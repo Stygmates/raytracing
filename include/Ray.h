@@ -17,8 +17,8 @@ class Ray
 		void set_source(Point source);
 		void set_direction(Vector direction);
 	private:
-		Point source;
-		Vector direction;
+		Point _source;
+		Vector _direction;
 };
 
 #endif

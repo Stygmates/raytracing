@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Octree::Octree(): dad(NULL)
+Octree::Octree(): _dad(NULL)
 {
 	
 }
@@ -21,7 +21,7 @@ Octree* Octree::get_dad()
 Octree* Octree::get_son(int id)
 {
 	if(id >= 0 && id < 8)
-		return this->_son[id];
+		return this->_sons[id];
 	else
 	{
 		cerr << "Octree::get_son: Invalid son id" << endl;
@@ -34,7 +34,7 @@ void Octree::set_dad(Octree *dad)
 	this->_dad = dad;
 }
 
-void set_son(Octree *son, int id)
+void Octree::set_son(Octree *son, int id)
 {
 	if(id >= 0 && id < 8)
 		this->_sons[id] = son;
@@ -44,7 +44,7 @@ void set_son(Octree *son, int id)
 	}
 }
 
-void add_triangle(Triangle triangle)
+void Octree::add_triangle(Triangle triangle)
 {
 
 }

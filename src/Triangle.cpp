@@ -1,3 +1,5 @@
+#include "../include/Triangle.h"
+
 Triangle::Triangle()
 {
 

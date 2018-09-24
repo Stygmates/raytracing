@@ -1,6 +1,6 @@
 #include "../include/Point.h"
 
-Point::Point():x(0), y(0), z(0)
+Point::Point():_x(0), _y(0), _z(0)
 {
 
 }

@@ -31,7 +31,7 @@ void Ray::set_source(Point source)
 	this->_source = source;
 }
 
-void Ray::set_direction(Point direction)
+void Ray::set_direction(Vector direction)
 {
 	this->_direction = direction;
 }

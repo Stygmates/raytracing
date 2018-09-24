@@ -19,8 +19,8 @@ class Octree
 		Octree *get_dad();
 		Octree *get_son(int id);
 
-		Octree *set_dad(Octree *dad);
-		Octree *set_son(Octree *son, int id);
+		void set_dad(Octree *dad);
+		void set_son(Octree *son, int id);
 
 		void add_triangle(Triangle triangle);
 };

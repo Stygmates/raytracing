@@ -15,12 +15,12 @@ Vector::~Vector()
 
 }
 
-Point Vector::get_p1(Point p1)
+Point Vector::get_p1()
 {
 	return this->_p1;
 }
 
-Point Vector::get_p2(Point p2)
+Point Vector::get_p2()
 {
 	return this->_p2;
 }
