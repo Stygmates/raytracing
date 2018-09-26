@@ -2,6 +2,9 @@
 #define __RAY_H
 
 #include "Vector.h"
+#include <iostream>
+
+using namespace std;
 
 class Ray
 {
@@ -20,5 +23,12 @@ class Ray
 		Point _source;
 		Vector _direction;
 };
+
+inline ostream& operator<<(ostream& flux,Ray r)
+{
+	flux <<"source :\n"<<r.get_source()<<"direction :\n"<<r.get_direction();
+
+	return flux;
+}
 
 #endif

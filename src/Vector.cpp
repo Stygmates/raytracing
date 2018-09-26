@@ -71,8 +71,19 @@ Vector Vector::operator^(const Vector& v)
 	return vec;
 }
 
-int Vector::operator*(const Vector& v)
+double Vector::operator*(const Vector& v)
 {
 	return this->_x * v.get_x() + this->_y * v.get_y() + this->_z * v.get_z();
+}
+
+
+Vector Vector::operator+(const Vector& v)
+{
+	Vector sum;
+	sum.set_x(this->_x + v.get_x());
+	sum.set_y(this->_y + v.get_y());
+	sum.set_z(this->_z + v.get_z());
+
+	return sum;
 }
 
