@@ -16,9 +16,9 @@ class Triangle
 		void set_p1(Point p1);
 		void set_p2(Point p2);
 		void set_p3(Point p3);
-
-		Point ray_intersect(Ray ri);
+		
+		Point ray_intersect(Ray r);
 
 	private:
-		Point _p1, _p2, _p3;
+		Point _p1, _p2, _p3, _normal;
 };
