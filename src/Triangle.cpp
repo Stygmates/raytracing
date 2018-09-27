@@ -1,6 +1,8 @@
 #include "../include/Triangle.h"
 #include <iostream>
 #include <cmath>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -84,4 +86,20 @@ Point Triangle::ray_intersect(Ray r)
 	std::cout<<p_intersect;
 	
 	return p_intersect;
+}
+
+Point Triangle::get_min_bounding_box()
+{
+	int min_x = min(min(this->get_p1().get_x(), this->get_p2().get_x()), this->get_p3().get_x());
+	int min_y = min(min(this->get_p1().get_y(), this->get_p2().get_y()), this->get_p3().get_y());
+	int min_z = min(min(this->get_p1().get_z(), this->get_p2().get_z()), this->get_p3().get_z());
+	return Point(min_x, min_y, min_z);
+}
+
+Point Triangle::get_max_bounding_box()
+{
+	int max_x = max(max(this->get_p1().get_x(), this->get_p2().get_x()), this->get_p3().get_x());
+	int max_y = max(max(this->get_p1().get_y(), this->get_p2().get_y()), this->get_p3().get_y());
+	int max_z = max(max(this->get_p1().get_z(), this->get_p2().get_z()), this->get_p3().get_z());
+	return Point(max_x, max_y, max_z);
 }

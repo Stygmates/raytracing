@@ -18,6 +18,8 @@ class Triangle
 		void set_p3(Point p3);
 		
 		Point ray_intersect(Ray r);
+		Point get_min_bounding_box();
+		Point get_max_bounding_box();
 
 	private:
 		Point _p1, _p2, _p3, _normal;
