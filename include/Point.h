@@ -1,5 +1,8 @@
 #ifndef __POINT_H
 #define __POINT_H
+#include <iostream>
+
+using namespace std;
 
 class Point{
 	public:
@@ -17,5 +20,9 @@ class Point{
 	private:
 		int _x, _y, _z;
 };
-
+inline ostream& operator<<(ostream& flux,Point P)
+{
+	flux <<"Point : ( "<<P.get_x()<<", "<<P.get_y()<<", "<<P.get_z()<<")"<<std::endl;
+	return flux;  
+}
 #endif

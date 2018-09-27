@@ -5,9 +5,11 @@ Vector::Vector()
 
 }
 
-Vector::Vector(Point p1, Point p2): _p1(p1), _p2(p2)
+Vector::Vector(Point p1, Point p2)
 {
-
+	this->_x = p2.get_x() - p1.get_x();
+	this->_y = p2.get_y() - p1.get_y();
+	this->_z = p2.get_z() - p1.get_z();
 }
 
 Vector::~Vector()
@@ -15,22 +17,73 @@ Vector::~Vector()
 
 }
 
-Point Vector::get_p1()
+void Vector::set_x(int x)
 {
-	return this->_p1;
+	this->_x = x;
 }
 
-Point Vector::get_p2()
+void Vector::set_y(int y)
 {
-	return this->_p2;
+	this->_y = y;
 }
 
-void Vector::set_p1(Point p1)
+void Vector::set_z(int z)
 {
-	this->_p1 = p1;
+	this->_z = z;
 }
 
-void Vector::set_p2(Point p2)
+int Vector::get_x() const
 {
-	this->_p2 = p2;
+	return this->_x;
 }
+
+int Vector::get_y() const 
+{
+	return this->_y;
+}
+
+int Vector::get_z() const 
+{
+	return this->_z;
+}
+void Vector::set_v(int x, int y,int z)
+{
+	this->_x = x;
+	this->_y = y;
+	this->_z = z;
+}
+
+Vector Vector::operator=(const Vector& v)
+{
+	this->_x=v.get_x();
+	this->_y=v.get_y();
+	this->_z=v.get_z();
+
+	return *this;
+}
+Vector Vector::operator^(const Vector& v)
+{
+	Vector vec;
+	vec.set_x ( this->_y * v.get_z() - v.get_y() * this->_z);
+	vec.set_y ( this->_z * v.get_x() - v.get_z() * this->_x);
+	vec.set_z ( this->_x * v.get_y() - v.get_x() * this->_y);
+	
+	return vec;
+}
+
+double Vector::operator*(const Vector& v)
+{
+	return this->_x * v.get_x() + this->_y * v.get_y() + this->_z * v.get_z();
+}
+
+
+Vector Vector::operator+(const Vector& v)
+{
+	Vector sum;
+	sum.set_x(this->_x + v.get_x());
+	sum.set_y(this->_y + v.get_y());
+	sum.set_z(this->_z + v.get_z());
+
+	return sum;
+}
+
