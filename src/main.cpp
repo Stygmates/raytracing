@@ -4,10 +4,13 @@
 #include "../include/Point.h"
 #include "../include/Vector.h"
 
+#include <gtest/gtest.h>
+
 using namespace std;
 
-int main()
+int main(int argc, char **argv)
 {
+	::testing::InitGoogleTest(&argc, argv);
 	Point p0(-4,-1,-5);
 	Point p1(-2,-1,-5);
 	Point p2(-3,1,-5);
@@ -22,5 +25,5 @@ int main()
 	tr.ray_intersect(r);
 
 	cout << "Hello world" << endl;
-	return 0;
+	return RUN_ALL_TESTS();
 }
