@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../include/Point.h"
 
-TEST(PointEmptyConstructor, PointEmptyConstructorTest)
+TEST(PointConstructor, PointEmptyConstructorTest)
 {
     Point p;
     ASSERT_EQ(p.get_x(), 0);
