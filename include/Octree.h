@@ -26,6 +26,8 @@ class Octree
 
 		void set_dad(Octree *dad);
 		void set_son(Octree *son, int id);
+		void set_center(Point center);
+		void set_size(int size);
 
 		bool triangle_bounding_box_intersects(Triangle triangle);
 		void add_triangle(Triangle triangle);
