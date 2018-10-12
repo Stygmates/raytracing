@@ -37,6 +37,15 @@ void Vector::set_z(int z)
 	this->_z = z;
 }
 
+
+Point Vector::get_translation(Point p)
+{
+    int x = p.get_x() + this->get_x();
+    int y = p.get_y() + this->get_y();
+    int z = p.get_z() + this->get_z();
+    return Point(x, y, z);
+}
+
 int Vector::get_x() const
 {
 	return this->_x;

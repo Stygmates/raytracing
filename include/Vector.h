@@ -21,6 +21,9 @@ class Vector
 		void set_x(int x);
 		void set_y(int y);
 		void set_z(int z);
+
+        //Gets the translation of a point by a vector
+        Point get_translation(Point p);
 		
 		int get_x() const;
 		int get_y() const;
