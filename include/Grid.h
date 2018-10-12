@@ -14,6 +14,7 @@ class Grid
         Grid(Point min_grid, Point max_grid, std::vector<Triangle> triangles);
         bool boundingbox_intersects(Triangle t);
         void add_triangle(Triangle t);
+        bool point_inside(Point p);
     private:
         Point _min_grid;
         Point _max_grid;

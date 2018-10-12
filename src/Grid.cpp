@@ -30,3 +30,10 @@ void Grid::add_triangle(Triangle t)
     if(this->boundingbox_intersects(t))
         this->triangle_list.push_back(t);
 }
+
+bool Grid::point_inside(Point p)
+{
+    return  (p.get_x()>= this->_min_grid.get_x() && p.get_x() <= this->_max_grid.get_x()) &&
+            (p.get_x()>= this->_min_grid.get_y() && p.get_y() <= this->_max_grid.get_y()) &&
+            (p.get_x()>= this->_min_grid.get_z() && p.get_z() <= this->_max_grid.get_z());
+}
