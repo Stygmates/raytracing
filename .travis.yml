@@ -1,13 +1,12 @@
 language: cpp
-compiler: gcc
+compiler: g++
 dist: bionic
 
 before_install:
         - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
         - sudo apt-get update -qq
         - sudo apt-get install -qq libgtest-dev build-essential qtcreator g++-5
-        - export CXX="g++-5"
-        - g++ --version
+        - sudo update-alternatives --set c++ /usr/bin/g++
         - ( cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp libgtest* /usr/lib/ )
 script:
         - qmake
