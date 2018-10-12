@@ -5,7 +5,7 @@ dist: bionic
 before_install:
         - sudo apt-get update
         - sudo apt-get install -y libgtest-dev
-        - cd /usr/src/googletest/googletest
+        - cd /usr/src/gtest
         - sudo cmake .
         - sudo make 
         - sudo cp libgtest* /usr/lib/
