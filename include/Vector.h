@@ -27,6 +27,7 @@ class Vector
 		int get_z() const;
 
 		void set_v(int x,int y, int z);
+        double norm();
 		Vector operator=(const Vector& v);
 		Vector operator^(const Vector& v);
 		double operator*(const Vector& v);

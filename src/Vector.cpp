@@ -1,3 +1,4 @@
+#include <math.h>
 #include "../include/Vector.h"
 
 Vector::Vector()
@@ -55,6 +56,12 @@ void Vector::set_v(int x, int y,int z)
 	this->_x = x;
 	this->_y = y;
 	this->_z = z;
+}
+
+double Vector::norm()
+{
+    double square = (double)this->get_x() * (double)this->get_x() + (double)this->get_y() * (double)this->get_y() + (double)this->get_z() * (double)this->get_z();
+    return sqrt(square);
 }
 
 Vector Vector::operator=(const Vector& v)
