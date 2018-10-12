@@ -4,9 +4,8 @@ dist: bionic
 
 before_install:
         - sudo apt-get update
-        - sudo apt-get install -y libgtest-dev
+        - sudo apt-get install -y libgtest-dev build-essential qt5-default
         - ( cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp libgtest* /usr/lib/ )
 script:
-        - qmake -project
-        - qmake raytracing.pro
+        - qmake
         - make
