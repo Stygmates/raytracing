@@ -3,7 +3,7 @@
 #include "math.h"
 
 
-TEST(Vectors, NormVectorTest)
+TEST(Vector, NormVectorTest)
 {
     Point p1;
     Point p2(2, 3, 4);
@@ -11,7 +11,7 @@ TEST(Vectors, NormVectorTest)
     EXPECT_DOUBLE_EQ(v.norm(), sqrt(29));
 }
 
-TEST(Vectors, CrossVectorTest)
+TEST(Vector, CrossVectorTest)
 {
     Vector v1(5, -6, 3);
     Vector v2(-2, 7, 4);

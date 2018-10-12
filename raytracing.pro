@@ -37,7 +37,8 @@ SOURCES += \
         src/Grid.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
-        tests/TestVector.cpp
+        tests/TestVector.cpp \
+        tests/TestGrid.cpp
 
 HEADERS += \
         include/Octree.h \
