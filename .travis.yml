@@ -3,6 +3,7 @@ compiler: gcc
 dist: bionic
 
 before_install:
+        - sudo add-apt-repository universe
         - sudo apt-get update
         - sudo apt-get install -y libgtest-dev build-essential qtbase5-dev
         - ( cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp libgtest* /usr/lib/ )
