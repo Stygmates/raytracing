@@ -1,6 +1,9 @@
 language: cpp
 compiler: gcc
 dist: bionic
+
+install:
+        sudo apt install libgtest-dev
 script:
         - qmake -project
         - qmake raytracing.pro
