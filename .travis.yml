@@ -9,3 +9,4 @@ before_install:
 script:
         - qmake
         - make
+        - ./bin/raytracing
