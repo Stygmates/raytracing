@@ -23,7 +23,7 @@ TEST(Grid, GridBoundingBoxIntersectsTriangleTest)
     EXPECT_TRUE(g3.boundingbox_intersects(t));
 }
 
-TEST(Grid, GridBoundingBoxDontIntersectsTriangleTest)
+TEST(Grid, GridBoundingBoxDoesntIntersectTriangleTest)
 {
     Point p1(0, 0, 0);
     Point p2(5, -5, 13);
