@@ -12,6 +12,10 @@ Vector::Vector(Point p1, Point p2)
 	this->_z = p2.get_z() - p1.get_z();
 }
 
+Vector::Vector(int x, int y, int z): _x(x), _y(y), _z(z)
+{
+}
+
 Vector::~Vector()
 {
 

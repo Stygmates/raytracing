@@ -14,6 +14,7 @@ class Vector
 	public:
 		Vector();
 		Vector(Point p1, Point p2);
+        Vector(int x, int y, int z);
 		~Vector();
 
 		
