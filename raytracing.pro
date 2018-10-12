@@ -12,6 +12,8 @@ DESTDIR = bin/
 TARGET = raytracing
 TEMPLATE = app
 
+INCLUDEPATH = include
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -32,8 +34,10 @@ SOURCES += \
         src/Triangle.cpp \
         src/Vector.cpp \
         src/mainwindow.cpp \
+        src/Grid.cpp \
         tests/TestPoint.cpp \
-        tests/TestTriangle.cpp
+        tests/TestTriangle.cpp \
+        tests/TestVector.cpp
 
 HEADERS += \
         include/Octree.h \
@@ -41,7 +45,8 @@ HEADERS += \
         include/Ray.h \
         include/Triangle.h \
         include/Vector.h \
-        include/mainwindow.h
+        include/mainwindow.h \
+        include/Grid.h
 
 FORMS += \
         forms/mainwindow.ui
