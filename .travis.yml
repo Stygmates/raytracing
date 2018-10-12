@@ -4,7 +4,8 @@ dist: bionic
 
 before_install:
         - sudo apt-get update
-        - sudo apt-get install -y libgtest-dev build-essential qtcreator
+        - sudo apt-get install -y libgtest-dev build-essential qtcreator g++-8
+        - export CXX="g++-8"
         - ( cd /usr/src/gtest && sudo cmake . && sudo make && sudo cp libgtest* /usr/lib/ )
 script:
         - qmake
