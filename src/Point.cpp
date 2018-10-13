@@ -5,9 +5,11 @@ Point::Point():_x(0), _y(0), _z(0)
 
 }
 
-Point::Point(int x, int y, int z): _x(x), _y(y), _z(z)
+Point::Point(float x, float y, float z): Point()
 {
-
+    this->_x = x;
+    this->_y = y;
+    this->_z = z;
 }
 
 Point::~Point()
@@ -15,32 +17,32 @@ Point::~Point()
 
 }
 
-int Point::get_x()
+float Point::get_x()
 {
 	return this->_x;
 }
 
-int Point::get_y()
+float Point::get_y()
 {
 	return this->_y;
 }
 
-int Point::get_z()
+float Point::get_z()
 {
 	return this->_z;
 }
 
-void Point::set_x(int x)
+void Point::set_x(float x)
 {
 	this->_x = x;
 }
 
-void Point::set_y(int y)
+void Point::set_y(float y)
 {
 	this->_y = y;
 }
 
-void Point::set_z(int z)
+void Point::set_z(float z)
 {
 	this->_z = z;
 }

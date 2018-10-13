@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Octree::Octree(): _dad(NULL), _size(0), _center(Point(0, 0, 0))
+Octree::Octree(): _dad(NULL), _size(0), _center(Point())
 {
 	
 }

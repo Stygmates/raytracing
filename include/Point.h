@@ -7,16 +7,16 @@ using namespace std;
 class Point{
 	public:
 		Point();
-		Point(int x, int y, int z);
+        Point(float x, float y, float z);
 		~Point();
 
-		int get_x();
-		int get_y();
-		int get_z();
+        float get_x();
+        float get_y();
+        float get_z();
 
-		void set_x(int x);
-		void set_y(int y);
-		void set_z(int z);
+        void set_x(float x);
+        void set_y(float y);
+        void set_z(float z);
 	private:
 		int _x, _y, _z;
 };
