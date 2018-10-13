@@ -13,7 +13,7 @@ Vector::Vector(Point p1, Point p2)
 	this->_z = p2.get_z() - p1.get_z();
 }
 
-Vector::Vector(int x, int y, int z): _x(x), _y(y), _z(z)
+Vector::Vector(float x, float y, float z): _x(x), _y(y), _z(z)
 {
 }
 
@@ -22,17 +22,17 @@ Vector::~Vector()
 
 }
 
-void Vector::set_x(int x)
+void Vector::set_x(float x)
 {
 	this->_x = x;
 }
 
-void Vector::set_y(int y)
+void Vector::set_y(float y)
 {
 	this->_y = y;
 }
 
-void Vector::set_z(int z)
+void Vector::set_z(float z)
 {
 	this->_z = z;
 }
@@ -40,37 +40,44 @@ void Vector::set_z(int z)
 
 Point Vector::get_translation(Point p)
 {
-    int x = p.get_x() + this->get_x();
-    int y = p.get_y() + this->get_y();
-    int z = p.get_z() + this->get_z();
+    float x = p.get_x() + this->get_x();
+    float y = p.get_y() + this->get_y();
+    float z = p.get_z() + this->get_z();
     return Point(x, y, z);
 }
 
-int Vector::get_x() const
+float Vector::get_x() const
 {
 	return this->_x;
 }
 
-int Vector::get_y() const 
+float Vector::get_y() const
 {
 	return this->_y;
 }
 
-int Vector::get_z() const 
+float Vector::get_z() const
 {
 	return this->_z;
 }
-void Vector::set_v(int x, int y,int z)
+void Vector::set_v(float x, float y, float z)
 {
 	this->_x = x;
 	this->_y = y;
 	this->_z = z;
 }
 
-double Vector::norm()
+float Vector::norm()
 {
-    double square = (double)this->get_x() * (double)this->get_x() + (double)this->get_y() * (double)this->get_y() + (double)this->get_z() * (double)this->get_z();
+    float square = this->get_x() * this->get_x() + this->get_y() * this->get_y() + this->get_z() * this->get_z();
     return sqrt(square);
+}
+
+Vector Vector::unit()
+{
+    float norm = this->norm();
+    Vector result(this->get_x()/norm,this->get_y()/norm, this->get_z()/norm);
+    return result;
 }
 
 Vector Vector::operator=(const Vector& v)

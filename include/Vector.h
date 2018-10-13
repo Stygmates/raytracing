@@ -14,23 +14,24 @@ class Vector
 	public:
 		Vector();
 		Vector(Point p1, Point p2);
-        Vector(int x, int y, int z);
+        Vector(float x, float y, float z);
 		~Vector();
 
 		
-		void set_x(int x);
-		void set_y(int y);
-		void set_z(int z);
+        void set_x(float x);
+        void set_y(float y);
+        void set_z(float z);
 
         //Gets the translation of a point by a vector
         Point get_translation(Point p);
 		
-		int get_x() const;
-		int get_y() const;
-		int get_z() const;
+        float get_x() const;
+        float get_y() const;
+        float get_z() const;
 
-		void set_v(int x,int y, int z);
-        double norm();
+        void set_v(float x, float y, float z);
+        float norm();
+        Vector unit();
 		Vector operator=(const Vector& v);
 		Vector operator^(const Vector& v);
 		double operator*(const Vector& v);
