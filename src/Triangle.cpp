@@ -14,9 +14,9 @@ Triangle::Triangle()
 
 Triangle::Triangle(Point p1, Point p2, Point p3): _p1(p1), _p2(p2), _p3(p3)
 {
-	Vector v1(this->_p1,this->_p2);
-	Vector v2(this->_p1,this->_p3);
-	this->_normal = v1^v2;
+    Vector v1(this->_p1,this->_p2);
+    Vector v2(this->_p1,this->_p3);
+    this->_normal = v1^v2;
 }
 
 Triangle::~Triangle()
@@ -41,8 +41,9 @@ Point Triangle::get_p3()
 
 Vector Triangle::get_normal()
 {
-	return this->_normal;
+    return this->_normal;
 }
+
 void Triangle::set_p1(Point p1)
 {
 	this->_p1 = p1;
@@ -60,52 +61,53 @@ void Triangle::set_p3(Point p3)
 
 Vector Triangle::compute_normal()
 {
-	Vector v1(this->_p1,this->_p2);
-	Vector v2(this->_p1,this->_p3);
-	return v1^v2;
+    Vector v1(this->_p1,this->_p2);
+    Vector v2(this->_p1,this->_p3);
+    return v1^v2;
 }
 
-double Triangle::compute_D()
+float Triangle::compute_D()
 {
-	Vector N = get_normal();
-	
-	return N.get_x()*this->_p1.get_x() 
-	     + N.get_y()*this->_p1.get_y() 
-	     + N.get_z()*this->_p1.get_z();
+    Vector N = get_normal();
+
+    return N.get_x()*this->_p1.get_x()
+         + N.get_y()*this->_p1.get_y()
+         + N.get_z()*this->_p1.get_z();
 }
 
-double Triangle::compute_t(Vector source,Ray r)
+float Triangle::compute_t(Vector source,Ray r)
 {
-	Vector N = get_normal();
-	double D = compute_D();
+    Vector N = get_normal();
+    float D = compute_D();
 
-	
-	double t;
-	if( N*r.get_direction() == 0.0)
+
+    float t;
+    if( N*r.get_direction() == 0.0)
         qDebug("parallel");
-	
-	t = -( (N*source -  D ) / (N*r.get_direction()) );
-	if (t < 0) 
+
+    t = -( (N*source -  D ) / (N*r.get_direction()) );
+    if (t < 0)
         qDebug("triangle is behind");
 
-	return t;
+    return t;
 }
+
 bool Triangle::ray_intersect_plan(Ray r,Point& P)
-{	//A*x + B*y + C*z + D = 0 
-	//A B C = Normal
-	//D = distance from the origin (0,0,0)
-	//D = N * P0 where P0 point of triangle 
-	//Step 1 : Finding P
-	//P = Source + t*Dir
-	
-	Point O(0,0,0);
-	Point S = r.get_source();
-	Vector source(O,S);
-	double t = compute_t(source,r);
-	
+{	//A*x + B*y + C*z + D = 0
+    //A B C = Normal
+    //D = distance from the origin (0,0,0)
+    //D = N * P0 where P0 point of triangle
+    //Step 1 : Finding P
+    //P = Source + t*Dir
+
+    Point O(0,0,0);
+    Point S = r.get_source();
+    Vector source(O,S);
+    double t = compute_t(source,r);
+
     Vector V = source +t*r.get_direction();
     P = Point(V.get_x(),V.get_y(),V.get_z());
-	
+
     return t >= 0;
 }
 bool Triangle::ray_intersect(Ray r,Point& P){
@@ -119,7 +121,6 @@ bool Triangle::ray_intersect(Ray r,Point& P){
                 (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0 ;
     }
 }
-
 
 Point Triangle::get_min_bounding_box()
 {

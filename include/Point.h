@@ -7,20 +7,18 @@ using namespace std;
 class Point{
 	public:
 		Point();
-        Point(double x, double y, double z);
+        Point(float x, float y, float z);
 		~Point();
 
-        Point operator=(const Point& p);
+        float get_x();
+        float get_y();
+        float get_z();
 
-        double get_x() const;
-        double get_y() const;
-        double get_z() const;
-
-        void set_x(double x);
-        void set_y(double y);
-        void set_z(double z);
+        void set_x(float x);
+        void set_y(float y);
+        void set_z(float z);
 	private:
-		int _x, _y, _z;
+        float _x, _y, _z;
 };
 inline ostream& operator<<(ostream& flux,Point P)
 {

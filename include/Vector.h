@@ -9,32 +9,32 @@ using namespace std;
 class Vector
 {
 	private:
-		int _x, _y, _z;
+        float _x, _y, _z;
 
 	public:
 		Vector();
 		Vector(Point p1, Point p2);
-        Vector(double x, double y, double z);
+        Vector(float x, float y, float z);
 		~Vector();
 
 		
-        void set_x(double x);
-        void set_y(double y);
-        void set_z(double z);
+        void set_x(float x);
+        void set_y(float y);
+        void set_z(float z);
 
         //Gets the translation of a point by a vector
         Point get_translation(Point p);
 		
-        double get_x() const;
-        double get_y() const;
-        double get_z() const;
+        float get_x() const;
+        float get_y() const;
+        float get_z() const;
 
-        void set_v(double x, double y, double z);
-        double norm();
+        void set_v(float x, float y, float z);
+        float norm();
         Vector unit();
 		Vector operator=(const Vector& v);
 		Vector operator^(const Vector& v);
-        double operator*(const Vector& v);
+        float operator*(const Vector& v);
 		//Vector operator*(const double& t);
 		Vector operator+(const Vector& v);
 		
@@ -42,7 +42,7 @@ class Vector
 		
 };
 
-inline Vector operator*(const double& t,const Vector& v)
+inline Vector operator*(const float& t,const Vector& v)
 {
 	Vector vec;
 	vec.set_x(t*v.get_x());	

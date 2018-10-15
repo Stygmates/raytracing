@@ -8,7 +8,8 @@ TEST(Vector, NormVectorTest)
     Point p1;
     Point p2(2, 3, 4);
     Vector v(p1, p2);
-    EXPECT_DOUBLE_EQ(v.norm(), sqrt(v*v));
+    float val = 2.*2.+3.*3.+4.*4.;
+    EXPECT_FLOAT_EQ(v.norm(), sqrt(val));
 }
 
 TEST(Vector, CrossVectorTest)
