@@ -21,7 +21,10 @@ class Triangle
 		Vector compute_normal();
 		double compute_D();
 		double compute_t(Vector source,Ray r);
-		Point ray_intersect(Ray r);
+        bool ray_intersect_plan(Ray r,Point& P);
+        bool ray_intersect(Ray r,Point& P);
+        Point get_min_bounding_box();
+		Point get_max_bounding_box();
 
 	private:
 		Point _p1, _p2, _p3;

@@ -17,6 +17,8 @@ class Ray
 		Point get_source();
 		Vector get_direction();
 
+        Point get_point_at_parameter(double t);
+
 		void set_source(Point source);
 		void set_direction(Vector direction);
 	private:

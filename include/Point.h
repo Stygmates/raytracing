@@ -7,16 +7,18 @@ using namespace std;
 class Point{
 	public:
 		Point();
-		Point(int x, int y, int z);
+        Point(double x, double y, double z);
 		~Point();
 
-		int get_x();
-		int get_y();
-		int get_z();
+        Point operator=(const Point& p);
 
-		void set_x(int x);
-		void set_y(int y);
-		void set_z(int z);
+        double get_x() const;
+        double get_y() const;
+        double get_z() const;
+
+        void set_x(double x);
+        void set_y(double y);
+        void set_z(double z);
 	private:
 		int _x, _y, _z;
 };

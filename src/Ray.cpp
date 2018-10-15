@@ -35,3 +35,9 @@ void Ray::set_direction(Vector direction)
 {
 	this->_direction = direction;
 }
+
+Point Ray::get_point_at_parameter(double t)
+{
+    Vector translation = t * this->get_direction();
+    return translation.get_translation(this->get_source());
+}
