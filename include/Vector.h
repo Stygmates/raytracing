@@ -9,7 +9,7 @@ using namespace std;
 class Vector
 {
 	private:
-		int _x, _y, _z;
+        float _x, _y, _z;
 
 	public:
 		Vector();
@@ -34,7 +34,7 @@ class Vector
         Vector unit();
 		Vector operator=(const Vector& v);
 		Vector operator^(const Vector& v);
-		double operator*(const Vector& v);
+        float operator*(const Vector& v);
 		//Vector operator*(const double& t);
 		Vector operator+(const Vector& v);
 		
@@ -42,7 +42,7 @@ class Vector
 		
 };
 
-inline Vector operator*(const double& t,const Vector& v)
+inline Vector operator*(const float& t,const Vector& v)
 {
 	Vector vec;
 	vec.set_x(t*v.get_x());	

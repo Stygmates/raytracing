@@ -18,7 +18,7 @@ class Point{
         void set_y(float y);
         void set_z(float z);
 	private:
-		int _x, _y, _z;
+        float _x, _y, _z;
 };
 inline ostream& operator<<(ostream& flux,Point P)
 {

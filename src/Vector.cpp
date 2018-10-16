@@ -98,7 +98,7 @@ Vector Vector::operator^(const Vector& v)
 	return vec;
 }
 
-double Vector::operator*(const Vector& v)
+float Vector::operator*(const Vector& v)
 {
 	return this->_x * v.get_x() + this->_y * v.get_y() + this->_z * v.get_z();
 }
