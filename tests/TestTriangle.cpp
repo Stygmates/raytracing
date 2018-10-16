@@ -29,3 +29,4 @@ TEST(Triangle, PointOfIntersectTriangleWithRay)
     ASSERT_DOUBLE_EQ(P.get_y(),0.);
     ASSERT_DOUBLE_EQ(P.get_z(),0.);
 }
+

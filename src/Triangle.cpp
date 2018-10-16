@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <QDebug>
 
+
 using namespace std;
 
 Triangle::Triangle()
@@ -17,6 +18,7 @@ Triangle::Triangle(Point p1, Point p2, Point p3): _p1(p1), _p2(p2), _p3(p3)
     Vector v1(this->_p1,this->_p2);
     Vector v2(this->_p1,this->_p3);
     this->_normal = v1^v2;
+
 }
 
 Triangle::~Triangle()
@@ -43,6 +45,7 @@ Vector Triangle::get_normal()
 {
     return this->_normal;
 }
+
 
 void Triangle::set_p1(Point p1)
 {
@@ -121,6 +124,8 @@ bool Triangle::ray_intersect(Ray r,Point& P){
                 (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0 ;
     }
 }
+
+
 
 Point Triangle::get_min_bounding_box()
 {
