@@ -31,7 +31,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        googletest/googletest/src/gtest-all.cc \
         src/main.cpp \
         src/Octree.cpp \
         src/Point.cpp \
