@@ -15,8 +15,8 @@ TARGET = raytracing
 TEMPLATE = app
 
 INCLUDEPATH += include \
-    += $$PWD/googletest/googletest \
-    += $$PWD/googletest/googletest/include
+    += $$PWD/googletest \
+    += $$PWD/googletest/include
 
 INCLUDEPATH
 
@@ -33,7 +33,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        googletest/googletest/src/gtest-all.cc \
+        googletest/src/gtest-all.cc \
         src/main.cpp \
         src/Octree.cpp \
         src/Point.cpp \
@@ -59,4 +59,4 @@ HEADERS += \
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib
+LIBS += -lgtest -L$$PWD/googletest/build/lib
