@@ -10,8 +10,13 @@
 
 using namespace std;
 
-Vector color(Ray r)
+Vector color(Ray r, Triangle tri)
 {
+    Point p;
+    if(tri.ray_intersect(r, p))
+    {
+        return Vector(1.0, 0.0, 0.0);
+    }
     Vector unit_direction = r.get_direction().unit();
     float t = 0.5*(unit_direction.get_y() + 1.0);
     return (1-t)*Vector(1.0, 1.0, 1.0) + t*Vector(0.5, 0.7, 1.0);
@@ -31,14 +36,18 @@ int main(int argc, char **argv)
     Vector horizontal(4.0, 0.0, 0.0);
     Vector vertical(0.0, 2.0, 0.0);
     Point origin(0.0, 0.0, 0.0);
-    for(int i = ny-1; i>= 0; i--)
+    Point p1(0., 1., -1.);
+    Point p2(2., 0., -1.);
+    Point p3(-2., 0., -1);
+    Triangle tri(p1, p2, p3);
+    for(int j = ny-1; j>= 0; j--)
     {
-        for(int j = 0; j < nx; j++)
+        for(int i = 0; i < nx; i++)
         {
             float u = float(i)/float(nx);
             float v = float(j)/float(ny);
             Ray ray(origin, lower_left_corner + u*horizontal + v*vertical);
-            Vector col = color(ray);
+            Vector col = color(ray, tri);
             int r = int(255.99*col.get_x());
             int g = int(255.99*col.get_y());
             int b = int(255.99*col.get_z());
