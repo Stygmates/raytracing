@@ -15,8 +15,8 @@ TARGET = raytracing
 TEMPLATE = app
 
 INCLUDEPATH += include \
-    += $$PWD/googletest \
-    += $$PWD/googletest/include
+    += $$PWD/googletest/googletest \
+    += $$PWD/googletest/googletest/include
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -31,7 +31,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        googletest/src/gtest-all.cc \
+        googletest/googletest/src/gtest-all.cc \
         src/main.cpp \
         src/Octree.cpp \
         src/Point.cpp \
@@ -57,4 +57,4 @@ HEADERS += \
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/build/lib
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib
