@@ -16,7 +16,7 @@ TEMPLATE = app
 
 INCLUDEPATH += include \
     += $$PWD/googletest/googletest \
-    += $$PWD/googletest/googletest/include \
+    += $$PWD/googletest/googletest/include
 
 INCLUDEPATH
 
