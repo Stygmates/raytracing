@@ -22,8 +22,8 @@ class Triangle
         Vector compute_normal();
         float compute_D();
         float compute_t(Vector source,Ray r);
-        bool ray_intersect_plan(Ray r,Point& P);
-        bool ray_intersect(Ray r,Point& P);
+        Point ray_intersect_plan(Ray r,float t);
+        bool ray_intersect(Ray r);
 
 		Point get_min_bounding_box();
 		Point get_max_bounding_box();
