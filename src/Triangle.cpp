@@ -69,7 +69,7 @@ Vector Triangle::compute_normal()
     return v1^v2;
 }
 
-float Triangle::compute_D()
+float Triangle::distance_from_origin()
 {
     Vector N = get_normal();
 
@@ -78,10 +78,10 @@ float Triangle::compute_D()
          + N.get_z()*this->_p1.get_z();
 }
 
-float Triangle::compute_t(Vector source,Ray r)
+float Triangle::distance_ray_plan(Vector source,Ray r)
 {
     Vector N = get_normal();
-    float D = compute_D();
+    float D = distance_from_origin();
 
 
     float t;
@@ -113,7 +113,7 @@ bool Triangle::ray_intersect(Ray r){
 
 
     Vector source(Point(0, 0, 0),r.get_source());
-    double t = compute_t(source,r);
+    double t = distance_ray_plan(source,r);
 
     Point P;
 

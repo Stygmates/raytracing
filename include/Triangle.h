@@ -20,8 +20,8 @@ class Triangle
 		void set_p3(Point p3);
 		
         Vector compute_normal();
-        float compute_D();
-        float compute_t(Vector source,Ray r);
+        float distance_from_origin();
+        float distance_ray_plan(Vector source,Ray r);
         Point ray_intersect_plan(Ray r,float t);
         bool ray_intersect(Ray r);
 
