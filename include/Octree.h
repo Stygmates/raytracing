@@ -31,7 +31,7 @@ class Octree
 		void set_size(int size);
 
 		bool triangle_bounding_box_intersects(Triangle triangle);
-		void add_triangle(Triangle triangle);
+        void add_triangle(/*Triangle triangle*/);
 };
 
 #endif

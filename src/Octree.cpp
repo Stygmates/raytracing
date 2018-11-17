@@ -79,6 +79,7 @@ bool Octree::triangle_bounding_box_intersects(Triangle triangle)
            ((bounding_box_min.get_z() <= triangle_min.get_z()) && (triangle_min.get_z() <= bounding_box_max.get_z()));
 }
 
-void Octree::add_triangle(Triangle triangle)
+void Octree::add_triangle(/*Triangle triangle*/)
 {
+
 }
