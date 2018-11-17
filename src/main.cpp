@@ -30,7 +30,6 @@ Vector color(Ray r, vector<Triangle> tri)
     if(auto t = intersects(r,tri))
     {
         Vector normal = t.value_or(Triangle()).get_normal().unit();
-        cout << normal << endl;
         return 0.5*Vector(normal.get_x()+1., normal.get_y()+1., normal.get_z()+1.);
     }
     Vector unit_direction = r.get_direction().unit();

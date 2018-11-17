@@ -39,10 +39,14 @@ SOURCES += \
         src/Vector.cpp \
         src/mainwindow.cpp \
         src/Grid.cpp \
+        src/Color.cpp \
+        src/Phong.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
-        tests/TestGrid.cpp
+        tests/TestGrid.cpp \
+
+
 
 HEADERS += \
         include/Octree.h \
@@ -51,7 +55,9 @@ HEADERS += \
         include/Triangle.h \
         include/Vector.h \
         include/mainwindow.h \
-        include/Grid.h
+        include/Grid.h \
+        include/Color.h \
+        include/Phong.h
 
 FORMS += \
         forms/mainwindow.ui
