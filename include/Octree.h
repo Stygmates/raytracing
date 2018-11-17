@@ -1,6 +1,7 @@
 #ifndef __OCTREE_H
 #define __OCTREE_H
 
+#include <array>
 #include <vector>
 
 #include "Triangle.h"
@@ -9,7 +10,7 @@ class Octree
 {
 	private:
 		Octree *_dad;
-		Octree *_sons[8];
+        std::array<Octree*, 8> _sons;
 		std::vector<Triangle> _triangles;
 		Point _center;
 		int _size;

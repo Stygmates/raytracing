@@ -113,6 +113,7 @@ bool Triangle::ray_intersect_plan(Ray r,Point& P)
 
     return t >= 0;
 }
+
 bool Triangle::ray_intersect(Ray r,Point& P){
 
     bool intersect_plan = ray_intersect_plan(r,P);
