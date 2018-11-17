@@ -60,6 +60,7 @@ int main(int argc, char **argv)
     triangles.push_back(tri);
     Triangle tri2(p3, p2, p4);
     triangles.push_back(tri2);
+    Ray camera(origin, lower_left_corner);
 
     for(int j = ny-1; j>= 0; j--)
     {
@@ -75,7 +76,7 @@ int main(int argc, char **argv)
             myfile << r << " " << g << " " << b << endl;
         }
     }
-
+    cout << tri.Phong(0.1, 0.1, 0.2, 0.2, 0.3, 0.3, camera, camera, 0);
     myfile.close();
 	return RUN_ALL_TESTS();
 }

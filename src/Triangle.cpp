@@ -163,3 +163,18 @@ Color Triangle::Phong(Color ambient, float ambient_coeff, Color diffuse, float d
     Color specular_intensity = specular_coeff * specular * pow(mirror_reflexion * origin.get_direction(), alpha);
     return ambient_intensity + diffuse_intensity + specular_intensity;
 }
+
+float Triangle::Phong(float ambient, float ambient_coeff, float diffuse, float diffuse_coeff, float specular, float specular_coeff, Ray lightsource, Ray origin, int alpha)
+{
+    assert(ambient_coeff >= 0);
+    assert(ambient_coeff <= 1);
+    assert(diffuse_coeff >= 0);
+    assert(diffuse_coeff <= 1);
+    assert(specular_coeff >= 0);
+    assert(specular_coeff <= 1);
+    Vector mirror_reflexion = 2*(this->get_normal() * lightsource.get_direction()) * this->get_normal() - lightsource.get_direction();
+    float ambient_intensity = ambient * ambient_coeff;
+    float diffuse_intensity = diffuse_coeff * diffuse * (lightsource.get_direction()*this->get_normal());
+    float specular_intensity = specular_coeff * specular * pow(mirror_reflexion * origin.get_direction(), alpha);
+    return max(ambient_intensity + diffuse_intensity + specular_intensity, 0.f);
+}

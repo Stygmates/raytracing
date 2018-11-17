@@ -29,7 +29,7 @@ class Triangle
 		Point get_min_bounding_box();
 		Point get_max_bounding_box();
         Color Phong(Color ambient, float ambient_coeff, Color diffuse, float diffuse_coeff, Color specular, float specular_coeff, Ray lightsource, Ray origin, int alpha);
-
+        float Phong(float ambient, float ambient_coeff, float diffuse, float diffuse_coeff, float specular, float specular_coeff, Ray lightsource, Ray origin, int alpha);
 	private:
         Point _p1, _p2, _p3;
         Vector _normal;
