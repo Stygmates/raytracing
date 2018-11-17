@@ -3,6 +3,8 @@
 
 #include "Vector.h"
 #include <iostream>
+#include <vector>
+
 
 using namespace std;
 
@@ -21,6 +23,8 @@ class Ray
 
 		void set_source(Point source);
 		void set_direction(Vector direction);
+
+        vector<Point> stochastic_sampling(int n);
 	private:
 		Point _source;
 		Vector _direction;
