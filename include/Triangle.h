@@ -12,14 +12,14 @@ class Triangle
 		Point get_p1();
 		Point get_p2();
 		Point get_p3();
-        Vector get_normal();
 
+        Vector compute_normal();
+        Vector get_normal();
 
 		void set_p1(Point p1);
 		void set_p2(Point p2);
 		void set_p3(Point p3);
-		
-        Vector compute_normal();
+
         float compute_D();
         float compute_t(Vector source,Ray r);
         bool ray_intersect_plan(Ray r,Point& P);

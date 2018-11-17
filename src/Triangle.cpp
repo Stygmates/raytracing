@@ -41,6 +41,14 @@ Point Triangle::get_p3()
 	return this->_p3;
 }
 
+
+Vector Triangle::compute_normal()
+{
+    Vector v1(this->_p1,this->_p2);
+    Vector v2(this->_p1,this->_p3);
+    return v1^v2;
+}
+
 Vector Triangle::get_normal()
 {
     return this->_normal;
@@ -50,23 +58,19 @@ Vector Triangle::get_normal()
 void Triangle::set_p1(Point p1)
 {
 	this->_p1 = p1;
+    this->_normal = compute_normal();
 }
 
 void Triangle::set_p2(Point p2)
 {
 	this->_p2 = p2;
+    this->_normal = this->compute_normal();
 }
 
 void Triangle::set_p3(Point p3)
 {
 	this->_p3 = p3;
-}
-
-Vector Triangle::compute_normal()
-{
-    Vector v1(this->_p1,this->_p2);
-    Vector v2(this->_p1,this->_p3);
-    return v1^v2;
+    this->_normal = this->compute_normal();
 }
 
 float Triangle::compute_D()
