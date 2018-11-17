@@ -20,11 +20,11 @@ class Triangle
 		void set_p1(Point p1);
 		void set_p2(Point p2);
 		void set_p3(Point p3);
-
-        float compute_D();
-        float compute_t(Vector source,Ray r);
-        bool ray_intersect_plan(Ray r,Point& P);
-        bool ray_intersect(Ray r,Point& P);
+		
+        float distance_from_origin();
+        float distance_originRay_plan(Vector source,Ray r);
+        Point intersection_ray_plan(Ray r,float t);
+        bool ray_intersect(Ray r);
 
 		Point get_min_bounding_box();
 		Point get_max_bounding_box();

@@ -18,7 +18,7 @@ optional<Triangle>intersects(Ray r, vector<Triangle> tri)
     Point p;
     for(Triangle t: tri)
     {
-        if(t.ray_intersect(r, p))
+        if(t.ray_intersect(r))
             return t;
     }
     return {};
