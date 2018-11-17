@@ -21,8 +21,8 @@ class Triangle
 		
         Vector compute_normal();
         float distance_from_origin();
-        float distance_ray_plan(Vector source,Ray r);
-        Point ray_intersect_plan(Ray r,float t);
+        float distance_originRay_plan(Vector source,Ray r);
+        Point intersection_ray_plan(Ray r,float t);
         bool ray_intersect(Ray r);
 
 		Point get_min_bounding_box();

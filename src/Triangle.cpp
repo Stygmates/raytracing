@@ -78,7 +78,7 @@ float Triangle::distance_from_origin()
          + N.get_z()*this->_p1.get_z();
 }
 
-float Triangle::distance_ray_plan(Vector source,Ray r)
+float Triangle::distance_originRay_plan(Vector source,Ray r)
 {
     Vector N = get_normal();
     float D = distance_from_origin();
@@ -95,7 +95,7 @@ float Triangle::distance_ray_plan(Vector source,Ray r)
     return t;
 }
 
-Point Triangle::ray_intersect_plan(Ray r,float t)
+Point Triangle::intersection_ray_plan(Ray r,float t)
 {	//A*x + B*y + C*z + D = 0
     //A B C = Normal
     //D = distance from the origin (0,0,0)
@@ -113,12 +113,12 @@ bool Triangle::ray_intersect(Ray r){
 
 
     Vector source(Point(0, 0, 0),r.get_source());
-    double t = distance_ray_plan(source,r);
+    double t = distance_originRay_plan(source,r);
 
     Point P;
 
     if(t>=0){
-        P = this->ray_intersect_plan(r,t);
+        P = this->intersection_ray_plan(r,t);
     }
     else
         return false;           //ray is parallel or behind
