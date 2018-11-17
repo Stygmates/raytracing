@@ -114,3 +114,12 @@ Vector Vector::operator+(const Vector& v)
 	return sum;
 }
 
+Vector Vector::operator-(const Vector& v)
+{
+    Vector sub;
+    sub.set_x(this->_x - v.get_x());
+    sub.set_y(this->_y - v.get_y());
+    sub.set_z(this->_z - v.get_z());
+
+    return sub;
+}

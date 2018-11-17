@@ -36,13 +36,14 @@ class Vector
 		Vector operator^(const Vector& v);
         float operator*(const Vector& v);
 		//Vector operator*(const double& t);
-		Vector operator+(const Vector& v);
+        Vector operator+(const Vector& v);
+        Vector operator-(const Vector& v);
 		
 		
 		
 };
 
-inline Vector operator*(const float& t,const Vector& v)
+inline Vector operator*(const float& t, const Vector& v)
 {
 	Vector vec;
 	vec.set_x(t*v.get_x());	
