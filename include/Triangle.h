@@ -1,5 +1,6 @@
 #include "Point.h"
 #include "Ray.h"
+#include "Color.h"
 
 
 class Triangle
@@ -27,6 +28,7 @@ class Triangle
 
 		Point get_min_bounding_box();
 		Point get_max_bounding_box();
+        Color Phong(Color ambient, float ambient_coeff, Color diffuse, float diffuse_coeff, Color specular, float specular_coeff, Ray lightsource, Ray origin, int alpha);
 
 	private:
         Point _p1, _p2, _p3;
