@@ -42,7 +42,8 @@ SOURCES += \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
-        tests/TestGrid.cpp
+        tests/TestGrid.cpp \
+    src/DigitalDifferentialAnalyser.cpp
 
 HEADERS += \
         include/Octree.h \
@@ -51,7 +52,8 @@ HEADERS += \
         include/Triangle.h \
         include/Vector.h \
         include/mainwindow.h \
-        include/Grid.h
+        include/Grid.h \
+    include/DigitalDifferentialAnalyser.h
 
 FORMS += \
         forms/mainwindow.ui

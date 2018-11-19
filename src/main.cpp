@@ -5,6 +5,7 @@
 #include "../include/Triangle.h"
 #include "../include/Point.h"
 #include "../include/Vector.h"
+#include "../include/DigitalDifferentialAnalyser.h"
 
 #include <gtest/gtest.h>
 
@@ -47,5 +48,5 @@ int main(int argc, char **argv)
     }
 
     myfile.close();
-	return RUN_ALL_TESTS();
+    return RUN_ALL_TESTS();
 }

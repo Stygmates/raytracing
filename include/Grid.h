@@ -1,4 +1,4 @@
-#ifndef __GRID_H
+    #ifndef __GRID_H
 #define __GRID_H
 
 #include <vector>
