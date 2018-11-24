@@ -43,10 +43,8 @@ void Grid::add_triangle(Triangle t)
         {
             for(auto slot_element: slot_row)
             {
-                cout << slot_element.get_min_slot() << endl;
                 if(slot_element.boundingbox_intersects(t))
                 {
-                    cout << "Intersection with box " << slot_element.get_min_slot() << endl;
                     slot_element.add_triangle(t);
                 }
             }
