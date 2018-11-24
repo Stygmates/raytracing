@@ -5,6 +5,7 @@
 #include "../include/Triangle.h"
 #include "../include/Point.h"
 #include "../include/Vector.h"
+#include "../include/Grid.h"
 
 #include <gtest/gtest.h>
 
@@ -47,5 +48,15 @@ int main(int argc, char **argv)
     }
 
     myfile.close();
+
+    Point min_grid(0, 0, 0);
+    Point max_grid(10, 10, 10);
+    int x = 10;
+    int y = 10;
+    int z = 10;
+
+    Grid grid(min_grid, max_grid, x, y, z);
+    Triangle t1(Point(0.1, 0.1, 0.1), Point(0.2, 0.2, 0.2), Point(0.3, 0.3, 0.3));
+    grid.add_triangle(t1);
 	return RUN_ALL_TESTS();
 }
