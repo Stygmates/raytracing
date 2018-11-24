@@ -17,17 +17,17 @@ Point::~Point()
 
 }
 
-float Point::get_x()
+float Point::get_x() const
 {
 	return this->_x;
 }
 
-float Point::get_y()
+float Point::get_y() const
 {
 	return this->_y;
 }
 
-float Point::get_z()
+float Point::get_z() const
 {
 	return this->_z;
 }
@@ -45,4 +45,19 @@ void Point::set_y(float y)
 void Point::set_z(float z)
 {
 	this->_z = z;
+}
+
+Point Point::operator+(Point& v)
+{
+    Point sum;
+    sum.set_x(this->_x + v.get_x());
+    sum.set_y(this->_y + v.get_y());
+    sum.set_z(this->_z + v.get_z());
+
+    return sum;
+}
+
+bool Point::operator!=(Point& v)
+{
+    return ((this->get_x() != v.get_x()) || (this->get_y() != v.get_y()) || (this->get_z() != v.get_z()));
 }

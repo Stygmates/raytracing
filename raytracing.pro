@@ -32,28 +32,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         src/main.cpp \
-        src/Octree.cpp \
+#        src/Octree.cpp \
         src/Point.cpp \
         src/Ray.cpp \
         src/Triangle.cpp \
         src/Vector.cpp \
         src/mainwindow.cpp \
         src/Grid.cpp \
+        src/Slot.cpp \
+        src/DigitalDifferentialAnalyser.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
-        tests/TestGrid.cpp \
-    src/DigitalDifferentialAnalyser.cpp
+        tests/TestSlot.cpp
 
 HEADERS += \
-        include/Octree.h \
+#        include/Octree.h \
         include/Point.h \
         include/Ray.h \
         include/Triangle.h \
         include/Vector.h \
         include/mainwindow.h \
         include/Grid.h \
-    include/DigitalDifferentialAnalyser.h
+        include/DigitalDifferentialAnalyser.h \
+        include/Slot.h
 
 FORMS += \
         forms/mainwindow.ui

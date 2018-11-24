@@ -1,39 +1,53 @@
-#include "../include/Grid.h"
-#include <assert.h>
+#include "Grid.h"
+#include "Point.h"
+#include <sstream>
 
-Grid::Grid(Point min_grid, Point max_grid): _min_grid(min_grid), _max_grid(max_grid)
+Grid::Grid(Point min_grid, Point max_grid, int slot_number_x, int slot_number_y, int slot_number_z): _min_grid(min_grid), _max_grid(max_grid)
 {
-    assert(min_grid.get_x() <= max_grid.get_x());
-    assert(min_grid.get_y() <= max_grid.get_y());
-    assert(min_grid.get_z() <= max_grid.get_z());
-}
+    if(min_grid.get_x() > max_grid.get_x() || min_grid.get_y() > max_grid.get_y())
+        cerr << "The grid's minimum is higher than its maximum";
+    int interval_x = max_grid.get_x() - min_grid.get_x();
+    int interval_y = max_grid.get_y() - min_grid.get_y();
+    int interval_z = max_grid.get_z() - min_grid.get_z();
+    if((interval_x % slot_number_x != 0) || (interval_y % slot_number_y != 0) || (interval_z % slot_number_z != 0))
+        cerr << "The number of slots must be a divisor of the interval";
 
+    //Size of a slot
+    this->_step_x = interval_x/slot_number_x;
+    this->_step_y = interval_y/slot_number_y;
+    this->_step_z = interval_z/slot_number_z;
 
-Grid::Grid(Point min_grid, Point max_grid, std::vector<Triangle> triangles): Grid(min_grid, max_grid)
-{
-    for(Triangle t: triangles)
+    for(int current_z = min_grid.get_z(); current_z < max_grid.get_z(); current_z += this->_step_z)
     {
-        this->add_triangle(t);
+        vector<vector<Slot>>slot_xy;
+        for(int current_y = min_grid.get_y(); current_y < max_grid.get_y(); current_y += this->_step_y)
+        {
+            vector<Slot> slot_x;
+            for(int current_x = min_grid.get_x(); current_x < max_grid.get_x(); current_x += this->_step_x)
+            {
+                Point pmin(current_x, current_y, current_z);
+                Point pmax(current_x + this->_step_x, current_y + this->_step_y, current_z + this->_step_z);
+                slot_x.push_back(Slot(pmin, pmax));
+            }
+            slot_xy.push_back(slot_x);
+        }
+        this->_slots.push_back(slot_xy);
     }
-}
-
-bool Grid::boundingbox_intersects(Triangle t)
-{
-    bool intersects = ( (this->_min_grid.get_x() <= t.get_max_bounding_box().get_x() && this->_max_grid.get_x() >= t.get_min_bounding_box().get_x()) &&
-                        (this->_min_grid.get_y() <= t.get_max_bounding_box().get_y() && this->_max_grid.get_y() >= t.get_min_bounding_box().get_y()) &&
-                        (this->_min_grid.get_z() <= t.get_max_bounding_box().get_z() && this->_max_grid.get_z() >= t.get_min_bounding_box().get_z()));
-    return intersects;
 }
 
 void Grid::add_triangle(Triangle t)
 {
-    if(this->boundingbox_intersects(t))
-        this->triangle_list.push_back(t);
-}
-
-bool Grid::point_inside(Point p)
-{
-    return  (p.get_x()>= this->_min_grid.get_x() && p.get_x() <= this->_max_grid.get_x()) &&
-            (p.get_x()>= this->_min_grid.get_y() && p.get_y() <= this->_max_grid.get_y()) &&
-            (p.get_x()>= this->_min_grid.get_z() && p.get_z() <= this->_max_grid.get_z());
+    for(auto slot_z: this->_slots)
+    {
+        for(auto slot_row: slot_z)
+        {
+            for(auto slot_element: slot_row)
+            {
+                if(slot_element.boundingbox_intersects(t))
+                {
+                    slot_element.add_triangle(t);
+                }
+            }
+        }
+    }
 }
