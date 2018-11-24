@@ -1,3 +1,6 @@
+#ifndef __TRIANGLE_H
+#define __TRIANGLE_H
+
 #include "Point.h"
 #include "Ray.h"
 
@@ -33,3 +36,4 @@ class Triangle
         Vector _normal;
 
 };
+#endif

@@ -10,13 +10,15 @@ class Point{
         Point(float x, float y, float z);
 		~Point();
 
-        float get_x();
-        float get_y();
-        float get_z();
+        float get_x() const;
+        float get_y() const;
+        float get_z() const;
 
         void set_x(float x);
         void set_y(float y);
         void set_z(float z);
+        Point operator+(Point& v);
+        bool operator!=(Point& v);
 	private:
         float _x, _y, _z;
 };
