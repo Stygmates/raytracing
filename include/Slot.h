@@ -15,10 +15,15 @@ class Slot
 
         Point get_min_slot();
         Point get_max_slot();
+        void set_min_slot(const Point &min_slot);
+        void set_max_slot(const Point &max_slot);
+
 
         bool boundingbox_intersects(Triangle t);
         void add_triangle(Triangle t);
         bool point_inside(Point p);
+
+
     private:
         Point _min_slot;
         Point _max_slot;
