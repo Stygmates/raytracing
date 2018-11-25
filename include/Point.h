@@ -17,7 +17,8 @@ class Point{
         void set_x(float x);
         void set_y(float y);
         void set_z(float z);
-        Point operator+(Point& v);
+        Point operator+(const Point& v);
+        Point operator-(const Point& v);
         bool operator!=(Point& v);
 	private:
         float _x, _y, _z;

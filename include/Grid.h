@@ -17,6 +17,21 @@ class Grid
 public:
     Grid(Point min_grid, Point max_grid, int x, int y, int z);
     void add_triangle(Triangle t);
+
+    int get_step_x() const;
+    int get_step_y() const;
+    int get_step_z() const;
+
+    void set_step_x(int step_x);
+    void set_step_y(int step_y);
+    void set_step_z(int step_z);
+
+    Point get_min_grid() const;
+    Point get_max_grid() const;
+
+    void set_min_grid(const Point &min_grid);
+    void set_max_grid(const Point &max_grid);
+
 private:
     std::vector<std::vector<std::vector<Slot>>> _slots;
     Point _min_grid, _max_grid;

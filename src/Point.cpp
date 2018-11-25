@@ -47,7 +47,7 @@ void Point::set_z(float z)
 	this->_z = z;
 }
 
-Point Point::operator+(Point& v)
+Point Point::operator+(const Point& v)
 {
     Point sum;
     sum.set_x(this->_x + v.get_x());
@@ -55,6 +55,16 @@ Point Point::operator+(Point& v)
     sum.set_z(this->_z + v.get_z());
 
     return sum;
+}
+
+Point Point::operator-(const Point &v)
+{
+    Point sub;
+    sub.set_x(this->_x - v.get_x());
+    sub.set_y(this->_y - v.get_y());
+    sub.set_z(this->_z - v.get_z());
+
+    return sub;
 }
 
 bool Point::operator!=(Point& v)

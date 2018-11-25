@@ -1,6 +1,11 @@
 #include "../include/Slot.h"
 #include <assert.h>
 
+Slot::Slot()
+{
+
+}
+
 Slot::Slot(Point min_slot, Point max_slot): _min_slot(min_slot), _max_slot(max_slot)
 {
     assert(min_slot.get_x() <= max_slot.get_x());
@@ -25,6 +30,16 @@ Point Slot::get_min_slot()
 Point Slot::get_max_slot()
 {
     return this->_max_slot;
+}
+
+void Slot::set_max_slot(const Point &max_slot)
+{
+    _max_slot = max_slot;
+}
+
+void Slot::set_min_slot(const Point &min_slot)
+{
+    _min_slot = min_slot;
 }
 
 bool Slot::boundingbox_intersects(Triangle t)

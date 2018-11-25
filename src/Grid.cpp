@@ -51,3 +51,55 @@ void Grid::add_triangle(Triangle t)
         }
     }
 }
+
+int Grid::get_step_x() const
+{
+    return _step_x;
+}
+
+int Grid::get_step_y() const
+{
+    return _step_y;
+}
+
+int Grid::get_step_z() const
+{
+    return _step_z;
+}
+
+void Grid::set_step_x(int step_x)
+{
+    _step_x = step_x;
+}
+
+void Grid::set_step_y(int step_y)
+{
+    _step_y = step_y;
+}
+
+void Grid::set_step_z(int step_z)
+{
+    _step_z = step_z;
+}
+
+Point Grid::get_min_grid() const
+{
+    return _min_grid;
+}
+
+Point Grid::get_max_grid() const
+{
+    return _max_grid;
+}
+
+void Grid::set_min_grid(const Point &min_grid)
+{
+    _min_grid = min_grid;
+}
+
+
+
+void Grid::set_max_grid(const Point &max_grid)
+{
+    _max_grid = max_grid;
+}

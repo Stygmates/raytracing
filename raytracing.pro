@@ -44,7 +44,8 @@ SOURCES += \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
-        tests/TestSlot.cpp
+        tests/TestSlot.cpp \
+        tests/TestDDA.cpp
 
 HEADERS += \
 #        include/Octree.h \

@@ -10,7 +10,9 @@ private :
     vector<Grid> Grids_intersect;
 
 public :
-    void find_visited_grids(Ray ray_normalized, Point hit_point, Vector cellIndex);
+    vector<Slot> find_visited_grids(Ray ray_normalized, Grid grid);
+    Slot find_slot(Grid grid, Ray ray_normalized);
+
 
 
 
