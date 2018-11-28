@@ -18,5 +18,5 @@ script:
   - qmake
   - build-wrapper-linux-x86-64 --out-dir bw_output make
   - ./bin/raytracing
-  - ls
+  - gcov src/*.cpp -o .
   - sonar-scanner
