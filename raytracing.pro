@@ -58,4 +58,4 @@ HEADERS += \
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -fprofile-arcs -ftest-coverage
