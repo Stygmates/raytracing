@@ -59,4 +59,3 @@ FORMS += \
         forms/mainwindow.ui
 
 LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib
-QMAKE_CXXFLAGS += --gtest_output="xml:XML_Report.xml"
