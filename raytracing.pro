@@ -58,4 +58,5 @@ HEADERS += \
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -fprofile-arcs -ftest-coverage
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lgcov
+QMAKE_CXXFLAGS += -Wall -fprofile-arcs -ftest-coverage
