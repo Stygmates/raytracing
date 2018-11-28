@@ -9,7 +9,15 @@ install:
   - sudo apt-get install -qq g++-6 build-essential qtcreator
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   - (git clone https://github.com/google/googletest && cd googletest/googletest && mkdir build && cd build && cmake .. && make)
+
+addons:
+  sonarcloud:
+          organization: "stygmates-github"
+          token:
+                  secure: 681a5e2245c446f8114e0f0fa92c59d201e19940
+
 script:
+  - sonar-scanner
   - qmake
   - make
   - ./bin/raytracing
