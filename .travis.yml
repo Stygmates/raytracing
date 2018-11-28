@@ -14,8 +14,6 @@ install:
 addons:
   sonarcloud:
           organization: "stygmates-github"
-          token:
-                  secure: 681a5e2245c446f8114e0f0fa92c59d201e19940
 jdk:
   - oraclejdk8
 
