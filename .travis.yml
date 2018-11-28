@@ -2,13 +2,13 @@ language: cpp
 compiler: gcc
 dist: trusty
 
-before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
-install: 
-  - sudo apt-get install -qq g++-6 build-essential qtcreator
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
-  - (git clone https://github.com/google/googletest && cd googletest/googletest && mkdir build && cd build && cmake .. && make)
+#before_install:
+#  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+#  - sudo apt-get update -qq
+#install: 
+#- sudo apt-get install -qq g++-6 build-essential qtcreator
+#  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+#  - (git clone https://github.com/google/googletest && cd googletest/googletest && mkdir build && cd build && cmake .. && make)
 addons:
         sonarcloud:
                 organisation: "stygmates-github"
@@ -16,6 +16,6 @@ addons:
                         secure: "aJqO6SZvT5BjiG3c3spO/fjw4UvpHXBzLhsrqHnrHhCDAguk3DhHT9mmWAPR+jqFhwKmQISXmyDjn2FPaonZo4n7edU9t8rBDffS8tbKFwEd3N2tp6k7bCGxb1Nt5P44lfPmDeNvnIxNxuqieN9HzApNQ1KAPKKrhN5vuWjQL0jPD4/DrmlMK8uNROKw+VE/jS7k7J3IVL626r7Y3TzCfki2TWaa/5Ti2cY3H72YUMb2iL/zIijdfwd87p7K4MLzMG4fuQufoUGL13lAZGQhzve1YUjoTaDSL0qyAYL71Pwt1HFR2vjCR/lG4CZXeJa5obY4cXNSVcI/cKnkEKZQNJdaVgGcJR0qPYFllOVR8uvZbkWqUGvjh1fw+0ayrvRhnO7dUK+RJNjV1o+VTB+Qg+Y8ZU3rcyluB00UIMOlqwCcMX+ThP/wtVfxnQNHB7/hRUaz1YCXuguGQQVfDzga+zBuRZnqZPbBksuu/5Sv189qvF2fXvzjdebHJZKfl8qFMJuXnsX9iCAGsDF8I2ymeO+YfbgkW7dw9cOHct5Xg7froi8xN5pyd724pL18Ib6BgCXIhqvvhZ2KUry9v/K3xD7J8u55e3/AjuQ8agFL7KgwbrV57sGJeBMrch9RQNI6R7Cr4RqAqz6bLVOnGWcD4VD51nrvyqL+NVauKhdxaqc="
 script:
   - sonar-scanner -X
-  - qmake
-  - make
-  - ./bin/raytracing
+    #- qmake
+    #- make
+    #- ./bin/raytracing
