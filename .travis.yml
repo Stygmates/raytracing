@@ -1,6 +1,7 @@
 language: cpp
 compiler: gcc
 dist: trusty
+sudo: required
 
 before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -15,6 +16,8 @@ addons:
           organization: "stygmates-github"
           token:
                   secure: 681a5e2245c446f8114e0f0fa92c59d201e19940
+jdk:
+  - oraclejdk8
 
 script:
   - sonar-scanner
