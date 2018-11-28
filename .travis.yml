@@ -18,5 +18,6 @@ script:
   - qmake
   - build-wrapper-linux-x86-64 --out-dir bw_output make
   - pwd
+  - ls
   - sonar-scanner
   - ./bin/raytracing
