@@ -11,8 +11,8 @@ TEST(Point, PointEmptyConstructorTest)
 
 TEST(Point, PointConstructorTest)
 {
-    Point p0(-4,-1,-5);
-    ASSERT_EQ(p0.get_x(), -4);
-    ASSERT_EQ(p0.get_y(), -1);
-    ASSERT_EQ(p0.get_z(), -5);
+    Point p0(-4.f,-1.f,-5.f);
+    ASSERT_EQ(p0.get_x(), -4.f);
+    ASSERT_EQ(p0.get_y(), -1.f);
+    ASSERT_EQ(p0.get_z(), -5.f);
 }

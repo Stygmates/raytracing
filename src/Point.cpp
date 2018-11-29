@@ -5,8 +5,9 @@ Point::Point():_x(0), _y(0), _z(0)
 
 }
 
-Point::Point(float x, float y, float z):_x(x), _y(y), _z(y)
+Point::Point(float x, float y, float z): _x(x), _y(y), _z(z)
 {
+
 }
 
 Point::~Point()
