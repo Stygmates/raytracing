@@ -16,7 +16,7 @@ TEST(DDA, DigitalDifferentialAnalyserTest)
     Vector direction(pis.get_x() + 0.5, pis.get_y() + 0.5, pis.get_z());
     Ray r(Point(0, 0, 0), direction);
     r.set_direction(Vector(r.get_direction().unit() + direction));  //translate direction of normalized ray
-    Ray r_normalized(Point(pis.get_x() + 0.5, pis.get_y() + 0.5, -50), r.get_direction());
+    Ray r_normalized(Point(pis.get_x() + 0.5, pis.get_y() + 0.5, pis.get_z()), r.get_direction());
 
     DDA scan;
     vector<Slot> path = scan.find_visited_grids(r_normalized, grid);

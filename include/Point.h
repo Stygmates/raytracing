@@ -19,13 +19,13 @@ class Point{
         void set_z(float z);
         Point operator+(const Point& v);
         Point operator-(const Point& v);
-        bool operator!=(Point& v);
+        bool operator!=(Point v);
 	private:
         float _x, _y, _z;
 };
 inline ostream& operator<<(ostream& flux,Point P)
 {
-	flux <<"Point : ( "<<P.get_x()<<", "<<P.get_y()<<", "<<P.get_z()<<")"<<std::endl;
+    flux << "Point : ( " << P.get_x() << ", " << P.get_y() << ", " << P.get_z() << ")";
 	return flux;  
 }
 #endif

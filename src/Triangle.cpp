@@ -8,7 +8,12 @@
 
 using namespace std;
 
-Triangle::Triangle()
+Triangle::Triangle(): _name("Triangle")
+{
+
+}
+
+Triangle::Triangle(string name): _name(name)
 {
 
 }
@@ -18,12 +23,23 @@ Triangle::Triangle(Point p1, Point p2, Point p3): _p1(p1), _p2(p2), _p3(p3)
     Vector v1(this->_p1,this->_p2);
     Vector v2(this->_p1,this->_p3);
     this->_normal = v1^v2;
+}
 
+Triangle::Triangle(string name, Point p1, Point p2, Point p3): _name(name), _p1(p1), _p2(p2), _p3(p3)
+{
+    Vector v1(this->_p1,this->_p2);
+    Vector v2(this->_p1,this->_p3);
+    this->_normal = v1^v2;
 }
 
 Triangle::~Triangle()
 {
 
+}
+
+string Triangle::get_name()
+{
+    return this->_name;
 }
 
 Point Triangle::get_p1()

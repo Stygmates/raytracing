@@ -91,3 +91,12 @@ Slot DDA::find_slot(Grid grid, Ray ray_normalized)
     return slot;
 }
 
+vector<Slot*> DDA::Slots_visited(Ray r, Grid grid){
+    r.set_direction(Vector(r.get_direction().unit()));
+    DDA scan;
+    vector<Slot> path = scan.find_visited_grids(r, grid);
+    vector<Slot*> ptr_slot;
+    for (auto p: path)
+                ptr_slot.push_back( grid.get_slot( p.get_min_slot() ) );
+    return ptr_slot;
+}

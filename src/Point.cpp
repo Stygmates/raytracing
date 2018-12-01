@@ -67,7 +67,7 @@ Point Point::operator-(const Point &v)
     return sub;
 }
 
-bool Point::operator!=(Point& v)
+bool Point::operator!=(Point v)
 {
     return ((this->get_x() != v.get_x()) || (this->get_y() != v.get_y()) || (this->get_z() != v.get_z()));
 }

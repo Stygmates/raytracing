@@ -32,6 +32,11 @@ Point Slot::get_max_slot()
     return this->_max_slot;
 }
 
+vector<Triangle> Slot::get_triangle_list()
+{
+    return this->triangle_list;
+}
+
 void Slot::set_max_slot(const Point &max_slot)
 {
     _max_slot = max_slot;
@@ -61,4 +66,9 @@ bool Slot::point_inside(Point p)
     return  (p.get_x()>= this->_min_slot.get_x() && p.get_x() <= this->_max_slot.get_x()) &&
             (p.get_x()>= this->_min_slot.get_y() && p.get_y() <= this->_max_slot.get_y()) &&
             (p.get_x()>= this->_min_slot.get_z() && p.get_z() <= this->_max_slot.get_z());
+}
+
+bool Slot::operator!=(Slot s)
+{
+    return (s.get_min_slot() != this->get_min_slot() || s.get_max_slot() != this->get_max_slot());
 }

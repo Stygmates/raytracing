@@ -1,6 +1,7 @@
 #include "Grid.h"
 #include "Point.h"
 #include <sstream>
+#include <cassert>
 
 Grid::Grid(Point min_grid, Point max_grid, int slot_number_x, int slot_number_y, int slot_number_z): _min_grid(min_grid), _max_grid(max_grid)
 {
@@ -19,20 +20,26 @@ Grid::Grid(Point min_grid, Point max_grid, int slot_number_x, int slot_number_y,
 
     for(int current_z = min_grid.get_z(); current_z < max_grid.get_z(); current_z += this->_step_z)
     {
-        vector<vector<Slot>>slot_xy;
+        vector<vector<Slot*>>slot_xy;
         for(int current_y = min_grid.get_y(); current_y < max_grid.get_y(); current_y += this->_step_y)
         {
-            vector<Slot> slot_x;
+            vector<Slot*> slot_x;
             for(int current_x = min_grid.get_x(); current_x < max_grid.get_x(); current_x += this->_step_x)
             {
                 Point pmin(current_x, current_y, current_z);
                 Point pmax(current_x + this->_step_x, current_y + this->_step_y, current_z + this->_step_z);
-                slot_x.push_back(Slot(pmin, pmax));
+                slot_x.push_back(new Slot(pmin, pmax));
             }
             slot_xy.push_back(slot_x);
         }
         this->_slots.push_back(slot_xy);
     }
+}
+
+void Grid::add_triangles(vector<Triangle> triangles)
+{
+    for(auto t: triangles)
+        this->add_triangle(t);
 }
 
 void Grid::add_triangle(Triangle t)
@@ -43,9 +50,10 @@ void Grid::add_triangle(Triangle t)
         {
             for(auto slot_element: slot_row)
             {
-                if(slot_element.boundingbox_intersects(t))
+                if(slot_element->boundingbox_intersects(t))
                 {
-                    slot_element.add_triangle(t);
+                    slot_element->add_triangle(t);
+                    cout << "Adding triangle " << t << " to slot with bounds " << slot_element->get_min_slot() << " and " << slot_element->get_max_slot() << endl;
                 }
             }
         }
@@ -103,3 +111,14 @@ void Grid::set_max_grid(const Point &max_grid)
 {
     _max_grid = max_grid;
 }
+
+Slot* Grid::get_slot(Point min_slot)
+{
+    int x, y, z;
+    x = (min_slot.get_x() - this->get_min_grid().get_x() )/this->get_step_x();
+    y = (min_slot.get_y() - this->get_min_grid().get_y() )/this->get_step_y();
+    z = (min_slot.get_z() - this->get_min_grid().get_z() )/this->get_step_z();
+    assert(!(_slots[x][y][z]->get_min_slot() != min_slot));
+    return _slots[x][y][z];
+}
+

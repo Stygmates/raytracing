@@ -15,6 +15,7 @@ class Slot
 
         Point get_min_slot();
         Point get_max_slot();
+        std::vector<Triangle> get_triangle_list();
         void set_min_slot(const Point &min_slot);
         void set_max_slot(const Point &max_slot);
 
@@ -22,6 +23,7 @@ class Slot
         bool boundingbox_intersects(Triangle t);
         void add_triangle(Triangle t);
         bool point_inside(Point p);
+        bool operator!=(Slot s);
 
 
     private:

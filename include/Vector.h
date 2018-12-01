@@ -54,9 +54,7 @@ inline Vector operator*(const float& t,const Vector& v)
 
 inline ostream& operator<<(ostream& flux,Vector v)
 {
-	flux <<"Vector : "<<v.get_x()<<endl;
-	flux <<"	 "<<v.get_y()<<endl;
-	flux <<"	 "<<v.get_z()<<endl;
+    flux <<"Vector : " << v.get_x() << ", " << v.get_y() << ", " << v.get_z();
 
 	return flux;
 }
