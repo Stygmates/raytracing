@@ -19,7 +19,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
     float t_x = deltaT.get_x();
     float t_y = deltaT.get_y();
     float t_z = deltaT.get_z();
-    float t = 0;
 
     Slot current_slot = find_slot(grid, ray_normalized);
 
@@ -33,7 +32,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
 
 
         if(fabs(t_x) <= fabs(t_y) and fabs(t_x) <= fabs(t_z)){
-            t = t_x;                // current t, next intersection with cell along ray
             t_x += deltaT.get_x();  // increment, next crossing along x
             Point min(current_slot.get_min_slot().get_x() + grid.get_step_x(), current_slot.get_min_slot().get_y(), current_slot.get_min_slot().get_z());
             Point max(current_slot.get_max_slot().get_x() + grid.get_step_x(), current_slot.get_max_slot().get_y(), current_slot.get_max_slot().get_z());
@@ -44,7 +42,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
             current_slot.set_max_slot(max);
 
         }else if(fabs(t_y) <= fabs(t_x) and fabs(t_y) <= fabs(t_z)){
-            t = t_y;
             t_y += deltaT.get_y(); // increment, next crossing along y
             Point min(current_slot.get_min_slot().get_x(), current_slot.get_min_slot().get_y() + grid.get_step_y(), current_slot.get_min_slot().get_z());
             Point max(current_slot.get_max_slot().get_x(), current_slot.get_max_slot().get_y() + grid.get_step_y(), current_slot.get_max_slot().get_z());
@@ -54,7 +51,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
             current_slot.set_min_slot(min);
             current_slot.set_max_slot(max);
         }else{
-            t = t_z;
             t_z += deltaT.get_z(); // increment, next crossing along z
             Point min(current_slot.get_min_slot().get_x(), current_slot.get_min_slot().get_y(), current_slot.get_min_slot().get_z() + grid.get_step_z());
             Point max(current_slot.get_max_slot().get_x(), current_slot.get_max_slot().get_y(), current_slot.get_max_slot().get_z() + grid.get_step_z());
