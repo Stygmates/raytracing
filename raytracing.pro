@@ -41,6 +41,7 @@ SOURCES += \
         src/Grid.cpp \
         src/Slot.cpp \
         src/DigitalDifferentialAnalyser.cpp \
+        src/Window.cpp
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
@@ -56,7 +57,8 @@ HEADERS += \
         include/mainwindow.h \
         include/Grid.h \
         include/DigitalDifferentialAnalyser.h \
-        include/Slot.h
+        include/Slot.h \
+        include/Window.h
 
 FORMS += \
         forms/mainwindow.ui

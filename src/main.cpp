@@ -9,6 +9,8 @@
 #include "../include/DigitalDifferentialAnalyser.h"
 #include "../include/Grid.h"
 #include "../include/Slot.h"
+#include "../include/Window.h"
+//#include <QApplication>
 
 #include <gtest/gtest.h>
 
@@ -85,6 +87,7 @@ void create_image(string filename, Point origin, Vector lower_left_corner, Vecto
 
 int main(int argc, char **argv)
 {
+    QApplication a(argc, argv);
 	::testing::InitGoogleTest(&argc, argv);
     ofstream myfile;
     myfile.open("image.ppm");
@@ -118,6 +121,8 @@ int main(int argc, char **argv)
     grid.add_triangles(triangles);
 
     create_image("image.ppm", origin, lower_left_corner, horizontal, vertical , nx, ny, grid);
+    Window window(1100, 500);
+    a.exec();
 
 	return RUN_ALL_TESTS();
 }
