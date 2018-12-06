@@ -11,6 +11,7 @@
 #include "../include/Slot.h"
 #include "../include/Window.h"
 //#include <QApplication>
+#include "mainwindow.h"
 
 #include <gtest/gtest.h>
 
@@ -120,8 +121,11 @@ int main(int argc, char **argv)
     Grid grid(Point(-4.f, -2.f, -7.f), Point(4.f, 2.f, 1.f), 2, 2, 2);
     grid.add_triangles(triangles);
 
-    create_image("image.ppm", origin, lower_left_corner, horizontal, vertical , nx, ny, grid);
-    Window window(1100, 500);
+    //create_image("image.ppm", origin, lower_left_corner, horizontal, vertical , nx, ny, grid);
+    MainWindow m;
+    m.show();
+//    OpenGLWidget win;
+//    win.show();
     a.exec();
 
 	return RUN_ALL_TESTS();

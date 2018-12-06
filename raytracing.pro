@@ -6,7 +6,7 @@
 
 CONFIG	 += c++14
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -41,7 +41,9 @@ SOURCES += \
         src/Grid.cpp \
         src/Slot.cpp \
         src/DigitalDifferentialAnalyser.cpp \
-        src/Window.cpp
+        src/Window.cpp \
+        src/GLWidget.cpp \
+        src/openglwidget.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
@@ -58,9 +60,11 @@ HEADERS += \
         include/Grid.h \
         include/DigitalDifferentialAnalyser.h \
         include/Slot.h \
-        include/Window.h
+        include/Window.h\
+        include/GLWidget.h \
+        src/openglwidget.h
 
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU
