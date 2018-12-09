@@ -5,9 +5,9 @@ using namespace std;
 
 void PainterWindow::paintEvent(QPaintEvent*) {
     QPainter painter(this);
-    for(int j = this->image.size() - 1; j>= 0; j--)
+    for(unsigned int j = this->image.size() - 1; j>= 0; j--)
     {
-        for(int i = 0; i < this->image[j].size(); i++)
+        for(unsigned int i = 0; i < this->image[j].size(); i++)
         {
             Point pixel = this->image[j][i];
             const QColor color(pixel.get_x(), pixel.get_y(), pixel.get_z());
