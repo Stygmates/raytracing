@@ -17,15 +17,8 @@ void GLWindow::initializeGL()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-    x = 0.0;
-    y = 0.0;
-    z = 0.0;
 
-    r = 0.0;
-    g = 0.0;
-    b = 0.0;
 
-    std::cout << "init" << x << y << z << std::endl;
 
 }
 

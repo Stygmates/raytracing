@@ -53,7 +53,6 @@ void Grid::add_triangle(Triangle t)
                 if(slot_element->boundingbox_intersects(t))
                 {
                     slot_element->add_triangle(t);
-                    cout << "Adding triangle " << t << " to slot with bounds " << slot_element->get_min_slot() << " and " << slot_element->get_max_slot() << endl;
                 }
             }
         }
@@ -118,6 +117,10 @@ Slot* Grid::get_slot(Point min_slot)
     x = (min_slot.get_x() - this->get_min_grid().get_x() )/this->get_step_x();
     y = (min_slot.get_y() - this->get_min_grid().get_y() )/this->get_step_y();
     z = (min_slot.get_z() - this->get_min_grid().get_z() )/this->get_step_z();
+    cout << "x = " << x << "y = " << y << "z = " << z << endl;
+    cout << _slots.size() << endl;
+    cout << _slots[1].size() << endl;
+    cout << _slots[1][1].size() << endl;
     assert(!(_slots[x][y][z]->get_min_slot() != min_slot));
     return _slots[x][y][z];
 }

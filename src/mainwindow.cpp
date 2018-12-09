@@ -100,29 +100,14 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
 void MainWindow::validerparametre()
 {
 
-    std::cout << phong_Ks->value() << std::endl;
-    std::cout << phong_Ki->value() << std::endl;
-    std::cout << phong_Kf->value() << std::endl;
-
-    std::cout << pos_x->value() << std::endl;
-    std::cout << pos_y->value() << std::endl;
-    std::cout << pos_z->value() << std::endl;
-
-    std::cout << light_x->value() << std::endl;
-    std::cout << light_y->value() << std::endl;
-    std::cout << light_z->value() << std::endl;
-
-
-    //First test
-
     int nx = 200;
     int ny = 100;
-    image->resize(650,550);
+
 
     Vector lower_left_corner(-2.0, -1.0, -1.0);
     Vector horizontal(4.0, 0.0, 0.0);
     Vector vertical(0.0, 2.0, 0.0);
-    Point origin(0.0, 0.0, 0.0);
+    //Point origin(0.0, 0.0, 0.0);
 
     Point p1(-2.f, 1.f, -2.f);
     Point p2(0.f, 1.f, -2.f);
@@ -135,17 +120,19 @@ void MainWindow::validerparametre()
     Triangle tri("T1", p1, p2, p3);
     triangles.push_back(tri);
     triangles.push_back(Triangle("T2", p4, p5, p6));
-    Grid grid(Point(-4.f, -2.f, -7.f), Point(4.f, 2.f, 1.f), 2, 2, 2);
+    Grid grid(Point(-4.f, -2.f, -7.f), Point(4.f, 2.f, 1.f), 4, 2, 4);
     grid.add_triangles(triangles);
 
+    Point origin_camera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
 
-    paint_image(origin, lower_left_corner, horizontal, vertical , nx, ny, grid);
+    paint_image(origin_camera, lower_left_corner, horizontal, vertical , nx, ny, grid);
 
 }
 
 Vector MainWindow::color(Ray r, Grid grid)
 {
     DDA dda;
+//    cout << grid.get_min_grid() << endl;
     vector<Slot*>slots_to_visit = dda.Slots_visited(r, grid);
     for(auto slot: slots_to_visit)
     {
@@ -154,10 +141,12 @@ Vector MainWindow::color(Ray r, Grid grid)
         if(auto t = intersects(r,tri))
         {
             Vector normal = t.value_or(Triangle()).get_normal().unit();
+//            qDebug() << "Color found and returned" << endl;
             return Vector(1.0f, 0.0f, 0.0f);
     //        return 0.5*Vector(normal.get_x()+1., normal.get_y()+1., normal.get_z()+1.);
         }
     }
+//    qDebug() << "No triangle found" << endl;
     Vector unit_direction = r.get_direction().unit();
     float t = 0.5*(unit_direction.get_y() + 1.0);
     return (1-t)*Vector(1.0, 1.0, 1.0) + t*Vector(0.5, 0.7, 1.0);
