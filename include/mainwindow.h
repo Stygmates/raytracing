@@ -11,11 +11,11 @@
 #include <fstream>
 
 #include "ui_mainwindow.h"
-#include "Window.h"
 #include "Vector.h"
 #include "Grid.h"
 #include "DigitalDifferentialAnalyser.h"
 #include "Triangle.h"
+#include "PainterWindow.h"
 #include <experimental/optional>
 
 using namespace experimental;
@@ -42,8 +42,6 @@ public:
     ~MainWindow();
 
 private:
-    GLWindow *image;
-
     Ui::MainWindow *ui;
     QPushButton* start;
     QPushButton* exit;

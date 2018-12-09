@@ -58,11 +58,11 @@ MainWindow::MainWindow(QWidget *parent) :
     parameter->addWidget(exit,12, 1);
 
     //Main image
-    image = new GLWindow();
+    window = new PainterWindow();
 
     QHBoxLayout *mainlayout = new QHBoxLayout();
 
-    mainlayout->addWidget(image);
+    mainlayout->addWidget(window);
     mainlayout->addLayout(parameter);
 
     mainwidget->setLayout(mainlayout);

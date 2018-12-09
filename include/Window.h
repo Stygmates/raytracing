@@ -4,6 +4,8 @@
 #include "GLWidget.h"
 #include "GL/glu.h"
 #include <iostream>
+#include <vector>
+#include <Point.h>
 
 
 
@@ -15,9 +17,8 @@ public:
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
-    float x, y, z;
-    float r, g, b;
-
+    std::vector<Point> color_row;
+    int row_index;
 
 };
 
