@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-CONFIG	 += c++14
+CONFIG	 += c++14 debug_and_release
 
 QT       += core gui
 

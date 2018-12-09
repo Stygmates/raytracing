@@ -11,4 +11,5 @@ install:
   - (git clone https://github.com/google/googletest && cd googletest/googletest && mkdir build && cd build && cmake .. && make)
 script:
   - qmake
-  - make
+  - make -f Makefile.debug
+  - ./bin/raytracing
