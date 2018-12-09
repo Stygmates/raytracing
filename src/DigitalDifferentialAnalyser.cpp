@@ -8,20 +8,13 @@ using namespace std;
 vector<Slot*> DDA::Slots_visited(Ray r, Grid grid){
 
 
-    cout << "ray direction unit " << r << "lenght = " <<pow(r.get_direction().get_x(),2.0)+pow(r.get_direction().get_y(),2.0)+pow(r.get_direction().get_z(),2.0)<< endl;
     DDA scan;
-    cout << "Finding visited grids" << endl;
     vector<Slot> path = scan.find_visited_grids(r, grid);
-    cout << path.size() << endl;
-    cout << "Scanning done" << endl;
     vector<Slot*> ptr_slot;
     for (auto p: path)
     {
-        cout << "Looking for " << p.get_min_slot() << endl;
         ptr_slot.push_back( grid.get_slot( p.get_min_slot() ) );
-        cout << "Found slot " << endl;
     }
-    cout << "Return pointers" << endl;
     return ptr_slot;
 }
 
@@ -30,14 +23,8 @@ vector<Slot*> DDA::Slots_visited(Ray r, Grid grid){
 vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
 {
     ray_normalized.translate_ray_to_screen();
-    cout << "ray direction translate " << ray_normalized << endl;
 
     ray_normalized.ray_unit();
-    cout << "ray direction translate " << ray_normalized << endl;
-
-    cout << "grid step " << grid.get_step_x() <<endl;
-    cout << "grid step " << grid.get_step_y() <<endl;
-    cout << "grid step " << grid.get_step_z() <<endl;
 
 
     ray_normalized.set_direction(Vector( (ray_normalized.get_direction().get_x()-ray_normalized.get_source().get_x())*2.0/*grid.get_step_x()*/+ray_normalized.get_source().get_x(),
@@ -48,12 +35,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
     Vector deltaT( (grid.get_step_x() - ray_normalized.get_source().get_x()) / ray_normalized.get_direction().get_x(),
                    (grid.get_step_y() - ray_normalized.get_source().get_y()) / ray_normalized.get_direction().get_y(),
                    (grid.get_step_z() - ray_normalized.get_source().get_z()) / ray_normalized.get_direction().get_z());
-
-    cout << "ray direction translate " << ray_normalized << endl;
-
-    cout << "step " << grid.get_step_x() << endl;
-    cout << "step " << grid.get_step_y() << endl;
-    cout << "step " << grid.get_step_z() << endl;
 
     float t_x = deltaT.get_x();
     float t_y = deltaT.get_y();
@@ -76,7 +57,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
             Point max(current_slot.get_max_slot().get_x() + grid.get_step_x(), current_slot.get_max_slot().get_y(), current_slot.get_max_slot().get_z());
             Slot slot(min, max);
             path.push_back(slot);   //next slot
-            //std::cout<<"x"<<std::endl;
             current_slot.set_min_slot(min);
             current_slot.set_max_slot(max);
 
@@ -86,7 +66,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
             Point max(current_slot.get_max_slot().get_x(), current_slot.get_max_slot().get_y() + grid.get_step_y(), current_slot.get_max_slot().get_z());
             Slot slot(min, max);
             path.push_back(slot);   //next slot
-            //std::cout<<"y"<<t<<std::endl;
             current_slot.set_min_slot(min);
             current_slot.set_max_slot(max);
         }else{
@@ -95,7 +74,6 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
             Point max(current_slot.get_max_slot().get_x(), current_slot.get_max_slot().get_y(), current_slot.get_max_slot().get_z() + grid.get_step_z());
             Slot slot(min, max);
             path.push_back(slot);   //next slot
-            //std::cout<<"z"<<std::endl;
             current_slot.set_min_slot(min);
             current_slot.set_max_slot(max);
         }
