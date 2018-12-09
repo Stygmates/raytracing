@@ -25,6 +25,9 @@ class Ray
 		void set_direction(Vector direction);
 
         vector<Point> stochastic_sampling(int n);
+        void translate_ray_to_screen();
+        void ray_unit();
+
 	private:
 		Point _source;
 		Vector _direction;
