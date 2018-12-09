@@ -44,6 +44,7 @@ SOURCES += \
         src/Window.cpp \
         src/GLWidget.cpp \
         src/openglwidget.cpp \
+        src/PainterWindow.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
         include/Slot.h \
         include/Window.h\
         include/GLWidget.h \
+        include/PainterWindow.h \
         src/openglwidget.h
 
 FORMS += \

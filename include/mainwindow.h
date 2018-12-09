@@ -57,6 +57,7 @@ private:
     QDoubleSpinBox* light_x;
     QDoubleSpinBox* light_y;
     QDoubleSpinBox* light_z;
+    PainterWindow * window;
 public slots :
     void validerparametre();
 

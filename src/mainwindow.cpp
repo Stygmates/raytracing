@@ -1,7 +1,10 @@
 #include "../include/mainwindow.h"
+
 #include "openglwidget.h"
 
 #include <iostream>
+#include <cassert>
+#include <QDebug>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -162,30 +165,27 @@ Vector MainWindow::color(Ray r, Grid grid)
 
 void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid)
 {
-
+    window->image = vector<vector<Point>>(height, vector<Point>(width));
     for(int j = height-1; j>= 0; j--)
     {
         for(int i = 0; i < width; i++)
         {
-            std::cout << j << std::endl;
             float u = float(i)/float(width);
             float v = float(j)/float(height);
             Ray camera(origin, lower_left_corner + u*horizontal + v*vertical);
             Vector col = color(camera, grid);
 
+//            qDebug() << "Color returned:" << col.get_x();
             int r = int(255.99*col.get_x());
             int g = int(255.99*col.get_y());
             int b = int(255.99*col.get_z());
-            image->x = u-1.0;
-            image->y = v/2.0-0.5;
-            image->z = 0.0;
-
-            image->r = r;
-            image->g = g;
-            image->b = b;
-            image->repaint();
+            assert(r>=0 && r<256);
+            assert(g>=0 && g<256);
+            assert(b>=0 && b<256);
+            window->image[j][i] = Point(r, g, b);
         }
     }
+    window->update();
 }
 
 optional<Triangle> MainWindow::intersects(Ray r, vector<Triangle> tri)
