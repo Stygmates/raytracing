@@ -98,8 +98,8 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
 void MainWindow::validerparametre()
 {
 
-    int nx = 200;
-    int ny = 100;
+    int nx = 600;
+    int ny = 300;
 
 
     Vector lower_left_corner(-2.0, -1.0, -1.0);
