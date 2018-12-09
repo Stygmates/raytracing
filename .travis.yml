@@ -6,7 +6,7 @@ before_install:
   - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
 install: 
-  - sudo apt-get install -qq g++-6 build-essential qtcreator libqt5opengl5 libqt5opengl5-dev
+  - sudo apt-get install -qq g++-6 build-essential qtcreator libqt5opengl5 libqt5opengl5-dev gdb
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   - (git clone https://github.com/google/googletest && cd googletest/googletest && mkdir build && cd build && cmake .. && make)
 script:
