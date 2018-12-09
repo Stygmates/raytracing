@@ -35,6 +35,8 @@ public:
     QLabel* create_label(int max_height, int max_width,QString name);
     QDoubleSpinBox* create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width);
 
+    void loader_error(const QString &text, const QColor &color);
+
     Vector color(Ray r, Grid grid);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
     optional<Triangle> intersects(Ray r, vector<Triangle> tri);
@@ -55,6 +57,10 @@ private:
     QDoubleSpinBox* pos_x;
     QDoubleSpinBox* pos_y;
     QDoubleSpinBox* pos_z;
+
+    QDoubleSpinBox* screen_lower_corner_x;
+    QDoubleSpinBox* screen_lower_corner_y;
+    QDoubleSpinBox* screen_lower_corner_z;
 
     QDoubleSpinBox* phong_Kf;
     QDoubleSpinBox* phong_Ki;

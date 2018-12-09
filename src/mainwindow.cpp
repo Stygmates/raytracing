@@ -16,13 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
     this->path_label = create_label(25, 150, "No Object");
     QWidget *mainwidget = new QWidget();
 
-
+    load_obj->setFixedWidth(100);
+    path_label->setFixedWidth(500);
     //Controls
 
     QGridLayout* parameter = new QGridLayout();
 
-    parameter->addWidget(load_obj,0, 0);
-    parameter->addWidget(path_label, 0, 1);
 
     parameter->addWidget(create_label(25, 150, "Phong parameters :"), 1, 0);
 
@@ -50,29 +49,50 @@ MainWindow::MainWindow(QWidget *parent) :
     pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
     parameter->addWidget(pos_z, 8, 1);
 
-    parameter->addWidget(create_label(25, 150, "Light direction:"), 9, 0);
+    parameter->addWidget(create_label(25, 150, "Screen Position:"), 9, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 10, 0);
-    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(light_x, 10, 1);
+    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    parameter->addWidget(screen_lower_corner_x, 10, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 11, 0);
-    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(light_y, 11, 1);
+    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    parameter->addWidget(screen_lower_corner_y, 11, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 12, 0);
-    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(light_z, 12, 1);
+    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    parameter->addWidget(screen_lower_corner_z, 12, 1);
 
-    parameter->addWidget(start,13, 0);
-    parameter->addWidget(exit,13, 1);
+    parameter->addWidget(create_label(25, 150, "Light direction:"), 13, 0);
+
+
+    parameter->addWidget(create_label(25, 150, "X ="), 14, 0);
+    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    parameter->addWidget(light_x, 14, 1);
+    parameter->addWidget(create_label(25, 150, "Y ="), 15, 0);
+    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    parameter->addWidget(light_y, 15, 1);
+    parameter->addWidget(create_label(25, 150, "Z ="), 16, 0);
+    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    parameter->addWidget(light_z, 16, 1);
+
+    parameter->addWidget(start,17, 0);
+    parameter->addWidget(exit,17, 1);
 
 
     //Main image
     window = new PainterWindow();
 
     QHBoxLayout *mainlayout = new QHBoxLayout();
+    QVBoxLayout *image_loader_layout = new QVBoxLayout();
+    QGridLayout* loader_layout = new QGridLayout();
 
-    mainlayout->addWidget(window);
+    loader_layout->addWidget(load_obj,0, 10);
+    loader_layout->addWidget(path_label, 0, 0);
+
+    image_loader_layout->addWidget(window);
+    image_loader_layout->addLayout(loader_layout);
+
+    mainlayout->addLayout(image_loader_layout);
     mainlayout->addLayout(parameter);
 
     mainwidget->setLayout(mainlayout);
@@ -108,7 +128,17 @@ void MainWindow::Load_obj()
 
 {
     path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), ".obj (*.obj)");
-    path_label->setText(path_to_obj);
+    loader_error(path_to_obj, QColor(255, 0, 0, 255));
+
+}
+
+void MainWindow::loader_error(const QString &text, const QColor &color) {
+    QPalette palette = path_label->palette();
+    QBrush brush(QColor(255, 0, 0, 255));
+    brush.setStyle(Qt::SolidPattern);
+    palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
+    path_label->setPalette(palette);
+    path_label->setText(text);
 
 }
 
@@ -120,7 +150,7 @@ void MainWindow::validerparametre()
     int ny = 600;
 
 
-    Vector lower_left_corner(-2.0, -1.0, -1.0);
+    Vector lower_left_corner(screen_lower_corner_x->value(), screen_lower_corner_y->value(), screen_lower_corner_z->value());
     Vector horizontal(4.0, 0.0, 0.0);
     Vector vertical(0.0, 2.0, 0.0);
     //Point origin(0.0, 0.0, 0.0);
