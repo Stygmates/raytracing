@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->start = new QPushButton("Start raytracing");
     this->exit = new QPushButton("Exit");
     this->load_obj = new QPushButton("Load object");
+    this->path_label = create_label(25, 150, "No Object");
     QWidget *mainwidget = new QWidget();
 
 
@@ -20,45 +21,48 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QGridLayout* parameter = new QGridLayout();
 
-    parameter->addWidget(create_label(25, 150, "Phong parameter :"), 0, 0);
+    parameter->addWidget(load_obj,0, 0);
+    parameter->addWidget(path_label, 0, 1);
 
-    parameter->addWidget(create_label(25, 150, "Phong specular coefficient ="), 1, 0);
+    parameter->addWidget(create_label(25, 150, "Phong parameter :"), 1, 0);
+
+    parameter->addWidget(create_label(25, 150, "Phong specular coefficient ="), 2, 0);
     phong_Ks = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
-    parameter->addWidget(phong_Ks, 1, 1);
-    parameter->addWidget(create_label(25, 150, "Phong Imbiant coefficient  ="), 2, 0);
+    parameter->addWidget(phong_Ks, 2, 1);
+    parameter->addWidget(create_label(25, 150, "Phong Imbiant coefficient  ="), 3, 0);
     phong_Ki = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
-    parameter->addWidget(phong_Ki, 2, 1);
-    parameter->addWidget(create_label(25, 150, "Phong Diffus coefficient   ="), 3, 0);
+    parameter->addWidget(phong_Ki, 3, 1);
+    parameter->addWidget(create_label(25, 150, "Phong Diffus coefficient   ="), 4, 0);
     phong_Kf = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
-    parameter->addWidget(phong_Kf, 3, 1);
+    parameter->addWidget(phong_Kf, 4, 1);
 
-    parameter->addWidget(create_label(25, 150, "Camera Position :"), 4, 0);
+    parameter->addWidget(create_label(25, 150, "Camera Position :"), 5, 0);
 
-    parameter->addWidget(create_label(25, 150, "X ="), 5, 0);
+    parameter->addWidget(create_label(25, 150, "X ="), 6, 0);
     pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(pos_x, 5, 1);
-    parameter->addWidget(create_label(25, 150, "Y ="), 6, 0);
+    parameter->addWidget(pos_x, 6, 1);
+    parameter->addWidget(create_label(25, 150, "Y ="), 7, 0);
     pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(pos_y, 6, 1);
-    parameter->addWidget(create_label(25, 150, "Z ="), 7, 0);
+    parameter->addWidget(pos_y, 7, 1);
+    parameter->addWidget(create_label(25, 150, "Z ="), 8, 0);
     pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(pos_z, 7, 1);
+    parameter->addWidget(pos_z, 8, 1);
 
-    parameter->addWidget(create_label(25, 150, "Light source position :"), 8, 0);
+    parameter->addWidget(create_label(25, 150, "Light source position :"), 9, 0);
 
-    parameter->addWidget(create_label(25, 150, "X ="), 9, 0);
+    parameter->addWidget(create_label(25, 150, "X ="), 10, 0);
     light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(light_x, 9, 1);
-    parameter->addWidget(create_label(25, 150, "Y ="), 10, 0);
+    parameter->addWidget(light_x, 10, 1);
+    parameter->addWidget(create_label(25, 150, "Y ="), 11, 0);
     light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(light_y, 10, 1);
-    parameter->addWidget(create_label(25, 150, "Z ="), 11, 0);
+    parameter->addWidget(light_y, 11, 1);
+    parameter->addWidget(create_label(25, 150, "Z ="), 12, 0);
     light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
-    parameter->addWidget(light_z, 11, 1);
+    parameter->addWidget(light_z, 12, 1);
 
-    parameter->addWidget(start,12, 0);
-    parameter->addWidget(exit,12, 1);
-    parameter->addWidget(load_obj,13, 0);
+    parameter->addWidget(start,13, 0);
+    parameter->addWidget(exit,13, 1);
+
 
     //Main image
     window = new PainterWindow();
@@ -101,6 +105,7 @@ void MainWindow::Load_obj()
 
 {
     path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), "Obj (*.obj)");
+    path_label->setText(path_to_obj);
 }
 
 //Slot

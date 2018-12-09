@@ -48,6 +48,8 @@ private:
     QPushButton* exit;
     QPushButton* load_obj;
 
+    QLabel* path_label;
+
     QString path_to_obj;
 
     QDoubleSpinBox* pos_x;
