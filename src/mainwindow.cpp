@@ -33,10 +33,12 @@ MainWindow::MainWindow(QWidget *parent) :
     phong_Ki = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
     parameter->addWidget(phong_Ki, 3, 1);
     parameter->addWidget(create_label(25, 150, "Phong Diffus coefficient   ="), 4, 0);
+
     phong_Kf = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
     parameter->addWidget(phong_Kf, 4, 1);
 
     parameter->addWidget(create_label(25, 150, "Camera Position :"), 5, 0);
+
 
     parameter->addWidget(create_label(25, 150, "X ="), 6, 0);
     pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
@@ -49,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     parameter->addWidget(pos_z, 8, 1);
 
     parameter->addWidget(create_label(25, 150, "Light source position :"), 9, 0);
+
 
     parameter->addWidget(create_label(25, 150, "X ="), 10, 0);
     light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
@@ -106,6 +109,7 @@ void MainWindow::Load_obj()
 {
     path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), "Obj (*.obj)");
     path_label->setText(path_to_obj);
+
 }
 
 //Slot
