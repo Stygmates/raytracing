@@ -1,7 +1,5 @@
 #include "../include/mainwindow.h"
 
-#include "openglwidget.h"
-
 #include <iostream>
 #include <cassert>
 #include <QDebug>

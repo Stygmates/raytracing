@@ -1,5 +1,3 @@
-#include <iostream>
-#include <fstream>
 #include <unistd.h>
 #include <experimental/optional>
 #include "../include/Ray.h"
@@ -9,7 +7,6 @@
 #include "../include/DigitalDifferentialAnalyser.h"
 #include "../include/Grid.h"
 #include "../include/Slot.h"
-#include "../include/Window.h"
 //#include <QApplication>
 #include "mainwindow.h"
 
