@@ -41,8 +41,6 @@ SOURCES += \
         src/Grid.cpp \
         src/Slot.cpp \
         src/DigitalDifferentialAnalyser.cpp \
-        src/Window.cpp \
-        src/GLWidget.cpp \
         src/PainterWindow.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
@@ -60,8 +58,6 @@ HEADERS += \
         include/Grid.h \
         include/DigitalDifferentialAnalyser.h \
         include/Slot.h \
-        include/Window.h\
-        include/GLWidget.h \
         include/PainterWindow.h
 
 FORMS += \
