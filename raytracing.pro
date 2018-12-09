@@ -32,7 +32,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         src/main.cpp \
-#        src/Octree.cpp \
+        src/Loader.cpp \
         src/Point.cpp \
         src/Ray.cpp \
         src/Triangle.cpp \
@@ -50,7 +50,7 @@ SOURCES += \
         tests/TestDDA.cpp
 
 HEADERS += \
-#        include/Octree.h \
+        include/Loader.h \
         include/Point.h \
         include/Ray.h \
         include/Triangle.h \
@@ -64,4 +64,4 @@ HEADERS += \
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU -lassimp -Iassimp
