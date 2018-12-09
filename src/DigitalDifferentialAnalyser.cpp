@@ -27,9 +27,9 @@ vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
     ray_normalized.ray_unit();
 
 
-    ray_normalized.set_direction(Vector( (ray_normalized.get_direction().get_x()-ray_normalized.get_source().get_x())*2.0/*grid.get_step_x()*/+ray_normalized.get_source().get_x(),
-                                         (ray_normalized.get_direction().get_y()-ray_normalized.get_source().get_y())*2.0/*grid.get_step_y()*/+ray_normalized.get_source().get_y(),
-                                         (ray_normalized.get_direction().get_z()-ray_normalized.get_source().get_z())*2.0/*grid.get_step_z()*/+ray_normalized.get_source().get_z()));
+    ray_normalized.set_direction(Vector( (ray_normalized.get_direction().get_x()-ray_normalized.get_source().get_x())*grid.get_step_x()+ray_normalized.get_source().get_x(),
+                                         (ray_normalized.get_direction().get_y()-ray_normalized.get_source().get_y())*grid.get_step_y()+ray_normalized.get_source().get_y(),
+                                         (ray_normalized.get_direction().get_z()-ray_normalized.get_source().get_z())*grid.get_step_z()+ray_normalized.get_source().get_z()));
 
 
     Vector deltaT( (grid.get_step_x() - ray_normalized.get_source().get_x()) / ray_normalized.get_direction().get_x(),
