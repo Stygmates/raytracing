@@ -20,19 +20,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QGridLayout* parameter = new QGridLayout();
 
-    parameter->addWidget(create_label(25, 150, "Phong parameter :"), 0, 0);
+    parameter->addWidget(create_label(25, 150, "Phong parameters:"), 0, 0);
 
-    parameter->addWidget(create_label(25, 150, "Phong specular coefficient ="), 1, 0);
+    parameter->addWidget(create_label(25, 150, "Specular ="), 1, 0);
     phong_Ks = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
     parameter->addWidget(phong_Ks, 1, 1);
-    parameter->addWidget(create_label(25, 150, "Phong Imbiant coefficient  ="), 2, 0);
+    parameter->addWidget(create_label(25, 150, "Ambient ="), 2, 0);
     phong_Ki = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
     parameter->addWidget(phong_Ki, 2, 1);
-    parameter->addWidget(create_label(25, 150, "Phong Diffus coefficient   ="), 3, 0);
+    parameter->addWidget(create_label(25, 150, "Diffuse ="), 3, 0);
     phong_Kf = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
     parameter->addWidget(phong_Kf, 3, 1);
 
-    parameter->addWidget(create_label(25, 150, "Camera Position :"), 4, 0);
+    parameter->addWidget(create_label(25, 150, "Camera Position:"), 4, 0);
 
     parameter->addWidget(create_label(25, 150, "X ="), 5, 0);
     pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
     parameter->addWidget(pos_z, 7, 1);
 
-    parameter->addWidget(create_label(25, 150, "Light source position :"), 8, 0);
+    parameter->addWidget(create_label(25, 150, "Light direction:"), 8, 0);
 
     parameter->addWidget(create_label(25, 150, "X ="), 9, 0);
     light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
@@ -100,7 +100,7 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
 void MainWindow::Load_obj()
 
 {
-    path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), "Obj (*.obj)");
+    path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), ".obj (*.obj)");
 }
 
 //Slot
