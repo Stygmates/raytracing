@@ -1,4 +1,5 @@
 #include "../include/mainwindow.h"
+#include "../include/Loader.h"
 
 #include <iostream>
 #include <cassert>
@@ -146,26 +147,36 @@ void MainWindow::loader_error(const QString &text, const QColor &color) {
 void MainWindow::validerparametre()
 {
 
-    int nx = 600;
+    int nx = 400;
     int ny = 600;
 
+    std::ifstream infile(this->path_to_obj.toStdString());
+    if(!infile.good())
+    {
+        cerr << "Failed to open the file " << this->path_to_obj.toStdString() << endl;
+        return;
+    }
 
+    vector<Triangle> triangles;
+    Loader l;
+    l.import(this->path_to_obj.toStdString());
+    l.loadData(triangles);
     Vector lower_left_corner(screen_lower_corner_x->value(), screen_lower_corner_y->value(), screen_lower_corner_z->value());
     Vector horizontal(4.0, 0.0, 0.0);
     Vector vertical(0.0, 2.0, 0.0);
     //Point origin(0.0, 0.0, 0.0);
 
-    Point p1(-2.f, 1.f, -2.f);
-    Point p2(0.f, 1.f, -2.f);
-    Point p3(-1.f, 0.f, -2.f);
+//    Point p1(-2.f, 1.f, -2.f);
+//    Point p2(0.f, 1.f, -2.f);
+//    Point p3(-1.f, 0.f, -2.f);
 
-    Point p4 = p1 + Point(2.f, 0.f, 0.f);
-    Point p5 = p2 + Point(2.f, 0.f, 0.f);
-    Point p6 = p3 + Point(2.f, 0.f, 0.f);
-    vector<Triangle> triangles;
-    Triangle tri("T1", p1, p2, p3);
-    triangles.push_back(tri);
-    triangles.push_back(Triangle("T2", p4, p5, p6));
+//    Point p4 = p1 + Point(2.f, 0.f, 0.f);
+//    Point p5 = p2 + Point(2.f, 0.f, 0.f);
+//    Point p6 = p3 + Point(2.f, 0.f, 0.f);
+//    vector<Triangle> triangles;
+//    Triangle tri("T1", p1, p2, p3);
+//    triangles.push_back(tri);
+//    triangles.push_back(Triangle("T2", p4, p5, p6));
     Grid grid(Point(-4.f, -2.f, -7.f), Point(4.f, 2.f, 1.f), 4, 2, 4);
     grid.add_triangles(triangles);
 

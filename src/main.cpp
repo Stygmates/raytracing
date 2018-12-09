@@ -1,11 +1,3 @@
-#include <unistd.h>
-#include "../include/Ray.h"
-#include "../include/Triangle.h"
-#include "../include/Point.h"
-#include "../include/Vector.h"
-#include "../include/DigitalDifferentialAnalyser.h"
-#include "../include/Grid.h"
-#include "../include/Slot.h"
 #include "mainwindow.h"
 
 #include <gtest/gtest.h>

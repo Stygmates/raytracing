@@ -101,12 +101,12 @@ float Triangle::distance_originRay_plan(Vector source,Ray r)
 
 
     float t;
-    if( N*r.get_direction() == 0.0)
-        qDebug("parallel");
+//    if( N*r.get_direction() == 0.0)
+//        qDebug("parallel");
 
     t = -( (N*source -  D ) / (N*r.get_direction()) );
-    if (t < 0)
-        qDebug("triangle is behind");
+//    if (t < 0)
+//        qDebug("triangle is behind");
 
     return t;
 }
