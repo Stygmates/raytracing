@@ -118,9 +118,9 @@ Slot* Grid::get_slot(Point min_slot)
     x = (min_slot.get_x() - this->get_min_grid().get_x() )/this->get_step_x();
     y = (min_slot.get_y() - this->get_min_grid().get_y() )/this->get_step_y();
     z = (min_slot.get_z() - this->get_min_grid().get_z() )/this->get_step_z();
-    assert(((int)_slots.size() > x) && ((int)_slots[x].size() > y) && ((int)_slots[x][y].size() > z));
+    assert(((int)_slots.size() > z) && ((int)_slots[z].size() > y) && ((int)_slots[z][y].size() > x));
 
-    assert(!(_slots[x][y][z]->get_min_slot() != min_slot));
-    return _slots[x][y][z];
+    assert(!(_slots[z][y][x]->get_min_slot() != min_slot));
+    return _slots[z][y][x];
 }
 
