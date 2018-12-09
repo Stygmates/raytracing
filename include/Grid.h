@@ -37,6 +37,8 @@ public:
 
     Slot* get_slot(Point min_slot);
 
+    std::vector<std::vector<std::vector<Slot*>>> get_slots();
+
 private:
     std::vector<std::vector<std::vector<Slot*>>> _slots;
     Point _min_grid, _max_grid;

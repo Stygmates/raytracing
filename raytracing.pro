@@ -45,6 +45,7 @@ SOURCES += \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
+        tests/TestGrid.cpp \
         tests/TestSlot.cpp \
         tests/TestDDA.cpp
 
