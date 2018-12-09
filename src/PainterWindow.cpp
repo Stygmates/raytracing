@@ -9,9 +9,9 @@ void PainterWindow::paintEvent(QPaintEvent*) {
     if(this->image.size() != 0)
     {
         this->resize(this->image[0].size(), this->image.size());
-        for(unsigned int j = this->image.size() - 1; j>= 0; j--)
+        for(int j = (int)this->image.size() - 1; j>= 0; j--)
         {
-            for(unsigned int i = 0; i < this->image[j].size(); i++)
+            for(int i = 0; i < (int)this->image[j].size(); i++)
             {
                 Point pixel = this->image[j][i];
                 const QColor color(pixel.get_x(), pixel.get_y(), pixel.get_z());
