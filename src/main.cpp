@@ -17,10 +17,10 @@ int main(int argc, char **argv)
     QApplication a(argc, argv);
 	::testing::InitGoogleTest(&argc, argv);
     #ifdef QT_DEBUG
-        cout << "Debug version" << endl;
+        cerr << "Debug version" << endl;
     #endif
     #ifndef QT_DEBUG
-        cout << "Release version" << endl;
+        cerr << "Release version" << endl;
         MainWindow m;
         m.show();
         a.exec();
