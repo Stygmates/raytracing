@@ -12,5 +12,5 @@ install:
 script:
   - qmake
   - make
-  - ./bin/raytracing
+  - xvfb-run ./bin/raytracing
 
