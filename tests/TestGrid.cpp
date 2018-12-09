@@ -10,7 +10,7 @@ TEST(Grid, GridCreationTest)
     int step_z = 3;
 
     Grid g(min_grid, max_grid, step_x, step_y, step_z);
-    ASSERT_EQ(g.get_slots().size(), 2);
-    ASSERT_EQ(g.get_slots()[0].size(), 8);
-    ASSERT_EQ(g.get_slots()[0][0].size(), 5);
+    ASSERT_EQ((int)g.get_slots().size(), 2);
+    ASSERT_EQ((int)g.get_slots()[0].size(), 8);
+    ASSERT_EQ((int)g.get_slots()[0][0].size(), 5);
 }
