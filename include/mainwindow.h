@@ -9,6 +9,7 @@
 #include <QDoubleSpinBox>
 #include <QPushButton>
 #include <fstream>
+#include <QFileDialog>
 
 #include "ui_mainwindow.h"
 #include "Vector.h"
@@ -45,6 +46,9 @@ private:
     Ui::MainWindow *ui;
     QPushButton* start;
     QPushButton* exit;
+    QPushButton* load_obj;
+
+    QString path_to_obj;
 
     QDoubleSpinBox* pos_x;
     QDoubleSpinBox* pos_y;
@@ -60,6 +64,7 @@ private:
     PainterWindow * window;
 public slots :
     void validerparametre();
+    void Load_obj();
 
 
 

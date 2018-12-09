@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->start = new QPushButton("Start raytracing");
     this->exit = new QPushButton("Exit");
+    this->load_obj = new QPushButton("Load object");
     QWidget *mainwidget = new QWidget();
 
 
@@ -57,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     parameter->addWidget(start,12, 0);
     parameter->addWidget(exit,12, 1);
+    parameter->addWidget(load_obj,13, 0);
 
     //Main image
     window = new PainterWindow();
@@ -70,6 +72,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setCentralWidget(mainwidget);
 
     connect(start, SIGNAL(clicked()),this, SLOT(validerparametre()));
+    connect(load_obj, SIGNAL(clicked()),this, SLOT(Load_obj()));
     connect(exit, SIGNAL(clicked()),qApp, SLOT(quit()));
 }
 
@@ -92,6 +95,12 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
     spin_box->setSingleStep(step);
 
     return spin_box;
+}
+
+void MainWindow::Load_obj()
+
+{
+    path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), "Obj (*.obj)");
 }
 
 //Slot
