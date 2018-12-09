@@ -3,20 +3,15 @@
 #include <sstream>
 #include <cassert>
 
-Grid::Grid(Point min_grid, Point max_grid, int slot_number_x, int slot_number_y, int slot_number_z): _min_grid(min_grid), _max_grid(max_grid)
+Grid::Grid(Point min_grid, Point max_grid, int step_x, int step_y, int step_z): _min_grid(min_grid), _max_grid(max_grid), _step_x(step_x), _step_y(step_y), _step_z(step_z)
 {
     if(min_grid.get_x() > max_grid.get_x() || min_grid.get_y() > max_grid.get_y())
         cerr << "The grid's minimum is higher than its maximum";
     int interval_x = max_grid.get_x() - min_grid.get_x();
     int interval_y = max_grid.get_y() - min_grid.get_y();
     int interval_z = max_grid.get_z() - min_grid.get_z();
-    if((interval_x % slot_number_x != 0) || (interval_y % slot_number_y != 0) || (interval_z % slot_number_z != 0))
+    if((interval_x % step_x != 0) || (interval_y % step_y != 0) || (interval_z % step_z != 0))
         cerr << "The number of slots must be a divisor of the interval";
-
-    //Size of a slot
-    this->_step_x = interval_x/slot_number_x;
-    this->_step_y = interval_y/slot_number_y;
-    this->_step_z = interval_z/slot_number_z;
 
     for(int current_z = min_grid.get_z(); current_z < max_grid.get_z(); current_z += this->_step_z)
     {
@@ -111,16 +106,20 @@ void Grid::set_max_grid(const Point &max_grid)
     _max_grid = max_grid;
 }
 
+
+vector<vector<vector<Slot*>>> Grid::get_slots()
+{
+    return _slots;
+}
+
 Slot* Grid::get_slot(Point min_slot)
 {
     int x, y, z;
     x = (min_slot.get_x() - this->get_min_grid().get_x() )/this->get_step_x();
     y = (min_slot.get_y() - this->get_min_grid().get_y() )/this->get_step_y();
     z = (min_slot.get_z() - this->get_min_grid().get_z() )/this->get_step_z();
-    cout << "x = " << x << "y = " << y << "z = " << z << endl;
-    cout << _slots.size() << endl;
-    cout << _slots[1].size() << endl;
-    cout << _slots[1][1].size() << endl;
+    assert(((int)_slots.size() > x) && ((int)_slots[x].size() > y) && ((int)_slots[x][y].size() > z));
+
     assert(!(_slots[x][y][z]->get_min_slot() != min_slot));
     return _slots[x][y][z];
 }

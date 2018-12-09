@@ -15,7 +15,7 @@ struct pointcomp {
 class Grid
 {
 public:
-    Grid(Point min_grid, Point max_grid, int x, int y, int z);
+    Grid(Point min_grid, Point max_grid, int step_x, int step_y, int step_z);
     void add_triangles(vector<Triangle> triangles);
     void add_triangle(Triangle t);
 
