@@ -129,13 +129,13 @@ void MainWindow::Load_obj()
 
 {
     path_to_obj = QFileDialog::getOpenFileName(this->load_obj, "Load an object", QString(), ".obj (*.obj)");
-    loader_error(path_to_obj, QColor(255, 0, 0, 255));
+    loader_error(path_to_obj, QColor(0, 0, 0, 255));
 
 }
 
 void MainWindow::loader_error(const QString &text, const QColor &color) {
     QPalette palette = path_label->palette();
-    QBrush brush(QColor(255, 0, 0, 255));
+    QBrush brush(color);
     brush.setStyle(Qt::SolidPattern);
     palette.setBrush(QPalette::Active, QPalette::WindowText, brush);
     path_label->setPalette(palette);
@@ -153,6 +153,8 @@ void MainWindow::validerparametre()
     std::ifstream infile(this->path_to_obj.toStdString());
     if(!infile.good())
     {
+
+        loader_error(QString::fromStdString("Failed to open the file " + this->path_to_obj.toStdString()) , QColor(255, 0, 0, 255));
         cerr << "Failed to open the file " << this->path_to_obj.toStdString() << endl;
         return;
     }
