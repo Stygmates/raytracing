@@ -90,8 +90,8 @@ MainWindow::MainWindow(QWidget *parent) :
     loader_layout->addWidget(load_obj,0, 10);
     loader_layout->addWidget(path_label, 0, 0);
 
-    image_loader_layout->addWidget(window);
     image_loader_layout->addLayout(loader_layout);
+    image_loader_layout->addWidget(window);
 
     mainlayout->addLayout(image_loader_layout);
     mainlayout->addLayout(parameter);
