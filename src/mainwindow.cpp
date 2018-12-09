@@ -117,7 +117,7 @@ void MainWindow::validerparametre()
 {
 
     int nx = 600;
-    int ny = 300;
+    int ny = 600;
 
 
     Vector lower_left_corner(-2.0, -1.0, -1.0);
