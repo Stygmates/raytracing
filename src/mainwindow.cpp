@@ -1,10 +1,12 @@
 #include "../include/mainwindow.h"
 #include "../include/Loader.h"
+#include "../include/PhongColor.h"
 
 #include <iostream>
 #include <cassert>
 #include <QDebug>
 
+using namespace experimental;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,15 +29,15 @@ MainWindow::MainWindow(QWidget *parent) :
     parameter->addWidget(create_label(25, 150, "Phong parameters :"), 1, 0);
 
     parameter->addWidget(create_label(25, 150, "Specular ="), 2, 0);
-    phong_Ks = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
-    parameter->addWidget(phong_Ks, 2, 1);
+    phong_specular = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
+    parameter->addWidget(phong_specular, 2, 1);
     parameter->addWidget(create_label(25, 150, "Ambient ="), 3, 0);
-    phong_Ki = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
-    parameter->addWidget(phong_Ki, 3, 1);
+    phong_ambient = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
+    parameter->addWidget(phong_ambient, 3, 1);
     parameter->addWidget(create_label(25, 150, "Diffuse ="), 4, 0);
 
-    phong_Kf = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
-    parameter->addWidget(phong_Kf, 4, 1);
+    phong_diffuse = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
+    parameter->addWidget(phong_diffuse, 4, 1);
 
     parameter->addWidget(create_label(25, 150, "Camera Position:"), 5, 0);
 
@@ -147,8 +149,15 @@ void MainWindow::loader_error(const QString &text, const QColor &color) {
 void MainWindow::validerparametre()
 {
 
-    int nx = 400;
-    int ny = 600;
+    if(pos_x->value() == screen_lower_corner_x->value() &&
+            pos_y->value() == screen_lower_corner_y->value() &&
+            pos_z->value() == screen_lower_corner_z->value())
+    {
+        loader_error(QString::fromStdString("Camera position can not be at the same coordinates as the screen position"), QColor(255, 255, 0));
+        return;
+    }
+    int nx = 600;
+    int ny = 300;
 
     std::ifstream infile(this->path_to_obj.toStdString());
     if(!infile.good())
@@ -188,7 +197,7 @@ void MainWindow::validerparametre()
 
 }
 
-Vector MainWindow::color(Ray r, Grid grid)
+Color MainWindow::color(Ray r, Grid grid)
 {
     DDA dda;
 //    cout << grid.get_min_grid() << endl;
@@ -197,18 +206,22 @@ Vector MainWindow::color(Ray r, Grid grid)
     {
 //        cout << "Ray source " << r.get_source() << " direction: " << r.get_direction() << " going through min = " << slot->get_min_slot() << endl;
         vector<Triangle> tri = slot->get_triangle_list();
-        if(auto t = intersects(r,tri))
+        Point lightPosition(light_x->value(), light_y->value(), light_z->value());
+        Color lightcolor(1.0f, 1.0f, 1.0f);
+        float ambient = 0.9f;
+        if(auto color = intersects(r, tri, ambient, lightPosition, lightcolor))
         {
-            Vector normal = t.value_or(Triangle()).get_normal().unit();
+            Color col = color.value_or(Color());
 //            qDebug() << "Color found and returned" << endl;
-            return Vector(1.0f, 0.0f, 0.0f);
+            return col;
     //        return 0.5*Vector(normal.get_x()+1., normal.get_y()+1., normal.get_z()+1.);
         }
     }
 //    qDebug() << "No triangle found" << endl;
     Vector unit_direction = r.get_direction().unit();
     float t = 0.5*(unit_direction.get_y() + 1.0);
-    return (1-t)*Vector(1.0, 1.0, 1.0) + t*Vector(0.5, 0.7, 1.0);
+    Color background_color = (1-t)*Color(1.0, 1.0, 1.0) + t*Color(0.5, 0.7, 1.0);
+    return background_color;
 }
 
 void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid)
@@ -221,12 +234,12 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
             float u = float(i)/float(width);
             float v = float(j)/float(height);
             Ray camera(origin, lower_left_corner + u*horizontal + v*vertical);
-            Vector col = color(camera, grid);
+            Color col = color(camera, grid);
 
 //            qDebug() << "Color returned:" << col.get_x();
-            int r = int(255.99*col.get_x());
-            int g = int(255.99*col.get_y());
-            int b = int(255.99*col.get_z());
+            int r = int(255.99*col.get_red());
+            int g = int(255.99*col.get_green());
+            int b = int(255.99*col.get_blue());
             assert(r>=0 && r<256);
             assert(g>=0 && g<256);
             assert(b>=0 && b<256);
@@ -236,13 +249,16 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
     window->update();
 }
 
-optional<Triangle> MainWindow::intersects(Ray r, vector<Triangle> tri)
+optional<Color> MainWindow::intersects(Ray r, vector<Triangle> tri, float ambientStrength, Point lightPosition, Color lightcolor)
 {
-    Point p;
     for(Triangle t: tri)
     {
-        if(t.ray_intersect(r))
-            return t;
+        if(auto p = t.ray_intersect(r))
+        {
+            PhongColor pc(t, p.value(), ambientStrength, lightPosition, lightcolor);
+
+            return pc.get_color(Color(0.5f, 0.6f, 0.2f));
+        }
     }
     return {};
 }

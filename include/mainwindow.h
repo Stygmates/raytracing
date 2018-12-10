@@ -17,6 +17,7 @@
 #include "DigitalDifferentialAnalyser.h"
 #include "Triangle.h"
 #include "PainterWindow.h"
+#include "Color.h"
 #include <experimental/optional>
 
 using namespace experimental;
@@ -37,10 +38,9 @@ public:
 
     void loader_error(const QString &text, const QColor &color);
 
-    Vector color(Ray r, Grid grid);
+    Color color(Ray r, Grid grid);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
-    optional<Triangle> intersects(Ray r, vector<Triangle> tri);
-
+    optional<Color> intersects(Ray r, vector<Triangle> tri, float ambientStrength, Point lightPosition, Color lightcolor);
 
     ~MainWindow();
 
@@ -62,9 +62,9 @@ private:
     QDoubleSpinBox* screen_lower_corner_y;
     QDoubleSpinBox* screen_lower_corner_z;
 
-    QDoubleSpinBox* phong_Kf;
-    QDoubleSpinBox* phong_Ki;
-    QDoubleSpinBox* phong_Ks;
+    QDoubleSpinBox* phong_diffuse;
+    QDoubleSpinBox* phong_ambient;
+    QDoubleSpinBox* phong_specular;
 
     QDoubleSpinBox* light_x;
     QDoubleSpinBox* light_y;

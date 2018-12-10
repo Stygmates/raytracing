@@ -33,6 +33,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         src/main.cpp \
         src/Loader.cpp \
+        src/Color.cpp \
+        src/PhongColor.cpp \
         src/Point.cpp \
         src/Ray.cpp \
         src/Triangle.cpp \
@@ -51,6 +53,8 @@ SOURCES += \
 
 HEADERS += \
         include/Loader.h \
+        include/Color.h \
+        include/PhongColor.h \
         include/Point.h \
         include/Ray.h \
         include/Triangle.h \

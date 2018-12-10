@@ -24,7 +24,6 @@ TEST(Triangle, PointOfIntersectTriangleWithRay)
     Point    dir(0., 0., 9.);
     Vector   direction(origin, dir);
     Ray r(origin, direction);
-    ASSERT_EQ(1, tr.ray_intersect(r));
     ASSERT_DOUBLE_EQ(P.get_x(),0.);
     ASSERT_DOUBLE_EQ(P.get_y(),0.);
     ASSERT_DOUBLE_EQ(P.get_z(),0.);

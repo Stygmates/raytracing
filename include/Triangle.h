@@ -1,9 +1,12 @@
 #ifndef __TRIANGLE_H
 #define __TRIANGLE_H
 
+#include <experimental/optional>
+
 #include "Point.h"
 #include "Ray.h"
 
+using namespace experimental;
 
 /**
  * @brief The Triangle class: defines the structure of a triangle, a triangle is composed of three points p1, p2, p3
@@ -120,8 +123,7 @@ class Triangle
          * @param r The ray to test
          * @return True if the ray intersects the triangle, False otherwise
          */
-        bool ray_intersect(Ray r);
-
+        optional<Point> ray_intersect(Ray r);
         /**
          * @brief get_min_bounding_box
          * @return A point with each component being the minimum in each direction of the bounding box of the triangle

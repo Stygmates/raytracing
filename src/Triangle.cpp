@@ -111,7 +111,7 @@ float Triangle::distance_originRay_plan(Vector source,Ray r)
     return t;
 }
 
-Point Triangle::intersection_ray_plan(Ray r,float t)
+Point Triangle::intersection_ray_plan(Ray r, float t)
 {	//A*x + B*y + C*z + D = 0
     //A B C = Normal
     //D = distance from the origin (0,0,0)
@@ -125,25 +125,31 @@ Point Triangle::intersection_ray_plan(Ray r,float t)
     return Point(V.get_x(),V.get_y(),V.get_z());
 }
 
-bool Triangle::ray_intersect(Ray r){
-
-
+optional<Point> Triangle::ray_intersect(Ray r){
     Vector source(Point(0, 0, 0),r.get_source());
     double t = distance_originRay_plan(source,r);
 
     Point P;
 
-    if(t>=0){
+    if(t >= 0){
         P = this->intersection_ray_plan(r,t);
     }
     else
-        return false;           //ray is parallel or behind
+    {
+        return {};           //ray is parallel or behind
+    }
 
 
-   return  (Vector(this->_p1,this->_p2)^Vector(this->_p1,P))*(Vector(this->_p1,P)^Vector(this->_p1,this->_p3)) >= 0  &&
+   if((Vector(this->_p1,this->_p2)^Vector(this->_p1,P))*(Vector(this->_p1,P)^Vector(this->_p1,this->_p3)) >= 0  &&
            (Vector(this->_p2,this->_p1)^Vector(this->_p2,P))*(Vector(this->_p2,P)^Vector(this->_p2,this->_p3)) >= 0  &&
-           (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0 ;
-
+           (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0)
+   {
+       return P;
+   }
+   else
+   {
+       return {};
+   }
 }
 
 
