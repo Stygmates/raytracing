@@ -115,7 +115,7 @@ class Vector
          * @return The result of the dot product
          */
         float operator*(const Vector& v);
-		//Vector operator*(const double& t);
+        Vector operator*(const float& t);
 
         /**
          * @brief operator + The addition between two vectors
@@ -124,7 +124,12 @@ class Vector
          */
 		Vector operator+(const Vector& v);
 		
-		
+        /**
+         * @brief operator - The subtraction between two vectors
+         * @param v The second vector to compute the subtraction with
+         * @return The result of the subtraction
+         */
+        Vector operator-(const Vector& v);
 		
 };
 

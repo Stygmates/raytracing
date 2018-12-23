@@ -100,7 +100,12 @@ Vector Vector::operator^(const Vector& v)
 
 float Vector::operator*(const Vector& v)
 {
-	return this->_x * v.get_x() + this->_y * v.get_y() + this->_z * v.get_z();
+    return this->_x * v.get_x() + this->_y * v.get_y() + this->_z * v.get_z();
+}
+
+Vector Vector::operator*(const float &t)
+{
+    return Vector(this->_x * t, this->_y * t, this->_z * t);
 }
 
 
@@ -111,6 +116,16 @@ Vector Vector::operator+(const Vector& v)
 	sum.set_y(this->_y + v.get_y());
 	sum.set_z(this->_z + v.get_z());
 
-	return sum;
+    return sum;
+}
+
+Vector Vector::operator-(const Vector &v)
+{
+    Vector sub;
+    sub.set_x(this->_x - v.get_x());
+    sub.set_y(this->_y - v.get_y());
+    sub.set_z(this->_z - v.get_z());
+
+    return sub;
 }
 
