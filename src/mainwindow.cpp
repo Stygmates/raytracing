@@ -255,9 +255,9 @@ optional<Color> MainWindow::intersects(Ray r, vector<Triangle> tri, float ambien
     {
         if(auto p = t.ray_intersect(r))
         {
-            PhongColor pc(t, p.value(), ambientStrength, lightPosition, lightcolor);
-
-            return pc.get_color(Color(0.5f, 0.6f, 0.2f));
+//            PhongColor pc(t, p.value(), ambientStrength, lightPosition, lightcolor);
+              PhongColor pc(p.value(), 1.f/*ka*/, 1.f/*kd*/, 1.f/*ks*/, lightPosition, t.get_normal().unit(), Point(r.get_direction().get_x(), r.get_direction().get_y(), r.get_direction().get_z()));
+            return pc.get_color(Color(0.f, 0.0f, 0.0f));
         }
     }
     return {};

@@ -3,6 +3,7 @@
 
 #include "Triangle.h"
 #include "Color.h"
+#include <cmath>
 
 /**
  * @brief The PhongColor class: Class helper the color of a triangle enlightened by a light from a certain position
@@ -19,6 +20,8 @@ class PhongColor{
      * @param lightcolor The color of the light
      */
     PhongColor(Triangle t, Point intersection, float ambientStrength, Point lightPosition, Color lightcolor);
+    PhongColor(Point intersection, float ka, float kd, float ks, Point lightPosition,Vector N, Point originCamera);
+
 
     /**
      * @brief get_color Returns the computed color with triangleColor
@@ -35,6 +38,10 @@ class PhongColor{
          * @brief _diffuse_color The diffuse component in Phong
          */
         Color _diffuse_color;
+        /**
+         * @brief _specular_color The specular component in Phong
+         */
+        Color _specular_color;
 };
 
 #endif
