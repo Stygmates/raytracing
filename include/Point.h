@@ -72,6 +72,13 @@ class Point{
         Point operator-(const Point& v);
 
         /**
+         * @brief operator /  Division between two points
+         * @param v
+         * @return
+         */
+        Point operator/(const Point& v);
+
+        /**
          * @brief operator != Points comparison
          * @param v
          * @return
