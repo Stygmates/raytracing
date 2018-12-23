@@ -188,8 +188,13 @@ void MainWindow::validerparametre()
 //    Triangle tri("T1", p1, p2, p3);
 //    triangles.push_back(tri);
 //    triangles.push_back(Triangle("T2", p4, p5, p6));
-    Grid grid(Point(-4.f, -2.f, -7.f), Point(4.f, 2.f, 1.f), 4, 2, 4);
+    Grid grid(Point(-7.f, -7.f, -7.f), Point(7.f, 7.f, 7.f), 1, 1, 1);
+    std::cout << triangles.size() <<std::endl;
+
     grid.add_triangles(triangles);
+
+
+
 
     Point origin_camera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
 
