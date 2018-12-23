@@ -14,6 +14,9 @@ DESTDIR = bin/
 TARGET = raytracing
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -fopenmp
+
+
 INCLUDEPATH += include \
     += $$PWD/googletest/googletest \
     += $$PWD/googletest/googletest/include
@@ -68,4 +71,5 @@ HEADERS += \
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU -lassimp -Iassimp
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU -lassimp -Iassimp -lpthread -fopenmp
+

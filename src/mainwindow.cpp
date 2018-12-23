@@ -2,6 +2,7 @@
 #include "../include/Loader.h"
 #include "../include/PhongColor.h"
 
+#include <omp.h>
 #include <iostream>
 #include <cassert>
 #include <QDebug>
@@ -232,6 +233,7 @@ Color MainWindow::color(Ray r, Grid grid)
 void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid)
 {
     window->image = vector<vector<Point>>(height, vector<Point>(width));
+#pragma omp parallel for
     for(int j = height-1; j>= 0; j--)
     {
         for(int i = 0; i < width; i++)
