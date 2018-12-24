@@ -171,7 +171,7 @@ void MainWindow::validerparametre()
     }
 
     vector<Shape*> shapes;
-    Sphere *sphere = new Sphere(Point(0.f, 0.f, -1.f), 0.5f);
+    Sphere *sphere = new Sphere(Point(0.f, 0.f, -1.f), 1.5f);
     shapes.push_back(sphere);
     Loader l;
     l.import(this->path_to_obj.toStdString());
@@ -267,7 +267,7 @@ optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, float ambie
         {
 //            PhongColor pc(t, p.value(), ambientStrength, lightPosition, lightcolor);
               PhongColor pc(p.value().get_intersection(), 1.f/*ka*/, 1.f/*kd*/, 1.f/*ks*/, lightPosition, p.value().get_normal().unit(), Point(r.get_direction().get_x(), r.get_direction().get_y(), r.get_direction().get_z()));
-            return pc.get_color(Color(0.f, 0.0f, 0.0f));
+            return pc.get_color(Color(0.f, 0.0f, 1.0f));
         }
     }
     return {};

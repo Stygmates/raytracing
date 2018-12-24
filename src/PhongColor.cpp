@@ -16,20 +16,20 @@ using namespace std;
 PhongColor::PhongColor(Point intersection, float ka, float kd, float ks, Point lightPosition,Vector N, Point originCamera)
 {
     Color white(1.0f, 1.0f, 1.0f);
-    Vector V(intersection, originCamera);
+    Vector V(originCamera, intersection);
     Vector L(intersection, lightPosition);
     L = L.unit();
     V = V.unit();
     Vector R = (N * ((N*L) * 2) ) - L;
 
-    _ambient_color  = white * ka;
-    _diffuse_color  = white * kd * (L*N);
-    _specular_color = white * ks * pow(R*V, 20);
+    _ambient_color  =  white * ka;
+    _diffuse_color  =  white * kd * (L*N);
+    _specular_color =  white * ks * pow(R*V, 30);
 }
 
 Color PhongColor::get_color(Color triangleColor)
 {
-    Color c = (triangleColor + _ambient_color + _diffuse_color + _specular_color);
+    Color c = (triangleColor *(_ambient_color + _diffuse_color + _specular_color) );
     std::cout << c <<std::endl;
 
     if(c.get_red()   < 0.f)     c.set_red(0.f);
