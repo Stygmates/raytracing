@@ -1,6 +1,7 @@
 #include "../include/mainwindow.h"
 #include "../include/Loader.h"
 #include "../include/PhongColor.h"
+#include "Sphere.h"
 
 #include <omp.h>
 #include <iostream>
@@ -169,10 +170,10 @@ void MainWindow::validerparametre()
         return;
     }
 
-    vector<Triangle> triangles;
+    vector<Shape*> shapes;
     Loader l;
     l.import(this->path_to_obj.toStdString());
-    l.loadData(triangles);
+    l.loadData(shapes);
     Vector lower_left_corner(screen_lower_corner_x->value(), screen_lower_corner_y->value(), screen_lower_corner_z->value());
     Vector horizontal(4.0, 0.0, 0.0);
     Vector vertical(0.0, 2.0, 0.0);
@@ -190,9 +191,9 @@ void MainWindow::validerparametre()
 //    triangles.push_back(tri);
 //    triangles.push_back(Triangle("T2", p4, p5, p6));
     Grid grid(Point(-7.f, -7.f, -7.f), Point(7.f, 7.f, 7.f), 1, 1, 1);
-    std::cout << triangles.size() <<std::endl;
+    std::cout << shapes.size() <<std::endl;
 
-    grid.add_triangles(triangles);
+    grid.add_shapes(shapes);
 
 
 
@@ -211,11 +212,11 @@ Color MainWindow::color(Ray r, Grid grid)
     for(auto slot: slots_to_visit)
     {
 //        cout << "Ray source " << r.get_source() << " direction: " << r.get_direction() << " going through min = " << slot->get_min_slot() << endl;
-        vector<Triangle> tri = slot->get_triangle_list();
+        vector<Shape*> shapes = slot->get_shape_list();
         Point lightPosition(light_x->value(), light_y->value(), light_z->value());
         Color lightcolor(1.0f, 1.0f, 1.0f);
         float ambient = 0.9f;
-        if(auto color = intersects(r, tri, ambient, lightPosition, lightcolor))
+        if(auto color = intersects(r, shapes, ambient, lightPosition, lightcolor))
         {
             Color col = color.value_or(Color());
 //            qDebug() << "Color found and returned" << endl;
@@ -256,14 +257,14 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
     window->update();
 }
 
-optional<Color> MainWindow::intersects(Ray r, vector<Triangle> tri, float ambientStrength, Point lightPosition, Color lightcolor)
+optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, float ambientStrength, Point lightPosition, Color lightcolor)
 {
-    for(Triangle t: tri)
+    for(Shape *s: shapes)
     {
-        if(auto p = t.ray_intersect(r))
+        if(auto p = s->ray_intersect(r))
         {
 //            PhongColor pc(t, p.value(), ambientStrength, lightPosition, lightcolor);
-              PhongColor pc(p.value(), 1.f/*ka*/, 1.f/*kd*/, 1.f/*ks*/, lightPosition, t.get_normal().unit(), Point(r.get_direction().get_x(), r.get_direction().get_y(), r.get_direction().get_z()));
+              PhongColor pc(p.value().get_intersection(), 1.f/*ka*/, 1.f/*kd*/, 1.f/*ks*/, lightPosition, p.value().get_normal().unit(), Point(r.get_direction().get_x(), r.get_direction().get_y(), r.get_direction().get_z()));
             return pc.get_color(Color(0.f, 0.0f, 0.0f));
         }
     }

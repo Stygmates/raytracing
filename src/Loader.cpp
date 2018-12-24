@@ -6,6 +6,7 @@
 #include <cassert>
 #include <fstream>
 #include "../include/Loader.h"
+#include "Triangle.h"
 
 Loader::Loader()
 {
@@ -15,12 +16,20 @@ void Loader::import( std::string filename )
 {
     this->importer = new Assimp::Importer();
     this->scene = this->importer->ReadFile(filename, aiProcessPreset_TargetRealtime_Quality);
-    assert( this->scene != NULL );
+    if(this->scene == NULL)
+    {
+        std::cerr << "Error: No scene loaded" << std::endl;
+    }
     this->importer->SetPropertyInteger( AI_CONFIG_PP_SBP_REMOVE, aiPrimitiveType_LINE | aiPrimitiveType_POINT );
 }
 
-void Loader::loadData(std::vector<Triangle> &triangles)
+void Loader::loadData(std::vector<Shape*> &shapes)
 {
+    if(this->scene == NULL)
+    {
+        std::cerr << "Cannot load data: No scene loaded" << std::endl;
+        return;
+    }
     vector<Point> positions;
     if( this->scene->HasMeshes() )
     {
@@ -41,8 +50,8 @@ void Loader::loadData(std::vector<Triangle> &triangles)
                     Point p1(positions[face.mIndices[0]].get_x(), positions[face.mIndices[0]].get_y(), positions[face.mIndices[0]].get_z());
                     Point p2(positions[face.mIndices[1]].get_x(), positions[face.mIndices[1]].get_y(), positions[face.mIndices[1]].get_z());
                     Point p3(positions[face.mIndices[2]].get_x(), positions[face.mIndices[2]].get_y(), positions[face.mIndices[2]].get_z());
-                    Triangle t(p1, p2, p3);
-                    triangles.push_back(t);
+                    Triangle *t = new Triangle(p1, p2, p3);
+                    shapes.push_back(t);
                 }
             }
         }

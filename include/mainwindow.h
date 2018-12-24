@@ -40,7 +40,7 @@ public:
 
     Color color(Ray r, Grid grid);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
-    optional<Color> intersects(Ray r, vector<Triangle> tri, float ambientStrength, Point lightPosition, Color lightcolor);
+    optional<Color> intersects(Ray r, vector<Shape*> shapes, float ambientStrength, Point lightPosition, Color lightcolor);
 
     ~MainWindow();
 

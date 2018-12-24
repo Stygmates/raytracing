@@ -31,13 +31,13 @@ Grid::Grid(Point min_grid, Point max_grid, int step_x, int step_y, int step_z): 
     }
 }
 
-void Grid::add_triangles(vector<Triangle> triangles)
+void Grid::add_shapes(vector<Shape*> shapes)
 {
-    for(auto t: triangles)
-        this->add_triangle(t);
+    for(auto s: shapes)
+        this->add_shape(s);
 }
 
-void Grid::add_triangle(Triangle t)
+void Grid::add_shape(Shape* s)
 {
     for(auto slot_z: this->_slots)
     {
@@ -45,9 +45,9 @@ void Grid::add_triangle(Triangle t)
         {
             for(auto slot_element: slot_row)
             {
-                if(slot_element->boundingbox_intersects(t))
+                if(slot_element->boundingbox_intersects(s))
                 {
-                    slot_element->add_triangle(t);
+                    slot_element->add_shape(s);
                 }
             }
         }

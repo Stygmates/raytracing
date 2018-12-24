@@ -3,15 +3,17 @@
 
 #include <experimental/optional>
 
+#include "Shape.h"
 #include "Point.h"
 #include "Ray.h"
+
 
 using namespace experimental;
 
 /**
  * @brief The Triangle class: defines the structure of a triangle, a triangle is composed of three points p1, p2, p3
  */
-class Triangle
+class Triangle: public Shape
 {
 	public:
 		Triangle();
@@ -123,17 +125,17 @@ class Triangle
          * @param r The ray to test
          * @return True if the ray intersects the triangle, False otherwise
          */
-        optional<Point> ray_intersect(Ray r);
+        optional<HitRecord> ray_intersect(Ray r);
         /**
          * @brief get_min_bounding_box
          * @return A point with each component being the minimum in each direction of the bounding box of the triangle
          */
-		Point get_min_bounding_box();
+        virtual Point get_min_bounding_box();
         /**
          * @brief get_max_bounding_box
          * @return A point with each component being the maximum in each direction of the bounding box of the triangle
          */
-		Point get_max_bounding_box();
+        virtual Point get_max_bounding_box();
 
     private:
 

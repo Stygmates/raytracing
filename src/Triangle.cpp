@@ -125,7 +125,7 @@ Point Triangle::intersection_ray_plan(Ray r, float t)
     return Point(V.get_x(),V.get_y(),V.get_z());
 }
 
-optional<Point> Triangle::ray_intersect(Ray r){
+optional<HitRecord> Triangle::ray_intersect(Ray r){
     Vector source(Point(0, 0, 0),r.get_source());
     double t = distance_originRay_plan(source,r);
 
@@ -144,7 +144,7 @@ optional<Point> Triangle::ray_intersect(Ray r){
            (Vector(this->_p2,this->_p1)^Vector(this->_p2,P))*(Vector(this->_p2,P)^Vector(this->_p2,this->_p3)) >= 0  &&
            (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0)
    {
-       return P;
+       return HitRecord(P, this->get_normal());
    }
    else
    {

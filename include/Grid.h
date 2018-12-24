@@ -28,13 +28,13 @@ public:
      * @brief add_triangles Adds all of the triangles in the list to the slots that they intersect, using the add_triangle helper function
      * @param triangles
      */
-    void add_triangles(vector<Triangle> triangles);
+    void add_shapes(vector<Shape*> shapes);
 
     /**
      * @brief add_triangle Adds a triangle to the slots that it intersects
      * @param t
      */
-    void add_triangle(Triangle t);
+    void add_shape(Shape* s);
 
     /**
      * @brief get_name name getter

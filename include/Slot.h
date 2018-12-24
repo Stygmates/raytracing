@@ -26,7 +26,7 @@ class Slot
          * @param max_slot The maximum in each direction of the slot
          * @param triangles The triangles to test against the slot
          */
-        Slot(Point min_slot, Point max_slot, std::vector<Triangle> triangles);
+        Slot(Point min_slot, Point max_slot, std::vector<Shape*> shapes);
 
         /**
          * @brief get_min_slot Returns the minimum coordinates in each direction of the slot
@@ -41,10 +41,10 @@ class Slot
         Point get_max_slot();
 
         /**
-         * @brief get_triangle_list Returns the list of the triangles that intersect the current slot
+         * @brief get_shape_list Returns the list of the shapes that intersect the current slot
          * @return
          */
-        std::vector<Triangle> get_triangle_list();
+        std::vector<Shape*> get_shape_list();
 
         /**
          * @brief set_min_slot Sets the slot maximum to min_slot
@@ -59,17 +59,17 @@ class Slot
         void set_max_slot(const Point &max_slot);
 
         /**
-         * @brief boundingbox_intersects Checks if the boundingbox of the current slot intersects the boundingbox of the triangle
-         * @param t The triangle to test
+         * @brief boundingbox_intersects Checks if the boundingbox of the current slot intersects the boundingbox of the shape
+         * @param s The shape to test
          * @return
          */
-        bool boundingbox_intersects(Triangle t);
+        bool boundingbox_intersects(Shape *s);
 
         /**
          * @brief add_triangle Adds a triangle to the slot, using @ref boundingbox_intersects(Triangle)
          * @param t The triangle to add
          */
-        void add_triangle(Triangle t);
+        void add_shape(Shape *s);
 
         /**
          * @brief point_inside Tells if the coordinates of the point are inside the slot or not
@@ -100,7 +100,7 @@ class Slot
         /**
          * @brief triangle_list The triangles that have been added to the slot
          */
-        std::vector<Triangle> triangle_list;
+        std::vector<Shape*> shape_list;
 
 };
 
