@@ -31,53 +31,53 @@ MainWindow::MainWindow(QWidget *parent) :
     parameter->addWidget(create_label(25, 150, "Phong parameters :"), 1, 0);
 
     parameter->addWidget(create_label(25, 150, "Specular ="), 2, 0);
-    phong_specular = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
+    phong_specular = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 0.f);
     parameter->addWidget(phong_specular, 2, 1);
     parameter->addWidget(create_label(25, 150, "Ambient ="), 3, 0);
-    phong_ambient = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
+    phong_ambient = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 0.f);
     parameter->addWidget(phong_ambient, 3, 1);
     parameter->addWidget(create_label(25, 150, "Diffuse ="), 4, 0);
 
-    phong_diffuse = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50);
+    phong_diffuse = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 0.f);
     parameter->addWidget(phong_diffuse, 4, 1);
 
     parameter->addWidget(create_label(25, 150, "Camera Position:"), 5, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 6, 0);
-    pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
     parameter->addWidget(pos_x, 6, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 7, 0);
-    pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
     parameter->addWidget(pos_y, 7, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 8, 0);
-    pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 2.f);
     parameter->addWidget(pos_z, 8, 1);
 
     parameter->addWidget(create_label(25, 150, "Screen Position:"), 9, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 10, 0);
-    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -2.f);
     parameter->addWidget(screen_lower_corner_x, 10, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 11, 0);
-    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -1.f);
     parameter->addWidget(screen_lower_corner_y, 11, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 12, 0);
-    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -1.f);
     parameter->addWidget(screen_lower_corner_z, 12, 1);
 
     parameter->addWidget(create_label(25, 150, "Light direction:"), 13, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 14, 0);
-    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
     parameter->addWidget(light_x, 14, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 15, 0);
-    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
     parameter->addWidget(light_y, 15, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 16, 0);
-    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50);
+    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
     parameter->addWidget(light_z, 16, 1);
 
     parameter->addWidget(start,17, 0);
@@ -117,7 +117,7 @@ QLabel* MainWindow::create_label(int max_height, int max_width,QString name)
     return label;
 }
 
-QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width)
+QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width, float value)
 {
 
     QDoubleSpinBox* spin_box = new QDoubleSpinBox();
@@ -125,7 +125,7 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
     spin_box->setMaximumHeight(max_height);
     spin_box->setRange(xRange , yRange);
     spin_box->setSingleStep(step);
-
+    spin_box->setValue(value);
     return spin_box;
 }
 

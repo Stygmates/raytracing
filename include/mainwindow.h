@@ -34,7 +34,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     QLabel* create_label(int max_height, int max_width,QString name);
-    QDoubleSpinBox* create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width);
+    QDoubleSpinBox* create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width, float value);
 
     void loader_error(const QString &text, const QColor &color);
 
