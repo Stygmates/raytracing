@@ -34,39 +34,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        src/main.cpp \
-        src/Loader.cpp \
-        src/Color.cpp \
-        src/PhongColor.cpp \
-        src/Point.cpp \
-        src/Ray.cpp \
-        src/Triangle.cpp \
-        src/Vector.cpp \
-        src/mainwindow.cpp \
-        src/Grid.cpp \
-        src/Slot.cpp \
-        src/DigitalDifferentialAnalyser.cpp \
-        src/PainterWindow.cpp \
-        tests/TestPoint.cpp \
-        tests/TestTriangle.cpp \
-        tests/TestVector.cpp \
-        tests/TestGrid.cpp \
-        tests/TestSlot.cpp \
-        tests/TestDDA.cpp
+        src/*.cpp \
+        tests/*.cpp
 
 HEADERS += \
-        include/Loader.h \
-        include/Color.h \
-        include/PhongColor.h \
-        include/Point.h \
-        include/Ray.h \
-        include/Triangle.h \
-        include/Vector.h \
-        include/mainwindow.h \
-        include/Grid.h \
-        include/DigitalDifferentialAnalyser.h \
-        include/Slot.h \
-        include/PainterWindow.h
+        include/*.h
 
 FORMS += \
         forms/mainwindow.ui
