@@ -192,7 +192,7 @@ void MainWindow::validerparametre()
 //    Triangle tri("T1", p1, p2, p3);
 //    triangles.push_back(tri);
 //    triangles.push_back(Triangle("T2", p4, p5, p6));
-    Grid grid(Point(-7.f, -7.f, -7.f), Point(7.f, 7.f, 7.f), 1, 1, 1);
+    Grid grid(Point(-100.f, -100.f, -100.f), Point(100.f, 100.f, 100.f), 200, 200, 200);
     std::cout << shapes.size() <<std::endl;
 
     grid.add_shapes(shapes);
