@@ -10,6 +10,13 @@ Color::Color():_red(0.f), _green(0.f), _blue(0.f)
 
 Color::Color(float red, float green, float blue): _red(red), _green(green), _blue(blue)
 {
+    if(red < 0.f)   this->_red = 0.f;
+    if(green < 0.f)   this->_green = 0.f;
+    if(blue < 0.f)   this->_blue = 0.f;
+    if(red > 1.f)   this->_red = 1.f;
+    if(green > 1.f)   this->_green = 1.f;
+    if(blue > 1.f)   this->_blue = 1.f;
+
 }
 
 
@@ -30,35 +37,29 @@ float Color::get_blue() const
 
 void Color::set_red(float red)
 {
-    assert(red >= 0.f);
-    assert(red <= 1.f);
     this->_red = red;
+    if(red < 0.f)   this->_red = 0.f;
+    if(red > 1.f)   this->_red = 1.f;
 }
 
 void Color::set_green(float green)
 {
-    assert(green >= 0.f);
-    assert(green <= 1.f);
     this->_green = green;
+    if(green < 0.f)   this->_green = 0.f;
+    if(green > 1.f)   this->_green = 1.f;
 }
 
 void Color::set_blue(float blue)
 {
-    assert(blue >= 0.f);
-    assert(blue <= 1.f);
     this->_blue = blue;
+    if(blue < 0.f)   this->_blue = 0.f;
+    if(blue > 1.f)   this->_blue = 1.f;
 }
 void Color::set_rgb(float red, float green, float blue)
 {
-    assert(red >= 0.f);
-    assert(red <= 1.f);
-    assert(green >= 0.f);
-    assert(green <= 1.f);
-    assert(blue >= 0.f);
-    assert(blue <= 1.f);
-    this->_red = red;
-    this->_green = green;
-    this->_blue = blue;
+    this->set_red(red);
+    this->set_green(green);
+    this->set_blue(blue);
 }
 
 Color Color::operator*(const float& t)
