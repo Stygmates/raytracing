@@ -171,8 +171,8 @@ void MainWindow::validerparametre()
     }
 
     vector<Shape*> shapes;
-    Sphere *sphere = new Sphere(Point(0.f, 0.f, -1.f), 1.5f);
-    shapes.push_back(sphere);
+//    Sphere *sphere = new Sphere(Point(0.f, 0.f, -1.f), 1.5f, Material());
+//    shapes.push_back(sphere);
     Loader l;
     l.import(this->path_to_obj.toStdString());
     l.loadData(shapes);
