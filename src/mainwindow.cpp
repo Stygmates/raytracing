@@ -285,7 +285,7 @@ optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point light
                 distance_closest = hit.get_distance();
             }
         }
-        return closest.get_color(lightcolor, lightPosition, Ka, Kd, Ks, originCamera);
+        return closest.get_color(lightcolor, lightPosition, originCamera);
     }
 }
 
