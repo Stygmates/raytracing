@@ -16,6 +16,8 @@ public:
     Color get_specular();
     float get_shininess();
     Color get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, Point originCamera);
+
+    Color get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, Point originCamera, Color Ka, Color Kd, Color Ks);
 private:
     Color _ambient, _diffuse, _specular;
     float _shininess;

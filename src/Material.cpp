@@ -47,3 +47,19 @@ Color Material::get_color(Point intersection, Vector normal, Color lightcolor, P
     Color specular = lightcolor * this->get_specular() * powf(max(R*V, 0.f), this->_shininess);
     return ambient + diffuse + specular;
 }
+
+Color Material::get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, Point originCamera, Color Ka, Color Kd, Color Ks)
+{
+    Vector V(intersection, originCamera);
+    Vector L(intersection, lightposition);
+    L = L.unit();
+    V = V.unit();
+    Vector norm = normal.unit();
+    Vector R = (norm.unit() * ((norm*L) * 2) ) - L;
+
+
+    Color ambient = lightcolor * Ka;
+    Color diffuse = lightcolor * Kd;
+    Color specular = lightcolor * Ks * powf(max(R*V, 0.f), this->_shininess);
+    return ambient + diffuse + specular;
+}
