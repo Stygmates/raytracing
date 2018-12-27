@@ -79,23 +79,6 @@ MainWindow::MainWindow(QWidget *parent) :
     blue = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
     parameter->addWidget(blue, 16, 1);
 
-
-    /***************************Phong parameters to be removed***********************/
-    parameter->addWidget(create_label(25, 150, "Phong parameters :"), 17, 0);
-
-    parameter->addWidget(create_label(25, 150, "Specular ="), 18, 0);
-    phong_specular = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 0.f);
-    parameter->addWidget(phong_specular, 18, 1);
-    parameter->addWidget(create_label(25, 150, "Ambient ="), 19, 0);
-    phong_ambient = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 0.f);
-    parameter->addWidget(phong_ambient, 19, 1);
-    parameter->addWidget(create_label(25, 150, "Diffuse ="), 20, 0);
-
-    phong_diffuse = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 0.f);
-    parameter->addWidget(phong_diffuse, 20, 1);
-
-    /********************************************************************************/
-
     parameter->addWidget(start,17, 0);
     parameter->addWidget(exit,17, 1);
 
