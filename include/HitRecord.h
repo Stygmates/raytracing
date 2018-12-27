@@ -10,7 +10,7 @@ public:
     Vector get_normal();
     Material get_material();
     float get_distance();
-    Color get_color(Color lightcolor, Point lightposition, float Ka, float Kd, float Ks, Point originCamera);
+    Color get_color(Color lightcolor, Point lightposition, Point originCamera);
 private:
     Point _intersection;
     Vector _normal;

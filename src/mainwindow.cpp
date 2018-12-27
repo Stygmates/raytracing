@@ -216,9 +216,8 @@ Color MainWindow::color(Ray r, Grid grid)
 //        cout << "Ray source " << r.get_source() << " direction: " << r.get_direction() << " going through min = " << slot->get_min_slot() << endl;
         vector<Shape*> shapes = slot->get_shape_list();
         Point lightPosition(light_x->value(), light_y->value(), light_z->value());
-        Color lightcolor(1.0f, 1.0f, 1.0f);
-        float ambient = 0.9f;
-        if(auto color = intersects(r, shapes, ambient, lightPosition, lightcolor))
+        Color lightcolor(red->value(), green->value(), blue->value());
+        if(auto color = intersects(r, shapes, lightPosition, lightcolor))
         {
             Color col = color.value_or(Color());
 //            qDebug() << "Color found and returned" << endl;
@@ -257,13 +256,11 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
         }
     }
     window->update();
+    cout << "Image refreshed" << endl;
 }
 
-optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, float ambientStrength, Point lightPosition, Color lightcolor)
+optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor)
 {
-    float Ka = this->phong_ambient->value();
-    float Kd = this->phong_diffuse->value();
-    float Ks = this->phong_specular->value();
     Point originCamera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
     vector<HitRecord> hr;
     for(Shape *s: shapes)

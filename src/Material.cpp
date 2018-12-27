@@ -32,9 +32,9 @@ float Material::get_shininess()
 }
 
 
-Color Material::get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, float Ka, float Kd, float Ks, Point originCamera)
+Color Material::get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, Point originCamera)
 {
-    Vector V(originCamera, intersection);
+    Vector V(intersection, originCamera);
     Vector L(intersection, lightposition);
     L = L.unit();
     V = V.unit();
@@ -42,9 +42,8 @@ Color Material::get_color(Point intersection, Vector normal, Color lightcolor, P
     Vector R = (norm.unit() * ((norm*L) * 2) ) - L;
 
 
-
-    Color ambient = lightcolor * Ka;
-    Color diffuse = lightcolor * Kd * (L*norm);
-    Color specular = lightcolor * Ks * powf(max(R*V, 0.f), this->_shininess);
+    Color ambient = lightcolor * this->get_ambient();
+    Color diffuse = lightcolor * this->get_diffuse() * (L*norm);
+    Color specular = lightcolor * this->get_specular() * powf(max(R*V, 0.f), this->_shininess);
     return ambient + diffuse + specular;
 }

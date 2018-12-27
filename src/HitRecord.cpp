@@ -26,7 +26,7 @@ float HitRecord::get_distance()
 }
 
 
-Color HitRecord::get_color(Color lightcolor, Point lightposition, float Ka, float Kd, float Ks, Point originCamera)
+Color HitRecord::get_color(Color lightcolor, Point lightposition, Point originCamera)
 {
-    return this->get_material().get_color(this->get_intersection(),this->get_normal(), lightcolor, lightposition, Ka, Kd, Ks, originCamera);
+    return this->get_material().get_color(this->get_intersection(),this->get_normal(), lightcolor, lightposition, originCamera);
 }
