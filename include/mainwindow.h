@@ -62,9 +62,9 @@ private:
     QDoubleSpinBox* screen_lower_corner_y;
     QDoubleSpinBox* screen_lower_corner_z;
 
-    QDoubleSpinBox* phong_diffuse;
-    QDoubleSpinBox* phong_ambient;
-    QDoubleSpinBox* phong_specular;
+    QDoubleSpinBox* red;
+    QDoubleSpinBox* green;
+    QDoubleSpinBox* blue;
 
     QDoubleSpinBox* light_x;
     QDoubleSpinBox* light_y;
