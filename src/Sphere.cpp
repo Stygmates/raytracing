@@ -5,7 +5,7 @@ Sphere::Sphere(): _center(Point()), _radius(0.f)
 {
 }
 
-Sphere::Sphere(Point center, float radius): _center(center), _radius(radius)
+Sphere::Sphere(Point center, float radius, Material material): _center(center), _radius(radius), _material(material)
 {
     if(this->_radius < 0)
     {
@@ -49,7 +49,7 @@ optional<HitRecord> Sphere::ray_intersect(Ray r)
             normal.set_x(normal.get_x()/this->_radius);
             normal.set_y(normal.get_y()/this->_radius);
             normal.set_z(normal.get_z()/this->_radius);
-            return HitRecord(intersection, normal);
+            return HitRecord(intersection, normal, this->_material, solution);
         }
         solution = (-b + sqrt(discriminant))/2*a;
         if(solution > epsilon)
@@ -59,7 +59,7 @@ optional<HitRecord> Sphere::ray_intersect(Ray r)
             normal.set_x(normal.get_x()/this->_radius);
             normal.set_y(normal.get_y()/this->_radius);
             normal.set_z(normal.get_z()/this->_radius);
-            return HitRecord(intersection, normal);
+            return HitRecord(intersection, normal, this->_material, solution);
         }
 
     }

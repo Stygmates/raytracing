@@ -3,12 +3,13 @@
 
 #include "Shape.h"
 #include "HitRecord.h"
+#include "Material.h"
 
 class Sphere: public Shape
 {
 public:
     Sphere();
-    Sphere(Point center, float radius);
+    Sphere(Point center, float radius, Material material);
     /**
      * @brief ray_intersect Returns whether the ray intersects the triangle or not
      * @param r The ray to test
@@ -21,6 +22,7 @@ public:
 private:
     Point _center;
     float _radius;
+    Material _material;
 };
 
 #endif

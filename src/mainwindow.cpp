@@ -261,16 +261,36 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
 
 optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, float ambientStrength, Point lightPosition, Color lightcolor)
 {
+    float Ka = this->phong_ambient->value();
+    float Kd = this->phong_diffuse->value();
+    float Ks = this->phong_specular->value();
+    Point originCamera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
+    vector<HitRecord> hr;
     for(Shape *s: shapes)
     {
         if(auto p = s->ray_intersect(r))
         {
-//            PhongColor pc(t, p.value(), ambientStrength, lightPosition, lightcolor);
-              PhongColor pc(p.value().get_intersection(), 1.f/*ka*/, 1.f/*kd*/, 1.f/*ks*/, lightPosition, p.value().get_normal().unit(), Point(r.get_direction().get_x(), r.get_direction().get_y(), r.get_direction().get_z()));
-            return pc.get_color(Color(0.f, 0.0f, 1.0f));
+            hr.push_back(p.value());
         }
     }
-    return {};
+    if(hr.size() == 0)
+    {
+        return {};
+    }
+    else
+    {
+        HitRecord closest = hr[0];
+        float distance_closest = hr[0].get_distance();
+        for(auto hit: hr)
+        {
+            if(hit.get_distance() < closest.get_distance())
+            {
+                closest = hit;
+                distance_closest = hit.get_distance();
+            }
+        }
+        return closest.get_color(lightcolor, lightPosition, Ka, Kd, Ks, originCamera);
+    }
 }
 
 MainWindow::~MainWindow()

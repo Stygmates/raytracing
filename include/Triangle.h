@@ -6,6 +6,7 @@
 #include "Shape.h"
 #include "Point.h"
 #include "Ray.h"
+#include "Material.h"
 
 
 using namespace experimental;
@@ -29,7 +30,7 @@ class Triangle: public Shape
          * @param p2
          * @param p3
          */
-		Triangle(Point p1, Point p2, Point p3);
+        Triangle(Point p1, Point p2, Point p3);
         /**
          * @brief Triangle A triangle is defined by its 3 points p1, p2 and p3, the direction of the normal depends of the order in which the points are given
          * @param name
@@ -37,6 +38,8 @@ class Triangle: public Shape
          * @param p2
          * @param p3
          */
+
+        Triangle(Point p1, Point p2, Point p3, Material material);
         Triangle(string name, Point p1, Point p2, Point p3);
 		~Triangle();
 
@@ -137,6 +140,8 @@ class Triangle: public Shape
          */
         virtual Point get_max_bounding_box();
 
+        Material get_material();
+
     private:
 
         /**
@@ -153,6 +158,7 @@ class Triangle: public Shape
          * @brief _normal The normal of the triangle
          */
         Vector _normal;
+        Material _material;
 
 };
 

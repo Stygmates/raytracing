@@ -76,6 +76,11 @@ float Vector::norm()
 Vector Vector::unit()
 {
     float norm = this->norm();
+    if(norm == 0.f)
+    {
+        cerr << "The norm of the vector is 0" << endl;
+        return Vector(0.f, 0.f, 0.f);
+    }
     Vector result(this->get_x()/norm,this->get_y()/norm, this->get_z()/norm);
     return result;
 }

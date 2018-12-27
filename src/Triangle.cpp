@@ -25,6 +25,13 @@ Triangle::Triangle(Point p1, Point p2, Point p3): _p1(p1), _p2(p2), _p3(p3)
     this->_normal = v1^v2;
 }
 
+Triangle::Triangle(Point p1, Point p2, Point p3, Material material): _p1(p1), _p2(p2), _p3(p3), _material(material)
+{
+    Vector v1(this->_p1,this->_p2);
+    Vector v2(this->_p1,this->_p3);
+    this->_normal = v1^v2;
+}
+
 Triangle::Triangle(string name, Point p1, Point p2, Point p3): _name(name), _p1(p1), _p2(p2), _p3(p3)
 {
     Vector v1(this->_p1,this->_p2);
@@ -55,6 +62,11 @@ Point Triangle::get_p2()
 Point Triangle::get_p3()
 {
 	return this->_p3;
+}
+
+Material Triangle::get_material()
+{
+    return this->_material;
 }
 
 Vector Triangle::get_normal()
@@ -144,7 +156,7 @@ optional<HitRecord> Triangle::ray_intersect(Ray r){
            (Vector(this->_p2,this->_p1)^Vector(this->_p2,P))*(Vector(this->_p2,P)^Vector(this->_p2,this->_p3)) >= 0  &&
            (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0)
    {
-       return HitRecord(P, this->get_normal());
+       return HitRecord(P, this->get_normal(), this->_material, t);
    }
    else
    {
