@@ -10,15 +10,13 @@ class Material
 {
 public:
     Material();
-    Material(Color object_color, Color ambient, Color diffuse, Color specular, float shininess);
+    Material(Color ambient, Color diffuse, Color specular, float shininess);
     Color get_ambient();
     Color get_diffuse();
     Color get_specular();
     float get_shininess();
-    Color get_object_color();
     Color get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, float Ka, float Kd, float Ks, Point originCamera);
 private:
-    Color _object_color;
     Color _ambient, _diffuse, _specular;
     float _shininess;
 };

@@ -3,17 +3,12 @@
 #include "HitRecord.h"
 #include "math.h"
 
-Material::Material(): _object_color(Color()), _ambient(Color()), _diffuse(Color()), _specular(Color()), _shininess(0.f)
+Material::Material(): _ambient(Color()), _diffuse(Color()), _specular(Color()), _shininess(0.f)
 {
 }
 
-Material::Material(Color object_color, Color ambient, Color diffuse, Color specular, float shininess): _object_color(object_color), _ambient(ambient), _diffuse(diffuse), _specular(specular), _shininess(shininess)
+Material::Material(Color ambient, Color diffuse, Color specular, float shininess): _ambient(ambient), _diffuse(diffuse), _specular(specular), _shininess(shininess)
 {
-}
-
-Color Material::get_object_color()
-{
-    return this->_object_color;
 }
 
 Color Material::get_ambient()
@@ -65,5 +60,5 @@ Color Material::get_color(Point intersection, Vector normal, Color lightcolor, P
     Color ambient = lightcolor * Ka;
     Color diffuse = lightcolor * Kd * (L*norm);
     Color specular = lightcolor * Ks * powf(max(R*V, 0.f), this->_shininess);
-    return (ambient + diffuse + specular) * this->get_object_color();
+    return ambient + diffuse + specular;
 }

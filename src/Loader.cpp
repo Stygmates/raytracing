@@ -74,8 +74,7 @@ void Loader::loadData(std::vector<Shape*> &shapes)
             {
                 shininess = aiShininess;
             }
-            Color blue(0.f, 0.f, 1.f);
-            Material material(blue, ambient, diffuse, specular, shininess);
+            Material material(ambient, diffuse, specular, shininess);
 
             for( unsigned int j = 0; j < mesh->mNumVertices; j++ )
             {
