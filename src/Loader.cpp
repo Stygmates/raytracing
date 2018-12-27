@@ -40,6 +40,43 @@ void Loader::loadData(std::vector<Shape*> &shapes)
         for( unsigned int i = 0; i < this->scene->mNumMeshes; i++ )
         {
             aiMesh *mesh = this->scene->mMeshes[ i ];
+
+            aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
+            aiColor4D aiDiffuse;
+            Color diffuse;
+            if(aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &aiDiffuse) == AI_SUCCESS)
+            {
+                diffuse.set_red(aiDiffuse.r);
+                diffuse.set_green(aiDiffuse.g);
+                diffuse.set_blue(aiDiffuse.b);
+            }
+
+            aiColor4D aiSpecular;
+            Color specular;
+            if(aiGetMaterialColor(mtl, AI_MATKEY_COLOR_SPECULAR, &aiSpecular) == AI_SUCCESS)
+            {
+                specular.set_red(aiSpecular.r);
+                specular.set_green(aiSpecular.g);
+                specular.set_blue(aiSpecular.b);
+            }
+
+            aiColor4D aiAmbient;
+            Color ambient;
+            if(aiGetMaterialColor(mtl, AI_MATKEY_COLOR_AMBIENT, &aiAmbient) == AI_SUCCESS)
+            {
+                ambient.set_red(aiAmbient.r);
+                ambient.set_green(aiAmbient.g);
+                ambient.set_blue(aiAmbient.b);
+            }
+            float shininess = 0.f;
+            float aiShininess = 0.f;
+            if(aiGetMaterialFloat(mtl, AI_MATKEY_SHININESS, &aiShininess) == AI_SUCCESS)
+            {
+                shininess = aiShininess;
+            }
+            Color blue(0.f, 0.f, 1.f);
+            Material material(blue, ambient, diffuse, specular, shininess);
+
             for( unsigned int j = 0; j < mesh->mNumVertices; j++ )
             {
                 const aiVector3D& position = mesh->mVertices[ j ];
