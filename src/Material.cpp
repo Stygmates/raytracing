@@ -34,20 +34,6 @@ float Material::get_shininess()
 
 Color Material::get_color(Point intersection, Vector normal, Color lightcolor, Point lightposition, float Ka, float Kd, float Ks, Point originCamera)
 {
-//    //Ambient
-//    Color ambient(Ka * this->get_ambient());
-
-//    //Diffuse
-//    Vector norm = normal.unit();
-//    Vector lightdir(intersection, lightposition);
-//    if(lightdir.norm() == 0.f)
-//        return Color();
-//    lightdir = lightdir.unit();
-//    float diff = max(norm*lightdir, 0.f);
-//    Color diffuse(diff * this->get_diffuse() * Kd);
-
-
-//    return (ambient + diffuse)*lightcolor;
     Vector V(originCamera, intersection);
     Vector L(intersection, lightposition);
     L = L.unit();
