@@ -258,31 +258,60 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
     cout << "Image refreshed" << endl;
 }
 
-optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor)
+optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor,  Vector horizontal)
 {
     Point originCamera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
+    Point screenPos(this->screen_lower_corner_x->value(), this->screen_lower_corner_y->value(), this->screen_lower_corner_z->value());
     vector<HitRecord> hr;
-    for(Shape *s: shapes)
-    {
-        if(auto p = s->ray_intersect(r))
+    int n = 4;
+    int n_2 = pow(n, 2.0);
+    vector<Point> stochastic_ray = r.stochastic_sampling(n, this->window->image[0].size()/horizontal.get_x() );
+    Color final_color(0.f, 0.f, 0.f);
+    bool inersect_one_time_at_least = false;
+    vector<Point> lightsPosition;
+    lightsPosition.push_back(lightPosition);
+
+//    for(auto it : stochastic_ray)
+//    {
+//        r.set_direction(r.get_direction()+Vector(it.get_x(), it.get_y(), it.get_z()));
+
+        for(Shape *s: shapes)
         {
-            hr.push_back(p.value());
-        }
-    }
-    if(hr.size() == 0)
-    {
-        return {};
-    }
-    else
-    {
-        HitRecord closest = hr[0];
-        float distance_closest = hr[0].get_distance();
-        for(auto hit: hr)
-        {
-            if(hit.get_distance() < closest.get_distance())
+            if(auto p = s->ray_intersect(r))
             {
-                closest = hit;
-                distance_closest = hit.get_distance();
+                hr.push_back(p.value());
+            }
+        }
+        if(hr.size() == 0)
+        {
+            return {};
+//            n_2--;
+        }
+        else
+        {
+//            inersect_one_time_at_least = true;
+            HitRecord closest = hr[0];
+            float distance_closest = hr[0].get_distance();
+            for(auto hit: hr)
+            {
+                if(hit.get_distance() < closest.get_distance())
+                {
+                    closest = hit;
+                    distance_closest = hit.get_distance();
+                }
+            }
+            if(object_between_lightAndIntersection(lightsPosition, closest.get_intersection(), shapes))
+                return Color();
+            else
+                return closest.get_color(lightcolor, lightPosition, originCamera);
+//            final_color = final_color + closest.get_color(lightcolor, lightPosition, originCamera);
+        }
+//    }
+//    if(inersect_one_time_at_least)
+//        return final_color * (1.f/(float)n_2);
+//    else
+//        return {};
+}
 
 bool MainWindow::object_between_lightAndIntersection(vector<Point> lights, Point intersection, vector<Shape*> shapes){
     float epsilon = 0.001;
