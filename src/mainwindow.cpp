@@ -158,7 +158,7 @@ void MainWindow::validerparametre()
         return;
     }
     int nx = 600;
-    int ny = 300;
+    int ny = 600;
 
     std::ifstream infile(this->path_to_obj.toStdString());
     if(!infile.good())
@@ -177,7 +177,7 @@ void MainWindow::validerparametre()
     l.loadData(shapes);
     Vector lower_left_corner(screen_lower_corner_x->value(), screen_lower_corner_y->value(), screen_lower_corner_z->value());
     Vector horizontal(4.0, 0.0, 0.0);
-    Vector vertical(0.0, 2.0, 0.0);
+    Vector vertical(0.0, 4.0, 0.0);
     //Point origin(0.0, 0.0, 0.0);
 
 //    Point p1(-2.f, 1.f, -2.f);
