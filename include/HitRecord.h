@@ -5,6 +5,7 @@
 
 class HitRecord{
 public:
+    HitRecord();
     HitRecord(Point intersection, Vector normal, Material material, float distance);
     Point get_intersection();
     Vector get_normal();

@@ -1,5 +1,10 @@
 #include "HitRecord.h"
 
+HitRecord::HitRecord()
+{
+
+}
+
 HitRecord::HitRecord(Point intersection, Vector normal, Material material, float distance): _intersection(intersection), _normal(normal), _material(material), _distance(distance)
 {
 
