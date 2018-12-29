@@ -38,9 +38,9 @@ public:
 
     void loader_error(const QString &text, const QColor &color);
 
-    Color color(Ray r, Grid grid);
+    Color color(Ray r, Grid grid, Vector horizontal);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
-    optional<Color> intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor);
+    optional<Color> intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor, Vector horizontal);
 
     ~MainWindow();
 

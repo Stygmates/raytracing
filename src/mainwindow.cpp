@@ -205,7 +205,7 @@ void MainWindow::validerparametre()
 
 }
 
-Color MainWindow::color(Ray r, Grid grid)
+Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
 {
     DDA dda;
 //    cout << grid.get_min_grid() << endl;
@@ -216,7 +216,7 @@ Color MainWindow::color(Ray r, Grid grid)
         vector<Shape*> shapes = slot->get_shape_list();
         Point lightPosition(light_x->value(), light_y->value(), light_z->value());
         Color lightcolor(red->value(), green->value(), blue->value());
-        if(auto color = intersects(r, shapes, lightPosition, lightcolor))
+        if(auto color = intersects(r, shapes, lightPosition, lightcolor, horizontal))
         {
             Color col = color.value_or(Color());
 //            qDebug() << "Color found and returned" << endl;
@@ -242,7 +242,7 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
             float u = float(i)/float(width);
             float v = float(j)/float(height);
             Ray camera(origin, lower_left_corner + u*horizontal + v*vertical);
-            Color col = color(camera, grid);
+            Color col = color(camera, grid, horizontal);
 
 //            qDebug() << "Color returned:" << col.get_x();
             int r = int(255.99*col.get_red());
