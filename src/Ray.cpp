@@ -54,8 +54,9 @@ vector<Point> Ray::stochastic_sampling(int n)
             float x = ( i + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX)) ) / n;
             float y = ( j + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX)) ) / n;
 
-            random_point.set_x(x);
-            random_point.set_y(y);
+            random_point.set_x(x/(float)pixel_per_unit );
+            random_point.set_y(y/(float)pixel_per_unit );
+            random_point.set_z(0.f );
 
             matrix_sampling.push_back(random_point);
 
