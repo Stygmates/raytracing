@@ -79,3 +79,8 @@ Color Color::operator*(const Color& c)
     Color result(this->get_red() * c.get_red(), this->get_green() * c.get_green(), this->get_blue() * c.get_blue());
     return result;
 }
+
+bool Color::operator!=(Color c)
+{
+    return ((this->get_red() != c.get_red()) || (this->get_green() != c.get_green()) || (this->get_blue() != c.get_blue()));
+}
