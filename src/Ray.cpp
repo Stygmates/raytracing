@@ -43,7 +43,7 @@ Point Ray::get_point_at_parameter(double t)
     return translation.get_translation(this->get_source());
 }
 
-vector<Point> Ray::stochastic_sampling(int n)
+vector<Point> Ray::stochastic_sampling(int n,int pixel_per_unit)
 {
     vector<Point> matrix_sampling;
     Point random_point(0,0,0);
