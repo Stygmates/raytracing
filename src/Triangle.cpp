@@ -99,7 +99,7 @@ Vector Triangle::compute_normal()
 
 float Triangle::distance_from_origin()
 {
-    Vector N = get_normal();
+    Vector N = get_normal().unit();
 
     return N.get_x()*this->_p1.get_x()
          + N.get_y()*this->_p1.get_y()
@@ -108,7 +108,7 @@ float Triangle::distance_from_origin()
 
 float Triangle::distance_originRay_plan(Vector source,Ray r)
 {
-    Vector N = get_normal();
+    Vector N = get_normal().unit();
     float D = distance_from_origin();
 
 
@@ -151,10 +151,10 @@ optional<HitRecord> Triangle::ray_intersect(Ray r){
         return {};           //ray is parallel or behind
     }
 
+       if(this->get_normal()*(Vector(this->_p1,this->_p2)^Vector(this->_p1,P)) >= 0  &&
+          this->get_normal()*(Vector(this->_p2,this->_p3)^Vector(this->_p2,P)) >= 0  &&
+          this->get_normal()*(Vector(this->_p3,this->_p1)^Vector(this->_p3,P)) >= 0)
 
-   if((Vector(this->_p1,this->_p2)^Vector(this->_p1,P))*(Vector(this->_p1,P)^Vector(this->_p1,this->_p3)) >= 0  &&
-           (Vector(this->_p2,this->_p1)^Vector(this->_p2,P))*(Vector(this->_p2,P)^Vector(this->_p2,this->_p3)) >= 0  &&
-           (Vector(this->_p3,this->_p1)^Vector(this->_p3,P))*(Vector(this->_p3,P)^Vector(this->_p3,this->_p2)) >= 0)
    {
        return HitRecord(P, this->get_normal(), this->_material, t);
    }

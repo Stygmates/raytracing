@@ -41,6 +41,7 @@ public:
     Color color(Ray r, Grid grid, Vector horizontal);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
     optional<Color> intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor, Vector horizontal);
+    bool object_between_lightAndIntersection(vector<Point> lights, Point intersection, vector<Shape*> shapes);
 
     ~MainWindow();
 

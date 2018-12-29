@@ -283,10 +283,29 @@ optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point light
             {
                 closest = hit;
                 distance_closest = hit.get_distance();
+
+bool MainWindow::object_between_lightAndIntersection(vector<Point> lights, Point intersection, vector<Shape*> shapes){
+    float epsilon = 0.001;
+    for(auto l : lights)
+    {
+        Vector dirLight(intersection, l);
+        float normLight = dirLight.norm();
+        Ray shadaw_ray(intersection, dirLight );
+        for(auto s : shapes)
+        {
+            if(s->ray_intersect(shadaw_ray)){
+                if(auto hr = s->ray_intersect(shadaw_ray))
+                {
+                    HitRecord hr1 = hr.value();
+                    Point p = hr1.get_intersection();
+                    float distance = hr1.get_distance();
+                    if( distance > epsilon && normLight > distance )
+                        return true;
+                }
             }
         }
-        return closest.get_color(lightcolor, lightPosition, originCamera);
     }
+    return false;
 }
 
 MainWindow::~MainWindow()
