@@ -34,11 +34,11 @@ void Loader::loadData(std::vector<Shape*> &shapes)
         std::cerr << "Loader::loadData: No scene loaded" << std::endl;
         return;
     }
-    vector<Point> positions;
     if( this->scene->HasMeshes() )
     {
         for( unsigned int i = 0; i < this->scene->mNumMeshes; i++ )
         {
+            vector<Point> positions;
             aiMesh *mesh = this->scene->mMeshes[ i ];
 
             aiMaterial *mtl = scene->mMaterials[mesh->mMaterialIndex];
