@@ -79,7 +79,7 @@ void Loader::loadData(std::vector<Shape*> &shapes)
             for( unsigned int j = 0; j < mesh->mNumVertices; j++ )
             {
                 const aiVector3D& position = mesh->mVertices[ j ];
-                Point v = Point( position.x * -1., position.z, position.y);
+                Point v = Point( position.x, position.z * -1., position.y);
                 positions.push_back( v );
             }
             for( unsigned int j = 0; j < mesh->mNumFaces; j++ )
