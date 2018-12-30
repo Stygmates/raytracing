@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define M_PI = 3.141592653589793238462643383279502884
 
 #include <QMainWindow>
 #include <QHBoxLayout>

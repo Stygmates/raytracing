@@ -234,6 +234,8 @@ Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
 void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid)
 {
     window->image = vector<vector<Point>>(height, vector<Point>(width));
+    float alpha;
+    alpha = 60.0 * M_PI / 180.0;
 #pragma omp parallel for
     for(int j = height-1; j>= 0; j--)
     {
@@ -241,7 +243,10 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
         {
             float u = float(i)/float(width);
             float v = float(j)/float(height);
-            Ray camera(origin, lower_left_corner + u*horizontal + v*vertical);
+            Vector depth;
+            depth.set_z(-1. * horizontal.get_x()/(2.*tan(alpha/2.)));
+
+            Ray camera(origin, lower_left_corner + u*horizontal + v*vertical + depth);
             Color col = color(camera, grid, horizontal);
 
 //            qDebug() << "Color returned:" << col.get_x();
