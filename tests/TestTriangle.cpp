@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "../include/Triangle.h"
+#include "../include/HitRecord.h"
 
 TEST(Triangle, TriangleBoundingBoxTest)
 {
@@ -14,18 +15,25 @@ TEST(Triangle, TriangleBoundingBoxTest)
 
 TEST(Triangle, PointOfIntersectTriangleWithRay)
 {
-    Point p1(-4., -1., 0.);
-    Point p2( 2., -1., 0.);
-    Point p3( 0.,  1., 0.);
-    Point P;
+    Point p1(-4., -1., -10.);
+    Point p2( 2., -1., -10.);
+    Point p3( 0.,  1., -10.);
+    Point P(-1, -1, -1);
 
     Triangle tr(p1, p2, p3);
-    Point    origin(0., 0., 10.);
-    Point    dir(0., 0., 9.);
+    Point    origin(-4., -1., -1.);
+    Point    dir(-4., -1., -2.);
     Vector   direction(origin, dir);
     Ray r(origin, direction);
-    ASSERT_DOUBLE_EQ(P.get_x(),0.);
-    ASSERT_DOUBLE_EQ(P.get_y(),0.);
-    ASSERT_DOUBLE_EQ(P.get_z(),0.);
+    HitRecord hr;
+    if(auto p = tr.ray_intersect(r))
+    {
+        hr = p.value();
+    }
+    P = hr.get_intersection();
+    std::cout << P << std::endl;
+    ASSERT_DOUBLE_EQ(P.get_x(),-4.);
+    ASSERT_DOUBLE_EQ(P.get_y(),-1.);
+    ASSERT_DOUBLE_EQ(P.get_z(),-10.);
 }
 

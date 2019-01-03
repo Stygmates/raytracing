@@ -67,6 +67,26 @@ Point Point::operator-(const Point &v)
     return sub;
 }
 
+Point Point::operator/(const Point &v)
+{
+    Point div;
+    div.set_x(this->_x / v.get_x());
+    div.set_y(this->_y / v.get_y());
+    div.set_z(this->_z / v.get_z());
+
+    return div;
+}
+
+Point Point::operator*(const int f)
+{
+    Point mult;
+    mult.set_x(int(f*this->_x));
+    mult.set_y(int(f*this->_y));
+    mult.set_z(int(f*this->_z));
+
+    return mult;
+}
+
 bool Point::operator!=(Point v)
 {
     return ((this->get_x() != v.get_x()) || (this->get_y() != v.get_y()) || (this->get_z() != v.get_z()));

@@ -72,17 +72,27 @@ class Point{
         Point operator-(const Point& v);
 
         /**
+         * @brief operator /  Division between two points
+         * @param v
+         * @return
+         */
+        Point operator/(const Point& v);
+
+        /**
          * @brief operator != Points comparison
          * @param v
          * @return
          */
         bool operator!=(Point v);
+
+        Point operator*(const int f);
+
 	private:
         float _x, _y, _z;
 };
 inline ostream& operator<<(ostream& flux,Point P)
 {
-    flux << "Point : ( " << P.get_x() << ", " << P.get_y() << ", " << P.get_z() << ")";
+    flux << "Point : ( " << (float)P.get_x() << ", " << (float)P.get_y() << ", " << (float)P.get_z() << ")";
 	return flux;  
 }
 #endif

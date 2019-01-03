@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define M_PI = 3.141592653589793238462643383279502884
 
 #include <QMainWindow>
 #include <QHBoxLayout>
@@ -34,13 +35,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     QLabel* create_label(int max_height, int max_width,QString name);
-    QDoubleSpinBox* create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width);
+    QDoubleSpinBox* create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width, float value);
 
     void loader_error(const QString &text, const QColor &color);
 
-    Color color(Ray r, Grid grid);
+    Color color(Ray r, Grid grid, Vector horizontal);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
-    optional<Color> intersects(Ray r, vector<Triangle> tri, float ambientStrength, Point lightPosition, Color lightcolor);
+    optional<Color> intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor, Vector horizontal);
+    bool object_between_lightAndIntersection(vector<Point> lights, Point intersection, vector<Shape*> shapes);
 
     ~MainWindow();
 
@@ -62,8 +64,12 @@ private:
     QDoubleSpinBox* screen_lower_corner_y;
     QDoubleSpinBox* screen_lower_corner_z;
 
-    QDoubleSpinBox* phong_diffuse;
+    QDoubleSpinBox* red;
+    QDoubleSpinBox* green;
+    QDoubleSpinBox* blue;
+
     QDoubleSpinBox* phong_ambient;
+    QDoubleSpinBox* phong_diffuse;
     QDoubleSpinBox* phong_specular;
 
     QDoubleSpinBox* light_x;

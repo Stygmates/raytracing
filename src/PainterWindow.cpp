@@ -13,7 +13,7 @@ void PainterWindow::paintEvent(QPaintEvent*) {
         {
             for(int i = 0; i < (int)this->image[j].size(); i++)
             {
-                Point pixel = this->image[j][i];
+                Point pixel = this->image[/*(int)this->image.size() - 1 -*/ j][i];
                 const QColor color(pixel.get_x(), pixel.get_y(), pixel.get_z());
                 painter.setPen(color);
                 painter.drawPoint(i, j);
