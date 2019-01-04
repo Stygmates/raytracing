@@ -60,7 +60,7 @@ class Ray
          * @param n
          * @return
          */
-        vector<Point> stochastic_sampling(int n,int pixel_per_unit);
+        vector<Point> stochastic_sampling(int n);
 
         /**
          * @brief translate_ray_to_screen
