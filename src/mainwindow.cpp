@@ -232,36 +232,49 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
     depth.set_y(midlle_pixel_y);
     depth.set_z(-1. * horizontal.get_x()/(2.*tan(alpha/2.)));
 
+
 #pragma omp parallel for
     for(int j = height-1; j>= 0; j--)
     {
         for(int i = 0; i < width; i++)
         {
-            float u = float(i)/float(width);
-            float v = float(j)/float(height);
+            int nb_of_intersection = 0;
+            Ray r;
+            vector<Point> stochastic_ray = r.stochastic_sampling(4);
 
-
-
-            Ray camera(origin, lower_left_corner + u*horizontal + v*vertical + depth);
-            HitRecord b = grid.intersect(camera);
-            if(b.get_intersect())
+            for(auto it : stochastic_ray)
             {
-                camera.set_source(b.get_intersection());
-                Color col = color(camera, grid, horizontal);
 
-    //            qDebug() << "Color returned:" << col.get_x();
-                int r = int(255.99*col.get_red());
-                int g = int(255.99*col.get_green());
-                int b = int(255.99*col.get_blue());
-                r = powf(r, 1/1.2);
-                g = powf(g, 1/1.2);
-                b = powf(b, 1/1.2);
-                assert(r>=0 && r<256);
-                assert(g>=0 && g<256);
-                assert(b>=0 && b<256);
-                window->image[j][i] = Point(r, g, b);
-            }else
+                float u = (float(i) + it.get_x())/float(width);
+                float v = (float(j) + it.get_y())/float(height);
+
+                Ray camera(origin, lower_left_corner + u*horizontal + v*vertical + depth);
+                HitRecord b = grid.intersect(camera);
+                if(b.get_intersect())
+                {
+                    camera.set_source(b.get_intersection());
+                    Color col = color(camera, grid, horizontal);
+                    nb_of_intersection++;
+
+                    int r = int(255.99*col.get_red());
+                    int g = int(255.99*col.get_green());
+                    int b = int(255.99*col.get_blue());
+                    assert(r>=0 && r<256);
+                    assert(g>=0 && g<256);
+                    assert(b>=0 && b<256);
+                    window->image[j][i] = window->image[j][i] + Point(r, g, b);
+                }
+            }
+
+            if(nb_of_intersection > 0)
+            {
+                window->image[j][i].set_x( window->image[j][i].get_x() * (1.0 / float(nb_of_intersection)) );
+                window->image[j][i].set_y( window->image[j][i].get_y() * (1.0 / float(nb_of_intersection)) );
+                window->image[j][i].set_z( window->image[j][i].get_z() * (1.0 / float(nb_of_intersection)) );
+            }
+            else
                 window->image[j][i] = Point(0, 0, 0);
+
         }
     }
     window->update();
