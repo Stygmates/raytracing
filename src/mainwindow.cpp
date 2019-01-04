@@ -246,8 +246,12 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
         {
             int nb_of_intersection = 0;
             Ray r;
-            vector<Point> stochastic_ray = r.stochastic_sampling(4);
-
+            vector<Point> stochastic_ray;
+            if(sub_pixel_number->value() > 1)
+                stochastic_ray = r.stochastic_sampling(sub_pixel_number->value());
+            else {
+                stochastic_ray.push_back(Point(0, 0, 0));
+            }
             for(auto it : stochastic_ray)
             {
 
