@@ -35,13 +35,14 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     QLabel* create_label(int max_height, int max_width,QString name);
-    QDoubleSpinBox* create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width, float value);
+    template<typename type>
+    QDoubleSpinBox* create_double_spin_box(type xRange, type yRange, type step, int max_height, int max_width, type value, int decimals);
 
     void loader_error(const QString &text, const QColor &color);
 
-    Color color(Ray r, Grid grid, Vector horizontal);
+    Color color(Ray r, Grid grid);
     void paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid);
-    optional<Color> intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor, Vector horizontal);
+    optional<Color> intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor);
     bool object_between_lightAndIntersection(vector<Point> lights, Point intersection, vector<Shape*> shapes);
 
     ~MainWindow();
@@ -75,6 +76,8 @@ private:
     QDoubleSpinBox* light_x;
     QDoubleSpinBox* light_y;
     QDoubleSpinBox* light_z;
+
+    QDoubleSpinBox* sub_pixel_number;
     PainterWindow * window;
 public slots :
     void validerparametre();

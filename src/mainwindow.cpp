@@ -32,55 +32,59 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 2, 0);
-    pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(pos_x, 2, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 3, 0);
-    pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(pos_y, 3, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 4, 0);
-    pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(pos_z, 4, 1);
 
     parameter->addWidget(create_label(25, 150, "Screen Position:"), 5, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 6, 0);
-    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -2.f);
+    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -2.f, 2);
     parameter->addWidget(screen_lower_corner_x, 6, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 7, 0);
-    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(screen_lower_corner_y, 7, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 8, 0);
-    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -1.f);
+    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -1.f, 2);
     parameter->addWidget(screen_lower_corner_z, 8, 1);
 
     parameter->addWidget(create_label(25, 150, "Light position:"), 9, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 10, 0);
-    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(light_x, 10, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 11, 0);
-    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(light_y, 11, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 12, 0);
-    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(light_z, 12, 1);
 
     parameter->addWidget(create_label(25, 150, "Light color :"), 13, 0);
 
     parameter->addWidget(create_label(25, 150, "Red ="), 14, 0);
-    red = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
+    red = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f, 2);
     parameter->addWidget(red, 14, 1);
     parameter->addWidget(create_label(25, 150, "Green ="), 15, 0);
-    green = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
+    green = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f, 2);
     parameter->addWidget(green, 15, 1);
     parameter->addWidget(create_label(25, 150, "Blue ="), 16, 0);
-    blue = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
+    blue = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f, 2);
     parameter->addWidget(blue, 16, 1);
 
-    parameter->addWidget(start,17, 0);
-    parameter->addWidget(exit,17, 1);
+    parameter->addWidget(create_label(25, 150, "Subpixel number ="), 17, 0);
+    sub_pixel_number = create_double_spin_box(1, 10, 1, 25, 50, 1, 0);
+    parameter->addWidget(sub_pixel_number, 17, 1);
+
+    parameter->addWidget(start,18, 0);
+    parameter->addWidget(exit,18, 1);
 
 
     //Main image
@@ -116,7 +120,8 @@ QLabel* MainWindow::create_label(int max_height, int max_width,QString name)
     return label;
 }
 
-QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width, float value)
+template<typename type>
+QDoubleSpinBox* MainWindow::create_double_spin_box(type xRange, type yRange, type step, int max_height, int max_width, type value, int decimals)
 {
 
     QDoubleSpinBox* spin_box = new QDoubleSpinBox();
@@ -125,6 +130,7 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
     spin_box->setRange(xRange , yRange);
     spin_box->setSingleStep(step);
     spin_box->setValue(value);
+    spin_box->setDecimals(decimals);
     return spin_box;
 }
 
@@ -193,10 +199,13 @@ void MainWindow::validerparametre()
 
 }
 
-Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
+Color MainWindow::color(Ray r, Grid grid)
 {
     DDA dda;
-    vector<Slot*>slots_to_visit = dda.Slots_visited(r, grid);
+    Slot* slot;
+    slot = grid.get_slot(Point(0, 0, 0));
+    vector<Slot*>slots_to_visit;
+    slots_to_visit.push_back(slot);
 
     for(auto slot: slots_to_visit)
     {
@@ -204,7 +213,7 @@ Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
         vector<Shape*> shapes = slot->get_shape_list();
         Point lightPosition(light_x->value(), light_y->value(), light_z->value());
         Color lightcolor(red->value(), green->value(), blue->value());
-        if(auto color = intersects(r, shapes, lightPosition, lightcolor, horizontal))
+        if(auto color = intersects(r, shapes, lightPosition, lightcolor))
         {
             Color col = color.value_or(Color());
 //            qDebug() << "Color found and returned" << endl;
@@ -213,10 +222,7 @@ Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
         }
     }
 //    qDebug() << "No triangle found" << endl;
-    Vector unit_direction = r.get_direction().unit();
-    float t = 0.5*(unit_direction.get_y() + 1.0);
-    Color background_color = (1-t)*Color(1.0, 1.0, 1.0) + t*Color(0.5, 0.7, 1.0);
-    return background_color;
+    return Color();
 }
 
 void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid)
@@ -240,8 +246,12 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
         {
             int nb_of_intersection = 0;
             Ray r;
-            vector<Point> stochastic_ray = r.stochastic_sampling(4);
-
+            vector<Point> stochastic_ray;
+            if(sub_pixel_number->value() > 1)
+                stochastic_ray = r.stochastic_sampling(sub_pixel_number->value());
+            else {
+                stochastic_ray.push_back(Point(0, 0, 0));
+            }
             for(auto it : stochastic_ray)
             {
 
@@ -253,7 +263,7 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
                 if(b.get_intersect())
                 {
                     camera.set_source(b.get_intersection());
-                    Color col = color(camera, grid, horizontal);
+                    Color col = color(camera, grid);
                     nb_of_intersection++;
 
                     int r = int(255.99*col.get_red());
@@ -281,7 +291,7 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
     cout << "Image refreshed" << endl;
 }
 
-optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor,  Vector horizontal)
+optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor)
 {
     Point originCamera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
     Point screenPos(this->screen_lower_corner_x->value(), this->screen_lower_corner_y->value(), this->screen_lower_corner_z->value());
@@ -306,7 +316,7 @@ optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point light
             float distance_closest = hr[0].get_distance();
             for(auto hit: hr)
             {
-                if(hit.get_distance() < closest.get_distance())
+                if(hit.get_distance() < distance_closest)
                 {
                     closest = hit;
                     distance_closest = hit.get_distance();
