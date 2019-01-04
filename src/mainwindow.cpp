@@ -32,55 +32,59 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 2, 0);
-    pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    pos_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(pos_x, 2, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 3, 0);
-    pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    pos_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(pos_y, 3, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 4, 0);
-    pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    pos_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(pos_z, 4, 1);
 
     parameter->addWidget(create_label(25, 150, "Screen Position:"), 5, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 6, 0);
-    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -2.f);
+    screen_lower_corner_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -2.f, 2);
     parameter->addWidget(screen_lower_corner_x, 6, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 7, 0);
-    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    screen_lower_corner_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(screen_lower_corner_y, 7, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 8, 0);
-    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -1.f);
+    screen_lower_corner_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, -1.f, 2);
     parameter->addWidget(screen_lower_corner_z, 8, 1);
 
     parameter->addWidget(create_label(25, 150, "Light position:"), 9, 0);
 
 
     parameter->addWidget(create_label(25, 150, "X ="), 10, 0);
-    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    light_x = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(light_x, 10, 1);
     parameter->addWidget(create_label(25, 150, "Y ="), 11, 0);
-    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    light_y = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(light_y, 11, 1);
     parameter->addWidget(create_label(25, 150, "Z ="), 12, 0);
-    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f);
+    light_z = create_double_spin_box(-1000.f, 1000.0f, 1.f, 25, 50, 0.f, 2);
     parameter->addWidget(light_z, 12, 1);
 
     parameter->addWidget(create_label(25, 150, "Light color :"), 13, 0);
 
     parameter->addWidget(create_label(25, 150, "Red ="), 14, 0);
-    red = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
+    red = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f, 2);
     parameter->addWidget(red, 14, 1);
     parameter->addWidget(create_label(25, 150, "Green ="), 15, 0);
-    green = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
+    green = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f, 2);
     parameter->addWidget(green, 15, 1);
     parameter->addWidget(create_label(25, 150, "Blue ="), 16, 0);
-    blue = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f);
+    blue = create_double_spin_box(0.f, 1.0f, 0.1f, 25, 50, 1.f, 2);
     parameter->addWidget(blue, 16, 1);
 
-    parameter->addWidget(start,17, 0);
-    parameter->addWidget(exit,17, 1);
+    parameter->addWidget(create_label(25, 150, "Subpixel number ="), 17, 0);
+    sub_pixel_number = create_double_spin_box(1, 10, 1, 25, 50, 1, 0);
+    parameter->addWidget(sub_pixel_number, 17, 1);
+
+    parameter->addWidget(start,18, 0);
+    parameter->addWidget(exit,18, 1);
 
 
     //Main image
@@ -116,7 +120,8 @@ QLabel* MainWindow::create_label(int max_height, int max_width,QString name)
     return label;
 }
 
-QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, float step, int max_height, int max_width, float value)
+template<typename type>
+QDoubleSpinBox* MainWindow::create_double_spin_box(type xRange, type yRange, type step, int max_height, int max_width, type value, int decimals)
 {
 
     QDoubleSpinBox* spin_box = new QDoubleSpinBox();
@@ -125,6 +130,7 @@ QDoubleSpinBox* MainWindow::create_double_spin_box(float xRange, float yRange, f
     spin_box->setRange(xRange , yRange);
     spin_box->setSingleStep(step);
     spin_box->setValue(value);
+    spin_box->setDecimals(decimals);
     return spin_box;
 }
 
