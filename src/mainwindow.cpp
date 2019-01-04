@@ -222,10 +222,7 @@ Color MainWindow::color(Ray r, Grid grid)
         }
     }
 //    qDebug() << "No triangle found" << endl;
-    Vector unit_direction = r.get_direction().unit();
-    float t = 0.5*(unit_direction.get_y() + 1.0);
-    Color background_color = (1-t)*Color(1.0, 1.0, 1.0) + t*Color(0.5, 0.7, 1.0);
-    return background_color;
+    return Color();
 }
 
 void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector horizontal, Vector vertical, int width, int height, Grid grid)
