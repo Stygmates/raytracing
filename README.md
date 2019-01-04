@@ -54,14 +54,3 @@ To open the documentation, go to the html folder created and open index.html in 
   ```
   ./bin/raytracing
   ```
-
-  ## Current progress
-  The current application can load an obj, and display it on the screen if it is in front of the viewport, and we can move the camera to change the position of the viewport.
-
-  To get a visible result on the obj provided(cube.obj), the camera must be set with the same values as the screenshot below:
-  
-  ![Screenshot](cube.png)
-
-  We can then move the camera and see the cube moving.
-
-  The next features to be implemented are the stochastic raytracing and the phong lighting.
