@@ -199,10 +199,13 @@ void MainWindow::validerparametre()
 
 }
 
-Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
+Color MainWindow::color(Ray r, Grid grid)
 {
     DDA dda;
-    vector<Slot*>slots_to_visit = dda.Slots_visited(r, grid);
+    Slot* slot;
+    slot = grid.get_slot(Point(0, 0, 0));
+    vector<Slot*>slots_to_visit;
+    slots_to_visit.push_back(slot);
 
     for(auto slot: slots_to_visit)
     {
@@ -210,7 +213,7 @@ Color MainWindow::color(Ray r, Grid grid, Vector horizontal)
         vector<Shape*> shapes = slot->get_shape_list();
         Point lightPosition(light_x->value(), light_y->value(), light_z->value());
         Color lightcolor(red->value(), green->value(), blue->value());
-        if(auto color = intersects(r, shapes, lightPosition, lightcolor, horizontal))
+        if(auto color = intersects(r, shapes, lightPosition, lightcolor))
         {
             Color col = color.value_or(Color());
 //            qDebug() << "Color found and returned" << endl;
@@ -259,7 +262,7 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
                 if(b.get_intersect())
                 {
                     camera.set_source(b.get_intersection());
-                    Color col = color(camera, grid, horizontal);
+                    Color col = color(camera, grid);
                     nb_of_intersection++;
 
                     int r = int(255.99*col.get_red());
@@ -287,7 +290,7 @@ void MainWindow::paint_image(Point origin, Vector lower_left_corner, Vector hori
     cout << "Image refreshed" << endl;
 }
 
-optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor,  Vector horizontal)
+optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point lightPosition, Color lightcolor)
 {
     Point originCamera(this->pos_x->value(), this->pos_y->value(), this->pos_z->value());
     Point screenPos(this->screen_lower_corner_x->value(), this->screen_lower_corner_y->value(), this->screen_lower_corner_z->value());
