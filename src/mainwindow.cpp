@@ -316,7 +316,7 @@ optional<Color> MainWindow::intersects(Ray r, vector<Shape*> shapes, Point light
             float distance_closest = hr[0].get_distance();
             for(auto hit: hr)
             {
-                if(hit.get_distance() < closest.get_distance())
+                if(hit.get_distance() < distance_closest)
                 {
                     closest = hit;
                     distance_closest = hit.get_distance();
