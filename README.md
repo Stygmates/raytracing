@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This is a group project for one of our courses, which presents the concept of raytracing in computer graphics, using a grid to store the triangles and the Digital Differential Analyzer Algorithm to find the slots of the grid to scan, more features are coming, such as Phong lighting, and stochastic raytracing.
+This is a group project for one of our courses, which presents the concept of raytracing in computer graphics, using a grid to store the triangles and the Digital Differential Analyzer Algorithm to find the slots of the grid to scan, Phong lighting, and stochastic raytracing.
+More informations can be found on the pdf file at the root of the repo.
 
 ## Documentation
 
