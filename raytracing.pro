@@ -14,6 +14,9 @@ DESTDIR = bin/
 TARGET = raytracing
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -fopenmp
+
+
 INCLUDEPATH += include \
     += $$PWD/googletest/googletest \
     += $$PWD/googletest/googletest/include
@@ -44,12 +47,18 @@ SOURCES += \
         src/Slot.cpp \
         src/DigitalDifferentialAnalyser.cpp \
         src/PainterWindow.cpp \
+        src/HitRecord.cpp \
+        src/Sphere.cpp \
+        src/Material.cpp \
+        src/Shape.cpp \
         tests/TestPoint.cpp \
         tests/TestTriangle.cpp \
         tests/TestVector.cpp \
         tests/TestGrid.cpp \
         tests/TestSlot.cpp \
         tests/TestDDA.cpp
+#        src/*.cpp \
+#        tests/*.cpp
 
 HEADERS += \
         include/Loader.h \
@@ -63,9 +72,15 @@ HEADERS += \
         include/Grid.h \
         include/DigitalDifferentialAnalyser.h \
         include/Slot.h \
-        include/PainterWindow.h
+        include/PainterWindow.h \
+        include/HitRecord.h \
+        include/Sphere.h \
+        include/Material.h \
+        include/Shape.h
+#        include/*.h
 
 FORMS += \
         forms/mainwindow.ui
 
-LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU -lassimp -Iassimp
+LIBS += -lgtest -L$$PWD/googletest/googletest/build/lib -lGLU -lassimp -Iassimp -lpthread -fopenmp
+

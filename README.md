@@ -2,7 +2,8 @@
 
 ## Introduction
 
-This is a group project for one of our courses, which presents the concept of raytracing in computer graphics, using a grid to store the triangles and the Digital Differential Analyzer Algorithm to find the slots of the grid to scan, more features are coming, such as Phong lighting, and stochastic raytracing.
+This is a group project for one of our courses, which presents the concept of raytracing in computer graphics, using a grid to store the triangles and the Digital Differential Analyzer Algorithm to find the slots of the grid to scan, Phong lighting, and stochastic raytracing.
+More informations can be found on the pdf file at the root of the repo.
 
 ## Documentation
 
@@ -54,14 +55,3 @@ To open the documentation, go to the html folder created and open index.html in 
   ```
   ./bin/raytracing
   ```
-
-  ## Current progress
-  The current application can load an obj, and display it on the screen if it is in front of the viewport, and we can move the camera to change the position of the viewport.
-
-  To get a visible result on the obj provided(cube.obj), the camera must be set with the same values as the screenshot below:
-  
-  ![Screenshot](cube.png)
-
-  We can then move the camera and see the cube moving.
-
-  The next features to be implemented are the stochastic raytracing and the phong lighting.

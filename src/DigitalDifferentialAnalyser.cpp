@@ -2,105 +2,139 @@
 #include <cmath>
 #include <vector>
 #include <QDebug>
+#include <cassert>
 
 using namespace std;
 
-vector<Slot*> DDA::Slots_visited(Ray r, Grid grid){
 
+vector<Slot*> DDA::Slots_visited(Ray r, Grid grid){
 
     DDA scan;
     vector<Slot> path = scan.find_visited_grids(r, grid);
     vector<Slot*> ptr_slot;
     for (auto p: path)
     {
-        ptr_slot.push_back( grid.get_slot( p.get_min_slot() ) );
+        ptr_slot.push_back( grid.get_slot( p.get_index_slot() ) );
     }
     return ptr_slot;
 }
 
-
-
 vector<Slot> DDA::find_visited_grids(Ray ray_normalized, Grid grid)
 {
-    ray_normalized.translate_ray_to_screen();
-
+    Ray r = ray_normalized;
     ray_normalized.ray_unit();
+    Vector rayDirection = ray_normalized.get_direction();
+    Point rayOrigin = ray_normalized.get_source();
 
-
-    ray_normalized.set_direction(Vector( (ray_normalized.get_direction().get_x()-ray_normalized.get_source().get_x())*grid.get_step_x()+ray_normalized.get_source().get_x(),
-                                         (ray_normalized.get_direction().get_y()-ray_normalized.get_source().get_y())*grid.get_step_y()+ray_normalized.get_source().get_y(),
-                                         (ray_normalized.get_direction().get_z()-ray_normalized.get_source().get_z())*grid.get_step_z()+ray_normalized.get_source().get_z()));
-
-
-    Vector deltaT( (grid.get_step_x() - ray_normalized.get_source().get_x()) / ray_normalized.get_direction().get_x(),
-                   (grid.get_step_y() - ray_normalized.get_source().get_y()) / ray_normalized.get_direction().get_y(),
-                   (grid.get_step_z() - ray_normalized.get_source().get_z()) / ray_normalized.get_direction().get_z());
-
-    float t_x = deltaT.get_x();
-    float t_y = deltaT.get_y();
-    float t_z = deltaT.get_z();
-
-    Slot current_slot = find_first_slot(grid, ray_normalized);
-
-    vector<Slot> path;
-    path.push_back(current_slot);   //first slot
-
-    while(current_slot.get_max_slot().get_x() < grid.get_max_grid().get_x() &&
-          current_slot.get_max_slot().get_y() < grid.get_max_grid().get_y() &&
-          current_slot.get_max_slot().get_z() < grid.get_max_grid().get_z()   )
-    {
-
-
-        if(fabs(t_x) <= fabs(t_y) and fabs(t_x) <= fabs(t_z)){
-            t_x += deltaT.get_x();  // increment, next crossing along x
-            Point min(current_slot.get_min_slot().get_x() + grid.get_step_x(), current_slot.get_min_slot().get_y(), current_slot.get_min_slot().get_z());
-            Point max(current_slot.get_max_slot().get_x() + grid.get_step_x(), current_slot.get_max_slot().get_y(), current_slot.get_max_slot().get_z());
-            Slot slot(min, max);
-            path.push_back(slot);   //next slot
-            current_slot.set_min_slot(min);
-            current_slot.set_max_slot(max);
-
-        }else if(fabs(t_y) <= fabs(t_x) and fabs(t_y) <= fabs(t_z)){
-            t_y += deltaT.get_y(); // increment, next crossing along y
-            Point min(current_slot.get_min_slot().get_x(), current_slot.get_min_slot().get_y() + grid.get_step_y(), current_slot.get_min_slot().get_z());
-            Point max(current_slot.get_max_slot().get_x(), current_slot.get_max_slot().get_y() + grid.get_step_y(), current_slot.get_max_slot().get_z());
-            Slot slot(min, max);
-            path.push_back(slot);   //next slot
-            current_slot.set_min_slot(min);
-            current_slot.set_max_slot(max);
-        }else{
-            t_z += deltaT.get_z(); // increment, next crossing along z
-            Point min(current_slot.get_min_slot().get_x(), current_slot.get_min_slot().get_y(), current_slot.get_min_slot().get_z() + grid.get_step_z());
-            Point max(current_slot.get_max_slot().get_x(), current_slot.get_max_slot().get_y(), current_slot.get_max_slot().get_z() + grid.get_step_z());
-            Slot slot(min, max);
-            path.push_back(slot);   //next slot
-            current_slot.set_min_slot(min);
-            current_slot.set_max_slot(max);
-        }
-
+    Vector cellDimension(grid.get_step_x(), grid.get_step_y(), grid.get_step_z());
+    Vector deltaT, nextCrossingT;
+    Point rayOrigGrid = rayOrigin /*- grid.get_min_grid()*/;
+    Point gridDimension = grid.get_max_grid() - grid.get_min_grid();
+    float t_x, t_y, t_z;
+    if (rayDirection.get_x() < 0) {
+    deltaT.set_x( -gridDimension.get_x() / rayDirection.get_x());
+    t_x = (int(rayOrigGrid.get_x() / cellDimension.get_x()) * cellDimension.get_x() - rayOrigGrid.get_x()) / rayDirection.get_x();
+    }
+    else {
+    deltaT.set_x( gridDimension.get_x() / rayDirection.get_x());
+    t_x = ((int(rayOrigGrid.get_x() / cellDimension.get_x()) + 1) * cellDimension.get_x() - rayOrigGrid.get_x()) / rayDirection.get_x();
     }
 
-return path;
-}
+    if (rayDirection.get_y() < 0) {
+    deltaT.set_y( -gridDimension.get_y() / rayDirection.get_y());
+    t_y = (int(rayOrigGrid.get_y() / cellDimension.get_y()) * cellDimension.get_y() - rayOrigGrid.get_y()) / rayDirection.get_y();
+    }
+    else {
+    deltaT.set_y( gridDimension.get_y() / rayDirection.get_y());
+    t_y = ((int(rayOrigGrid.get_y() / cellDimension.get_y()) + 1) * cellDimension.get_y() - rayOrigGrid.get_y()) / rayDirection.get_y();
+    }
 
+    if (rayDirection.get_z() < 0) {
+    deltaT.set_z( -gridDimension.get_z() / rayDirection .get_z());
+    t_z = (int(rayOrigGrid.get_z() / cellDimension.get_z()) * cellDimension.get_z() - rayOrigGrid.get_z()) / rayDirection.get_z();
+    }
+    else {
+    deltaT.set_z( gridDimension .get_z() / rayDirection .get_z());
+    t_z = ((int(rayOrigGrid.get_z() / cellDimension.get_z()) + 1) * cellDimension.get_z() - rayOrigGrid.get_z()) / rayDirection.get_z();
+    }
+
+    float t = 0;
+
+    Slot current_slot = find_first_slot(grid, ray_normalized);
+    Point cellIndex = current_slot.get_min_slot();          // origin of the ray (cell index)
+
+    vector<Slot> path;
+    path.push_back(current_slot);
+
+    static int par = 0;
+
+    while (1) {
+        if (t_x < t_y && t_x < t_z)
+        {
+            t = t_x; // current t, next intersection with cell along ray
+            t_x += deltaT.get_x(); // increment, next crossing along x
+            if (rayDirection.get_x() < 0)
+                cellIndex.set_x(cellIndex.get_x() - grid.get_step_x());
+            else
+                cellIndex.set_x(cellIndex.get_x() + grid.get_step_x());
+        }
+        else if(t_y < t_x && t_y < t_z)
+        {
+            t = t_y;
+            t_y += deltaT.get_y(); // increment, next crossing along y
+            if (rayDirection.get_y() < 0)
+                cellIndex.set_y(cellIndex.get_y() - grid.get_step_y());
+            else
+                cellIndex.set_y(cellIndex.get_y() + grid.get_step_y());
+        }
+        else
+        {
+            t = t_z;
+            t_z += deltaT.get_z(); // increment, next crossing along y
+            if (rayDirection.get_z() < 0)
+                cellIndex.set_z(cellIndex.get_z() - grid.get_step_z());
+            else
+                cellIndex.set_z(cellIndex.get_z() + grid.get_step_z());
+
+        }
+
+        Point min = cellIndex;
+        Point max = cellIndex + Point(grid.get_step_x(), grid.get_step_y(), grid.get_step_z());
+        Point index;
+
+
+    // if some condition is met break from the loop
+    if(!(max.get_x() <= grid.get_max_grid().get_x() &&
+         max.get_y() <= grid.get_max_grid().get_y() &&
+         max.get_z() <= grid.get_max_grid().get_z() &&
+         min.get_x() >= grid.get_min_grid().get_x() &&
+         min.get_y() >= grid.get_min_grid().get_y() &&
+         min.get_z() >= grid.get_min_grid().get_z() )){
+    break;
+    }
+    index.set_x((min.get_x() - grid.get_min_grid().get_x()) / grid.get_step_x());
+    index.set_y((min.get_y() - grid.get_min_grid().get_y()) / grid.get_step_y());
+    index.set_z((min.get_z() - grid.get_min_grid().get_z()) / grid.get_step_z());
+    Slot slot(min, max, index);
+    path.push_back(slot);
+    }
+    return path;
+
+}
 
 Slot DDA::find_first_slot(Grid grid, Ray ray_normalized)
 {
-    Point current_slot, min_slot;
-    current_slot = ray_normalized.get_source() - grid.get_min_grid();
+    for(int x = 0; x < grid.get_max_index_x(); x++)
+        for(int y = 0; y < grid.get_max_index_y(); y++)
+            for(int z = 0; z < grid.get_max_index_z(); z++)
+        {
+            Point p(x, y, z);
+            Slot* slot = grid.get_slot(p);
+            HitRecord hr = slot->intersect(ray_normalized);
 
-    int x = ((int)current_slot.get_x()/grid.get_step_x()) * grid.get_step_x();
-    int y = ((int)current_slot.get_y()/grid.get_step_y()) * grid.get_step_y();
-    int z = ((int)current_slot.get_z()/grid.get_step_z()) * grid.get_step_z();
-
-    current_slot.set_x(x);
-    current_slot.set_y(y);
-    current_slot.set_z(z);
-
-    min_slot = current_slot + grid.get_min_grid();
-    Point max_slot(min_slot.get_x()+grid.get_step_x(), min_slot.get_y()+grid.get_step_y(), min_slot.get_z()+grid.get_step_z());
-
-    Slot slot(min_slot, max_slot);
-    return slot;
+            if (hr.get_intersect() && !(hr.get_intersection()*1000!=ray_normalized.get_source()*1000))
+                return *slot;
+        }
+    assert(1==0);
 }
 

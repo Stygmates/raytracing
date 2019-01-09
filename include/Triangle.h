@@ -3,15 +3,18 @@
 
 #include <experimental/optional>
 
+#include "Shape.h"
 #include "Point.h"
 #include "Ray.h"
+#include "Material.h"
+
 
 using namespace experimental;
 
 /**
  * @brief The Triangle class: defines the structure of a triangle, a triangle is composed of three points p1, p2, p3
  */
-class Triangle
+class Triangle: public Shape
 {
 	public:
 		Triangle();
@@ -27,7 +30,7 @@ class Triangle
          * @param p2
          * @param p3
          */
-		Triangle(Point p1, Point p2, Point p3);
+        Triangle(Point p1, Point p2, Point p3);
         /**
          * @brief Triangle A triangle is defined by its 3 points p1, p2 and p3, the direction of the normal depends of the order in which the points are given
          * @param name
@@ -35,6 +38,8 @@ class Triangle
          * @param p2
          * @param p3
          */
+
+        Triangle(Point p1, Point p2, Point p3, Material material);
         Triangle(string name, Point p1, Point p2, Point p3);
 		~Triangle();
 
@@ -123,17 +128,19 @@ class Triangle
          * @param r The ray to test
          * @return True if the ray intersects the triangle, False otherwise
          */
-        optional<Point> ray_intersect(Ray r);
+        optional<HitRecord> ray_intersect(Ray r);
         /**
          * @brief get_min_bounding_box
          * @return A point with each component being the minimum in each direction of the bounding box of the triangle
          */
-		Point get_min_bounding_box();
+        virtual Point get_min_bounding_box();
         /**
          * @brief get_max_bounding_box
          * @return A point with each component being the maximum in each direction of the bounding box of the triangle
          */
-		Point get_max_bounding_box();
+        virtual Point get_max_bounding_box();
+
+        Material get_material();
 
     private:
 
@@ -151,6 +158,7 @@ class Triangle
          * @brief _normal The normal of the triangle
          */
         Vector _normal;
+        Material _material;
 
 };
 

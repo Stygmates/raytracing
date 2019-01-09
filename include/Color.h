@@ -76,6 +76,7 @@ public:
      */
     Color operator*(const Color& c);
 
+    bool operator!=(Color c);
 private:
     float _red, _green, _blue;
 };

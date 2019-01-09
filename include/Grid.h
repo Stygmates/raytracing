@@ -6,6 +6,7 @@
 
 #include "Point.h"
 #include "Slot.h"
+#include "Shape.h"
 
 /**
  * @brief This class is a container for all the objects of the scene, the triangles of the objects are stored on the slot depending on
@@ -28,13 +29,13 @@ public:
      * @brief add_triangles Adds all of the triangles in the list to the slots that they intersect, using the add_triangle helper function
      * @param triangles
      */
-    void add_triangles(vector<Triangle> triangles);
+    void add_shapes(vector<Shape*> shapes);
 
     /**
      * @brief add_triangle Adds a triangle to the slots that it intersects
      * @param t
      */
-    void add_triangle(Triangle t);
+    void add_shape(Shape* s);
 
     /**
      * @brief get_name name getter
@@ -46,20 +47,20 @@ public:
      * @brief get_step_x
      * @return
      */
-    int get_step_x() const;
+    float get_step_x() const;
 
 
     /**
      * @brief get_step_y
      * @return
      */
-    int get_step_y() const;
+    float get_step_y() const;
 
     /**
      * @brief get_step_z
      * @return
      */
-    int get_step_z() const;
+    float get_step_z() const;
 
     /**
      * @brief set_name name setter
@@ -71,19 +72,19 @@ public:
      * @brief set_step_x step_x setter
      * @param step_x
      */
-    void set_step_x(int step_x);
+    void set_step_x(float step_x);
 
     /**
      * @brief set_step_y step_y setter
      * @param step_y
      */
-    void set_step_y(int step_y);
+    void set_step_y(float step_y);
 
     /**
      * @brief set_step_z step_z setter
      * @param step_z
      */
-    void set_step_z(int step_z);
+    void set_step_z(float step_z);
 
     /**
      * @brief get_min_grid Returns the minimum of the grid in each direction
@@ -122,6 +123,19 @@ public:
      */
     std::vector<std::vector<std::vector<Slot*>>> get_slots();
 
+    HitRecord intersect(Ray r) const;
+
+    Grid(std::vector<Shape*> shapes,int max_index_x, int max_index_y, int max_index_z);
+
+    int get_max_index_x();
+    void set_max_index_x(int max_index_x);
+
+    void set_max_index_y(int max_index_y);
+    int get_max_index_y();
+
+    int get_max_index_z();
+    void set_max_index_z(int max_index_z);
+
 private:
 
     /**
@@ -136,7 +150,9 @@ private:
     /**
      * @brief _step_x, _step_y, _step_z The step in each direction of the grid
      */
-    int _step_x, _step_y, _step_z;
+    float _step_x, _step_y, _step_z;
+
+    int _max_index_x, _max_index_y, _max_index_z;
 };
 
 #endif // GRID_H

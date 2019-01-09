@@ -56,6 +56,7 @@ vector<Point> Ray::stochastic_sampling(int n)
 
             random_point.set_x(x);
             random_point.set_y(y);
+            random_point.set_z(0.f );
 
             matrix_sampling.push_back(random_point);
 
@@ -66,18 +67,20 @@ return matrix_sampling;
 
 void Ray::translate_ray_to_screen()
 {
-    Vector translate(this->_direction.get_x()-this->_source.get_x(),
-                    this->_direction.get_y()-this->_source.get_y(),
-                    this->_direction.get_z()-this->_source.get_z());
+    Vector translate(this->_direction.get_x()+this->_source.get_x(),
+                    this->_direction.get_y()+this->_source.get_y(),
+                    this->_direction.get_z()+this->_source.get_z());
 
-    this->set_source(Point(this->_direction.get_x(), this->_direction.get_y(), this->_direction.get_z()) );
-    this->set_direction(this->get_direction() + translate);
+      this->set_source(Point(translate.get_x(), translate.get_y(), translate.get_z()));
+//    this->set_source(Point(this->_direction.get_x(), this->_direction.get_y(), this->_direction.get_z()) );
+//    this->set_direction(this->get_direction() + translate);
 }
 
 void Ray::ray_unit()
 {
     Vector direction_unit = this->_direction.unit();
-    this->set_direction(Vector( this->_source.get_x() + direction_unit.get_x(),
-                                this->_source.get_y() + direction_unit.get_y(),
-                                this->_source.get_z() + direction_unit.get_z()) );
+    this->set_direction(direction_unit);
+//    this->set_direction(Vector( this->_source.get_x() + direction_unit.get_x(),
+//                                this->_source.get_y() + direction_unit.get_y(),
+//                                this->_source.get_z() + direction_unit.get_z()) );
 }

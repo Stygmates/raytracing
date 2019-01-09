@@ -18,7 +18,7 @@ class Slot
          * @param min_slot The minimum in each direction of the slot
          * @param max_slot The maximum in each direction of the slot
          */
-        Slot(Point min_slot, Point max_slot);
+        Slot(Point min_slot, Point max_slot, Point index);
 
         /**
          * @brief Slot A slot is part of a Grid
@@ -26,50 +26,64 @@ class Slot
          * @param max_slot The maximum in each direction of the slot
          * @param triangles The triangles to test against the slot
          */
-        Slot(Point min_slot, Point max_slot, std::vector<Triangle> triangles);
+//        Slot(Point min_slot, Point max_slot, std::vector<Shape*> shapes);
 
         /**
          * @brief get_min_slot Returns the minimum coordinates in each direction of the slot
          * @return
          */
-        Point get_min_slot();
+        Point get_min_slot() const;
 
         /**
          * @brief get_max_slot Returns the maximum coordinates in each direction of the slot
          * @return
          */
-        Point get_max_slot();
+        Point get_max_slot() const;
 
         /**
-         * @brief get_triangle_list Returns the list of the triangles that intersect the current slot
+         * @brief get_shape_list Returns the list of the shapes that intersect the current slot
          * @return
          */
-        std::vector<Triangle> get_triangle_list();
+        std::vector<Shape*> get_shape_list();
+
+        /**
+         * @brief get_max_slot Returns the slot index
+         * @return
+         */
+        Point get_index_slot();
+
 
         /**
          * @brief set_min_slot Sets the slot maximum to min_slot
          * @param min_slot
          */
-        void set_min_slot(const Point &min_slot);
+        void set_min_slot(Point min_slot);
 
         /**
          * @brief set_max_slot Sets the slot maximum to max_slot
          * @param max_slot
          */
-        void set_max_slot(const Point &max_slot);
+        void set_max_slot(Point max_slot);
+
 
         /**
-         * @brief boundingbox_intersects Checks if the boundingbox of the current slot intersects the boundingbox of the triangle
-         * @param t The triangle to test
+         * @brief et_index_slot the slot index to index_slot
+         * @param index_slot
+         */
+        void set_index_slot(Point index_slot);
+
+        /**
+         * @brief boundingbox_intersects Checks if the boundingbox of the current slot intersects the boundingbox of the shape
+         * @param s The shape to test
          * @return
          */
-        bool boundingbox_intersects(Triangle t);
+        bool boundingbox_intersects(Shape *s);
 
         /**
          * @brief add_triangle Adds a triangle to the slot, using @ref boundingbox_intersects(Triangle)
          * @param t The triangle to add
          */
-        void add_triangle(Triangle t);
+        void add_shape(Shape *s);
 
         /**
          * @brief point_inside Tells if the coordinates of the point are inside the slot or not
@@ -86,7 +100,9 @@ class Slot
         bool operator!=(Slot s);
 
 
-    private:
+        HitRecord intersect(Ray r) const;
+
+private:
         /**
          * @brief _min_slot The point containing the minimum in each direction of the slot
          */
@@ -98,9 +114,14 @@ class Slot
         Point _max_slot;
 
         /**
+         * @brief _index_slot
+         */
+        Point _index_slot;
+
+        /**
          * @brief triangle_list The triangles that have been added to the slot
          */
-        std::vector<Triangle> triangle_list;
+        std::vector<Shape*> shape_list;
 
 };
 

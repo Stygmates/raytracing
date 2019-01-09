@@ -7,7 +7,7 @@
 #include <assimp/scene.h>           // Output data structure
 #include <assimp/postprocess.h>     // Post processing flags
 
-#include "Triangle.h"
+#include "Shape.h"
 
 /**
  * @brief The Loader class: Helper class that loads an obj into an array of triangles
@@ -29,7 +29,7 @@ class Loader{
          * @brief loadData Loads the triangles into an array of triangles
          * @param triangles The array of triangles where the triangles from the obj will be stored
          */
-        void loadData(std::vector<Triangle> &triangles);
+        void loadData(std::vector<Shape*> &shapes);
     private:
         /**
          * @brief scene Necessary attribute to use assimp
